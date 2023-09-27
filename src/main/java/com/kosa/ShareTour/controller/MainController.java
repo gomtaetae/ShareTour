@@ -10,4 +10,7 @@ public class MainController {
     public String page() {
         return "main";
     }
+
+    @GetMapping("/auction")
+    public String pass() { return "auction";}
 }
