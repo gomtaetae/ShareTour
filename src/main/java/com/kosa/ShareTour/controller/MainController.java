@@ -22,8 +22,11 @@ public class MainController {
     public String registerPage() {
         return "register";
     }
-}
 
+    @GetMapping("/auction")
+    public String mainAuction() {
+        return "auction";
+    }
     @GetMapping("/auctionplus")
     public String infoAuction() {
         return "auctionplus";
