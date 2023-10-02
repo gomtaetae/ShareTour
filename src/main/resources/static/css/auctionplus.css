@@ -90,7 +90,7 @@ input{width:500px;
 .package_img img:nth-child(1){margin-left:0px;}
 
 footer{height:250px;
-       border-top: 1px solid gray;}
+       border-top: 1px solid rgb(128, 128, 128);}
 
 .footer_top{height:150px;}
 
@@ -214,7 +214,8 @@ hr {
     text-align: left;
     margin-top: 10px;
 
-.d_rest1 {
-    margin-top: 30px;
-    margin-right: 119px;
+    .d_rest1 {
+        margin-top: 30px;
+        margin-right: 119px;
+    }
 }
