@@ -70,86 +70,41 @@ input{width:500px;
       border-radius:10px;
       border:0px;}
 
-.slide_wrap{width:1200px;
-            height:300px;
-            position:relative;}
-
-.slide{width:3600px;
-       height:300px;
-       position:relative;}
-
-.slide li{width:1200px;
-         height:300px;
-         float:left;}
-
-.slide li img{width:1200px;
-             height:300px;}
-
-.next{width:30px;
-      height:30px;
-      float:left;
-       position:absolute;
-      top:140px;
-      left:1170px;}
-
-.next img{width:30px;
-          height:30px;}
-
-.pre{width:30px;
-     height:30px;
-     float:left;
-     position:absolute;
-     top:140px;}
-
-.pre img{width:30px;
-       height:30px;}
-
-.travel_package{height:400px;
-              margin-top:10px;}
-
-.text{height:30px;
-       margin-top:50px;}
-
-.text img{width:30px;
-          height:30px;
-         float:left;}
-
-.text p{font-size:30px;
-       font-weight:700;
-       margin-left:10px;}
-
-.package_img{margin-top:20px;}
-
-.package_img img{width:280px;
-               height:300px;
-               margin-left:20px;}
-
-.package_img img:nth-child(1){margin-left:0px;}
-
-button{position:absolute;}
-
-#timer{float:left;
-       margin-top:120px;}
-
-#timer p{font-size: 30px;
-         height:30px;}
-
-#timer div{width:20px;
-           float:left;
-           padding: 10px;
-           margin-left:3px;
-          font-size:20px;}
-
-#timer div span{margin-top:10px;
-       display: block;}
-
-.sale{height:400px;}
-
-.sale_product img{width:1000px;
-                  height:400px;}
-
-.sale_product{float:right;}
-
+.registration-container {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.registration-container h2 {
+    text-align: center;
+}
+.registration-form input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.registration-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.registration-form button {
+    width: 400px;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
 footer{height:250px;
        border-top: 1px solid gray;}
 
@@ -158,9 +113,7 @@ footer{height:250px;
 .footer_logo{width:300px;
               float: left;}
 
-
 .footer_logo img{width:150px;}
-
 .footer_li{width:600px;
            float:right;
               margin-top:52px;}
