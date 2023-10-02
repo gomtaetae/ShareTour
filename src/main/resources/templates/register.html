@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="center">
+        <div class="top">
+            <div class="top_nav">
+                <div class="logo">
+                    <p>Share tour</p>
+                </div>
+                <div class="search_box">
+                    <input type="text" id="search_box" placeholder="검색어를 입력해주세요">
+                </div>
+                <div class="login">
+                    <ul class="clearfix">
+                        <li><a href="login">로그인</a></li>
+                        <li><a href="register">회원가입</a></li>
+                    </ul>
+                </div>
+            </div>
+            <nav>
+                <ul class="clearfix main_menu">
+                    <li><a href="#"><img src="/img/icons8-비행기-48.png" alt="">패키지 여행</a></li>
+                    <li><a href="#"><img src="/img/icons8-게시판-48.png" alt="">게시판</a></li>
+                    <li><a href="#"><img src="/img/icons8-법-48.png" alt="">경매</a></li>
+                    <li><a href="#"><img src="/img/icons8-sparkles-48.png" alt="">특가</a></li>
+                    <li><a href="#"><img src="/img/icons8-이야기-책-48.png" alt="">마이페이지</a></li>
+                    <li><a href="#"><img src="/img/icons8-바구니-30.png" alt="">장바구니</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="registration-container">
+            <h2>회원가입</h2>
+            <form class="registration-form" action="register.php" method="post">
+                <input type="text" name="name" placeholder="이름 (한글 및 영문만 입력 가능)" required pattern="[a-zA-Z가-힣]+">
+                <input type="text" name="id" placeholder="아이디 (영문 소문자와 숫자, 20자 이내)" required pattern="[a-z0-9]{1,20}">
+                <input type="password" name="password" placeholder="비밀번호 (영문, 숫자, 특수문자 조합, 8자 이상)" required
+                       pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*?~]).{8,}$">
+                <input type="tel" name="phone" placeholder="핸드폰 번호" required>
+                <input type="email" name="email" placeholder="이메일 주소" required>
+                <select name="gender">
+                    <option value="남">남</option>
+                    <option value="여">여</option>
+                </select>
+                <button name="address" required>주소</button>
+                <input type="address-main" name="address-main" placeholder="주소">
+                <input type="address-sub" name="address-sub" placeholder="상세주소">
+                <button type="submit">가입하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

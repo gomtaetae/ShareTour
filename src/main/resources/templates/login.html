@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/layout.css">
+</head>
+<body>
+<div id="wrap">
+    <div class="center">
+        <div class="top">
+            <div class="top_nav">
+                <div class="logo">
+                    <p>Share tour</p>
+                </div>
+                <div class="search_box">
+                    <input type="text" id="search_box" placeholder="검색어를 입력해주세요">
+                </div>
+                <div class="login">
+                    <ul class="clearfix">
+                        <li><a href="login">로그인</a></li>
+                        <li><a href="register">회원가입</a></li>
+                    </ul>
+                </div>
+            </div>
+            <nav>
+                <ul class="clearfix main_menu">
+                    <li><a href="#"><img src="/img/icons8-비행기-48.png" alt="">패키지 여행</a></li>
+                    <li><a href="#"><img src="/img/icons8-게시판-48.png" alt="">게시판</a></li>
+                    <li><a href="#"><img src="/img/icons8-법-48.png" alt="">경매</a></li>
+                    <li><a href="#"><img src="/img/icons8-sparkles-48.png" alt="">특가</a></li>
+                    <li><a href="#"><img src="/img/icons8-이야기-책-48.png" alt="">마이페이지</a></li>
+                    <li><a href="#"><img src="/img/icons8-바구니-30.png" alt="">장바구니</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="login-container">
+            <h2>로그인</h2>
+            <form class="login-form" action="#" method="post">
+                <input type="text" name="username" placeholder="아이디" required>
+                <input type="password" name="password" placeholder="비밀번호" required>
+                <button class="submit-button"type="submit">로그인</button>
+            </form>
+            <div class="register-button">
+                <a href="register">회원가입</a>
+            </div>
+            <div class="login-options">
+                <a href="#">아이디 찾기</a>
+                <a href="#">비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

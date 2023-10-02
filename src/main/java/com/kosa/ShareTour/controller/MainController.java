@@ -13,10 +13,16 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/auction")
-    public String mainAuction() {
-        return "auction";
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
     }
+
+    @GetMapping("/register")
+    public String registerPage() {
+        return "register";
+    }
+}
 
     @GetMapping("/auctionplus")
     public String infoAuction() {
