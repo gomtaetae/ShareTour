@@ -24,13 +24,11 @@ a,a :visited{text-decoration:none; color:black}
        overflow:hidden;
        margin:0 auto;}
 
-.top{height:180px;}
+.top{height:230px;}
 
 .top_nav{height:50px;}
 
-.logo p{font-size:30px;
-        font-weight:500;
-       margin-top:30px;}
+.logo img{width:100px;}
 
 .login{float:right;
        margin-top:30px;}

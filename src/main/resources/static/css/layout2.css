@@ -24,13 +24,11 @@ a,a :visited{text-decoration:none; color:black}
        overflow:hidden;
        margin:0 auto;}
 
-.top{height:180px;}
+.top{height:230px;}
 
 .top_nav{height:50px;}
 
-.logo p{font-size:30px;
-        font-weight:500;
-       margin-top:30px;}
+.logo img{width:100px;}
 
 .login{float:right;
        margin-top:30px;}
@@ -66,14 +64,12 @@ nav li img{width:20px;}
 .main_menu li:hover .sub_menu li{display:block;}
 
 .top_text{width:250px;
-          height:60px;}
+          height:30px;}
 .top_text p{font-size:30px;
             font-weight:700;}
 
 .categories{width:1200px;
-            height:30px;
-            margin-top:20px;
-            margin-bottom:20px;}
+            height:100px;}
 
 .category1,.category2,.category3,.category4{width:150px;
                                             height:30px;
@@ -81,20 +77,6 @@ nav li img{width:20px;}
                                             margin-left:200px;}
 
 .category1{margin-left:0px;}
-
-.product_1{width:1200px;
-           height:250px;}
-
-.product_1 img{width:300px;
-              float:left;}
-
-.product_1_text{width:800px;
-               height:170px;
-               float:left;
-               margin-left:20px;
-              padding-top:25px;}
-
-.product_1_text h2,p,span{line-height: 120%;}
 
 select{width:150px;
         height:30px;}
