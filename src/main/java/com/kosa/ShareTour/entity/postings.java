@@ -34,7 +34,4 @@ public class postings {
         created_at = LocalDateTime.now();
     }
 
-    @Column(name="password", length = 30, nullable = false)
-    private String password;
-
 }
