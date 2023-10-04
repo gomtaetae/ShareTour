@@ -36,6 +36,6 @@ public class Comment implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="postings_id")
-    private postings postings_id;
+    private Posting posting_id;
 
 }
