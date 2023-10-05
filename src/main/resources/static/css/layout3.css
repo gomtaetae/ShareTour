@@ -62,92 +62,38 @@ nav li img{width:20px;}
 
 .main_menu li:hover .sub_menu li{display:block;}
 
-input{width:500px;
+.search_box input{width:500px;
        height:50px;
        margin-left:10px;
        margin-top:20px;
       border-radius:10px;
       border:0px;}
+#product_info{width:1200px;
+              height:400px;}
 
-.slide_wrap{width:1060px;
-            height:280px;
-            position:relative;}
+#product_info .img{width:500px;
+                   height:300px;
+                  float: left;}
 
-.slide{width:3180px;
-       height:280px;
-       position:relative;}
+#product_info .img img{width:500px;}
 
-.slide li{width:1060px;
-         height:280px;
-         float:left;}
+#product_info .product_info_textbox{width:500px;
+                                    height:300px;
+                                    margin-left:30px;
+                                    float:left;}
 
-.slide li img{width:1060px;
-             height:280px;}
+.count{height:20px;}
 
-.next{width:30px;
-      height:30px;
-      float:left;
-       position:absolute;
-      top:140px;
-      left:1030px;}
+.count input{width:20px;
+            height:20px;
+            float:left;
+            margin-right:10px;
+            margin-left:10px;
+           border:1px solid black;}
 
-.next img{width:30px;
-          height:30px;}
+.count input:nth-child(1){margin-left:0px;}
 
-.pre{width:30px;
-     height:30px;
-     float:left;
-     position:absolute;
-     top:140px;}
-
-.pre img{width:30px;
-       height:30px;}
-
-.travel_package{height:400px;
-              margin-top:10px;}
-
-.text{height:30px;
-       margin-top:50px;}
-
-.text img{width:30px;
-          height:30px;
-         float:left;}
-
-.text p{font-size:30px;
-       font-weight:700;
-       margin-left:10px;}
-
-.package_img{margin-top:20px;}
-
-.package_img img{width:250px;
-               height:300px;
-               margin-left:10px;}
-
-.package_img img:nth-child(1){margin-left:0px;}
-
-button{position:absolute;}
-
-#timer{float:left;
-       margin-top:120px;}
-
-#timer p{font-size: 30px;
-         height:30px;}
-
-#timer div{width:20px;
-           float:left;
-           padding: 10px;
-           margin-left:3px;
-          font-size:20px;}
-
-#timer div span{margin-top:10px;
-       display: block;}
-
-.sale{height:400px;}
-
-.sale_product img{width:800px;
-                  height:320px;}
-
-.sale_product{float:right;}
+.count #result{float:left;}
 
 footer{height:250px;
        border-top: 1px solid gray;}
@@ -169,7 +115,3 @@ footer{height:250px;
 
 .footer_info p{font-size:15px;
                font-weight:300;}
-
-.mainlogo {
-        width:150px;
-        }

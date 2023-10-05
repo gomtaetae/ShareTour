@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인 페이지 구상</title>
-    <link rel="stylesheet" href="/css/layout.css">
-    <script src="/js/jquery-1.12.3.js"></script>
-    <script src="/js/layout.js"></script>
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
 <div id="wrap">
@@ -14,15 +12,15 @@
         <div class="top">
             <div class="top_nav">
                 <div class="logo">
-                    <p>Share tour</p>
+                    <img src="/img/logo.png">
                 </div>
                 <div class="search_box">
                     <input type="text" id="search_box" placeholder="검색어를 입력해주세요">
                 </div>
                 <div class="login">
                     <ul class="clearfix">
-                        <li><a href="#">로그인</a></li>
-                        <li><a href="#">회원가입</a></li>
+                        <li><a href="login">로그인</a></li>
+                        <li><a href="register">회원가입</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,56 +28,35 @@
                 <ul class="clearfix main_menu">
                     <li><a href="#"><img src="/img/icons8-비행기-48.png" alt="">패키지 여행</a></li>
                     <li><a href="#"><img src="/img/icons8-게시판-48.png" alt="">게시판</a></li>
-                    <li><a href="auction"><img src="/img/icons8-법-48.png" alt="">경매</a></li>
+                    <li><a href="#"><img src="/img/icons8-법-48.png" alt="">경매</a></li>
                     <li><a href="#"><img src="/img/icons8-sparkles-48.png" alt="">특가</a></li>
                     <li><a href="#"><img src="/img/icons8-이야기-책-48.png" alt="">마이페이지</a></li>
                     <li><a href="#"><img src="/img/icons8-바구니-30.png" alt="">장바구니</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="slide_wrap">
-            <ul class="slide">
-                <li><img src="/img/boat.jpg" alt=""></li>
-                <li><img src="/img/선물.jpg" alt=""></li>
-                <li><img src="/img/sky_501675638.jpg" alt=""></li>
-            </ul>
-            <div class="buuton">
-                <div class="next">
-                    <img src="/img/오른쪽.png" alt="">
-                </div>
-                <div class="pre">
-                    <img src="/img/왼쪽.png" alt="">
-                </div>
+        <div class="login-container">
+            <h2>로그인</h2>
+            <form class="login-form" action="#" method="post">
+                <input type="text" name="username" placeholder="아이디" required>
+                <input type="password" name="password" placeholder="비밀번호" required>
+                <button class="submit-button"type="submit">로그인</button>
+            </form>
+            <div class="register-button">
+                <a href="register">회원가입</a>
             </div>
-        </div>
-        <div class="package_product">
-            <div class="text">
-                <img src="/img/가방.png" alt="">
-                <p>이 패키지 어때?</p>
-            </div>
-            <div class="travel_package">
-                <div class="package_img">
-                    <img src="/img/turkiye.jfif" alt="package1">
-                    <img src="/img/sea.jfif" alt="package2">
-                    <img src="/img/mountain.jpg" alt="package3">
-                    <img src="/img/hiking.jfif" alt="package4">
-                </div>
-            </div>
-        </div>
-        <div class="sale">
-            <div id="timer">
-            </div>
-            <div class="sale_product">
-                <img src="/img/특가.jpg" alt="">
+            <div class="login-options">
+                <a href="#">아이디 찾기</a>
+                <a href="#">비밀번호 찾기</a>
             </div>
         </div>
         <footer>
             <div class="footer_top">
                 <div class="footer_logo">
-                    <p>Share tour</p>
+                    <img src="/img/logo.png">
                 </div>
                 <div class="footer_nav">
-                    <ul class="footer_li">
+                    <ul class="footer_li" >
                         <li><a href="#">패키지 여행</a></li>
                         <li><a href="#">게시판</a></li>
                         <li><a href="#">경매</a></li>
