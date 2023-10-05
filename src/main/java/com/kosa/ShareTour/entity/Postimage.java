@@ -14,11 +14,11 @@ public class Postimage implements Serializable {
     @Id
     @Column(name="postimages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int postimages_id;
+    private int postimagesid;
 
     @ManyToOne
     @JoinColumn(name="postings_id")
-    private Posting posting_id;
+    private Posting postingid;
 
     @Column(name="img")
     private String img;

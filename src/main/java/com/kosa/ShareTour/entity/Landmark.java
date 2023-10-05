@@ -15,7 +15,7 @@ public class Landmark {
     @Id
     @Column(name="landmarks_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int landmarks_id;
+    private int landmarksid;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -36,10 +36,10 @@ public class Landmark {
     private String area;
 
     @Column(name="loc_x", length = 50, nullable = false)
-    private String loc_x;
+    private String locx;
 
     @Column(name="loc_y", length = 50, nullable = false)
-    private String loc_y;
+    private String locy;
 
     @Column(name="price")
     private float price;

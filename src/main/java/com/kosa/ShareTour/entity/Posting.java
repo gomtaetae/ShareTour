@@ -18,7 +18,7 @@ public class Posting {
     @Id
     @Column(name="postings_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int postings_id;
+    private int postingsid;
 
     @Column(name="title", length = 32, nullable = false)
     private String title;
@@ -27,11 +27,11 @@ public class Posting {
     private String content;
 
     @Column(name="created_at", nullable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdat;
 
     @PrePersist
     protected void onCreate() {
-        created_at = LocalDateTime.now();
+        createdat = LocalDateTime.now();
     }
 
 }
