@@ -12,17 +12,17 @@ public class Auction implements Serializable {
 
     @Id
     @Column(name="auctions_id")
-    private int auctions_id;
+    private int auctionsid;
 
     @Column(name="finalprice")
     private float finalprice;
 
     @ManyToOne
-    @JoinColumn(name="users_id")
-    private User user_id;
+    @JoinColumn(name="user_id")
+    private User userid;
 
     @ManyToOne
-    @JoinColumn(name="accommodations_id")
-    private Accommodation accommodation_id;
+    @JoinColumn(name="accommodation_id")
+    private Accommodation accommodationid;
 
 }

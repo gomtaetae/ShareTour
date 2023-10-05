@@ -18,7 +18,7 @@ public class User {
     @Id
     @Column(name="users_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int users_id;
+    private int userid;
 
     @Column(name="username", length = 32, nullable = false)
     private String username;
@@ -41,7 +41,7 @@ public class User {
     }
 
     @Column(name="img")
-    private String img;
+    private String imgUrl;
 
     @Column(name="gender", length = 45, nullable = false)
     private String gender;

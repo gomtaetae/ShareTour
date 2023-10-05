@@ -15,7 +15,7 @@ public class Package implements Serializable {
     @Id
     @Column(name="packages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int packages_id;
+    private int packagesid;
 
     @Column(name="title", length = 50, nullable = false)
     private String title;
@@ -24,25 +24,25 @@ public class Package implements Serializable {
     private String content;
 
     @Column(name="start_date", nullable = false)
-    private LocalDate start_date;
+    private LocalDate startdate;
 
     @Column(name="end_date", nullable = false)
-    private LocalDate end_date;
+    private LocalDate enddate;
 
     @Column(name="created_at", nullable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdat;
 
     @Column(name="modified_at")
-    private LocalDateTime modified_at;
+    private LocalDateTime modifiedat;
 
     @PrePersist
     protected void onCreate() {
-        created_at = LocalDateTime.now();
+        createdat = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        modified_at = LocalDateTime.now();
+        modifiedat = LocalDateTime.now();
     }
 
     @Column(name="img", nullable = false)
@@ -58,25 +58,25 @@ public class Package implements Serializable {
     private LocalDateTime expire;
 
     @Column(name="in_stock")
-    private int in_stock;
+    private int instock;
 
     @Column(name="stock_left")
-    private int stock_left;
+    private int stockleft;
 
     @ManyToOne
     @JoinColumn(name="places_id")
-    private Place place_id;
+    private Place placeid;
 
     @ManyToOne
     @JoinColumn(name="landmarks_id")
-    private Landmark landmark_id;
+    private Landmark landmarkid;
 
     @ManyToOne
     @JoinColumn(name="accommodations_id")
-    private Accommodation accommodation_id;
+    private Accommodation accommodationid;
 
     @ManyToOne
     @JoinColumn(name="restaurants_id")
-    private Restaurant restaurant_id;
+    private Restaurant restaurantid;
 
 }
