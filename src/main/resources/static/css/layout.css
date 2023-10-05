@@ -20,7 +20,7 @@ a,a :visited{text-decoration:none; color:black}
 
 #wrap{width:100%;}
 
-.center{width:1200px;
+.center{width:1060px;
        overflow:hidden;
        margin:0 auto;}
 
@@ -173,3 +173,7 @@ footer{height:250px;
 
 .footer_info p{font-size:15px;
                font-weight:300;}
+
+.mainlogo {
+        width:150px;
+        }
