@@ -18,7 +18,6 @@ import java.util.List;
 
 @SpringBootTest
 class UserRepositoryTest {
-
     @Autowired
     UserRepository userRepository;
 
@@ -115,6 +114,25 @@ class UserRepositoryTest {
         assertThat(userList.size()).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("유저 이메일로 조회 테스트")
+    public void findByUserEmailTest(){
+        //given
+        String userEmail = "useremail@example.com";
+
+        User user = getUser("");
+        user.setEmail(userEmail);
+        userRepository.saveAndFlush(user);
+
+        //when
+        List<User> userList = userRepository.findByEmail(userEmail);
+
+        //then
+        assertThat(userList).isNotNull();
+        assertThat(userList.size()).isEqualTo(1);
+        User foundUser = userList.get(0);
+        assertThat(foundUser.getEmail()).isEqualTo(userEmail);
+    }
 
 
     @Test
@@ -138,11 +156,20 @@ class UserRepositoryTest {
 
     @Test
     @DisplayName("유저 전체 조회 테스트")
-
     public void findAllUsersIdTest(){
+        // given
+        for (int i = 1; i <= 4; i++) {
+            User user = getUser(String.valueOf(i));
+            userRepository.saveAndFlush(user);
+        }
+        em.clear();
+
+        //when
         var userList = userRepository.findAll();
-        for(var user : userList){
-            System.out.println(user.toString());
+
+        //then
+        for(var allUser : userList){
+            System.out.println(allUser.toString());
         }
     }
 
