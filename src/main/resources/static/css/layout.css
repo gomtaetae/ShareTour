@@ -20,7 +20,7 @@ a,a :visited{text-decoration:none; color:black}
 
 #wrap{width:100%;}
 
-.center{width:1200px;
+.center{width:1060px;
        overflow:hidden;
        margin:0 auto;}
 
@@ -34,7 +34,7 @@ a,a :visited{text-decoration:none; color:black}
        margin-top:30px;}
 
 .login li{float:left;
-          width:100px;
+          margin-left:30px;
           font-size:15px;}
 
 .search_box{width:500px;
@@ -45,13 +45,12 @@ nav{width:1200px;
     height:80px;
     margin-top:50px;}
 
-nav li{float:left;
-       width:100px;}
+nav li{float:left;}
 
 nav li img{width:20px;}
 
 .main_menu > li{text-align:center;
-                margin-left:114px;}
+                margin-left:124px;}
 
 .main_menu > li:nth-child(1){margin-left:0px;}
 
@@ -70,27 +69,27 @@ input{width:500px;
       border-radius:10px;
       border:0px;}
 
-.slide_wrap{width:1200px;
-            height:300px;
+.slide_wrap{width:1060px;
+            height:280px;
             position:relative;}
 
-.slide{width:3600px;
-       height:300px;
+.slide{width:3180px;
+       height:280px;
        position:relative;}
 
-.slide li{width:1200px;
-         height:300px;
+.slide li{width:1060px;
+         height:280px;
          float:left;}
 
-.slide li img{width:1200px;
-             height:300px;}
+.slide li img{width:1060px;
+             height:280px;}
 
 .next{width:30px;
       height:30px;
       float:left;
        position:absolute;
       top:140px;
-      left:1170px;}
+      left:1030px;}
 
 .next img{width:30px;
           height:30px;}
@@ -120,9 +119,9 @@ input{width:500px;
 
 .package_img{margin-top:20px;}
 
-.package_img img{width:280px;
+.package_img img{width:250px;
                height:300px;
-               margin-left:20px;}
+               margin-left:10px;}
 
 .package_img img:nth-child(1){margin-left:0px;}
 
@@ -145,8 +144,8 @@ button{position:absolute;}
 
 .sale{height:400px;}
 
-.sale_product img{width:1000px;
-                  height:400px;}
+.sale_product img{width:800px;
+                  height:320px;}
 
 .sale_product{float:right;}
 
@@ -163,7 +162,7 @@ footer{height:250px;
 
 .footer_li{width:600px;
            float:right;
-              margin-top:52px;}
+           margin-top:52px;}
 
 .footer_li li{width:100px;
           float:left;}
