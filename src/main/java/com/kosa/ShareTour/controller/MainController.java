@@ -2,6 +2,8 @@ package com.kosa.ShareTour.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+
 @Controller
 public class MainController {
 
@@ -24,17 +26,31 @@ public class MainController {
     public String mainAuction() {
         return "auction";
     }
+
     @GetMapping("/auctionplus")
     public String infoAuction() {
         return "auctionplus";
     }
+
     @GetMapping("/con_product_page")
     public String con_product() {
         return "con_product_page";
     }
+
     @GetMapping("/package_tour")
     public String tour() {
         return "package_tour";
     }
 
+    @GetMapping(value = "/header")
+    public String header() {
+        return "fragments/header";
+    }
+
+    @GetMapping(value = "/footer")
+    public String footer() {
+        return "fragments/footer";
+    }
+
 }
+

@@ -16,6 +16,8 @@ a,a :visited{text-decoration:none; color:black}
 .clearfix::after{content:""; display:block; clear:both;}
 .text_box{display:block;}
 .logo, nav, nav li,.icon li{float:left;}
+
+
 *{margin:0; padding:0;}
 
 #wrap{width:100%;}
@@ -169,3 +171,4 @@ footer{height:250px;
 
 .footer_info p{font-size:15px;
                font-weight:300;}
+
