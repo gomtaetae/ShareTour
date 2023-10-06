@@ -128,10 +128,27 @@ class UserRepositoryTest {
         User targetUser = userRepository.findByEmail(userEmail);
 
         //then
-        assertThat(targetUser.getNickname()).isNotNull();
-        assertThat(targetUser.getNickname()).isSameAs(userEmail);
+        assertThat(targetUser.getEmail()).isNotNull();
+        assertThat(targetUser.getEmail()).isEqualTo("useremail@example.com");
     }
 
+    @Test
+    @DisplayName("유저 닉네임으로 조회 테스트")
+    public void findByUserNicknameTest(){
+        //given
+        String userNickname = "nickname1";
+
+        User user = getUser("");
+        user.setNickname(userNickname);
+        userRepository.saveAndFlush(user);
+
+        //when
+        User targetUser = userRepository.findByNickname(userNickname);
+
+        //then
+        assertThat(targetUser.getNickname()).isNotNull();
+        assertThat(targetUser.getNickname()).isEqualTo("nickname1");
+    }
 
 
 

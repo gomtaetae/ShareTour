@@ -13,5 +13,4 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     User findByNickname(String nickname);
 
 
-
 }
