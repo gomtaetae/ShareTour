@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
@@ -25,27 +24,6 @@ class UserRepositoryTest {
     @PersistenceContext
     EntityManager em;
 
-    private User getUser() {
-        return this.getUser("");
-    }
-
-    private User getUser(String suffix) {
-        User user = new User();
-        user.setUsername("유저 이름" + suffix);
-        user.setEmail("user" + suffix + "@email.com");
-        user.setNickname("유저 닉네임" + suffix);
-        user.setPassword("유저 비밀번호" + suffix);
-        user.setCreate_time(LocalDateTime.now());
-        user.setImgUrl("유저 이미지" + suffix);
-        user.setGender("유저 성별");
-        user.setBirthday(LocalDate.now());
-        user.setMobile("유저 전화번호");
-        user.setAddress("유저 주소");
-        user.setGrade("유저 등급");
-        user.setPoint(10);
-
-        return user;
-    }
     @AfterEach
     public void cleanUp() {
         userRepository.deleteAll();
@@ -55,13 +33,13 @@ class UserRepositoryTest {
     @DisplayName("유저 생성 테스트")
     public void createUserList(){
         // given
-        User user = getUser();
+        User user = User.getUser();
 
         userRepository.saveAndFlush(user);
         em.clear();
 
         //when
-        var savedUser = userRepository.findById(user.getUserid()).orElseThrow();
+        var savedUser = userRepository.findById(user.getUserId()).orElseThrow();
 
         // then
         assertThat(savedUser.getUsername()).isEqualTo(user.getUsername());
@@ -71,7 +49,7 @@ class UserRepositoryTest {
     @DisplayName("유저 업데이트 테스트")
     public void updateUser() {
         // given
-        User user = getUser();
+        User user = User.getUser();
         userRepository.saveAndFlush(user);
 
         // when
@@ -91,7 +69,7 @@ class UserRepositoryTest {
         em.clear();
 
         // then
-        var updatedUser = userRepository.findById(user.getUserid()).orElseThrow();
+        var updatedUser = userRepository.findById(user.getUserId()).orElseThrow();
         assertThat(updatedUser.getNickname()).isEqualTo(user.getNickname());
     }
 
@@ -100,17 +78,19 @@ class UserRepositoryTest {
     public void findByUserNmTest(){
         //given
         for (int i = 1; i <= 3; i++) {
-            User user = getUser(String.valueOf(i));
+            User user = User.getUser(String.valueOf(i));
             userRepository.saveAndFlush(user);
         }
-        for (int i = 0; i < 2; i++) {
-            User user = getUser(String.valueOf(1));
+        for (int i = 4; i < 6; i++) {
+            User user = User.getUser("1", String.valueOf(i));
             userRepository.saveAndFlush(user);
         }
         em.clear();
 
         //when
         var userList = userRepository.findByUsername("유저 이름1");
+
+        // then
         assertThat(userList.size()).isEqualTo(3);
     }
 
@@ -120,11 +100,12 @@ class UserRepositoryTest {
         //given
         String userEmail = "useremail@example.com";
 
-        User user = getUser("");
+        User user = User.getUser();
         user.setEmail(userEmail);
         userRepository.saveAndFlush(user);
 
         //when
+        em.clear();
         User targetUser = userRepository.findByEmail(userEmail);
 
         //then
@@ -138,11 +119,12 @@ class UserRepositoryTest {
         //given
         String userNickname = "nickname1";
 
-        User user = getUser("");
+        User user = User.getUser();
         user.setNickname(userNickname);
         userRepository.saveAndFlush(user);
 
         //when
+        em.clear();
         User targetUser = userRepository.findByNickname(userNickname);
 
         //then
@@ -150,14 +132,12 @@ class UserRepositoryTest {
         assertThat(targetUser.getNickname()).isEqualTo("nickname1");
     }
 
-
-
     @Test
     @DisplayName("유저 ID 구분 삭제 테스트")
     public void deleteUsersByIdTest(){
         // given
         for (int i = 1; i <= 3; i++) {
-            User user = getUser(String.valueOf(1));
+            User user = User.getUser(String.valueOf(i));
             userRepository.saveAndFlush(user);
         }
         em.clear();
@@ -166,28 +146,8 @@ class UserRepositoryTest {
         userRepository.deleteById(1);
 
         //then
-        var userList = userRepository.findByUsername("유저 이름1");
-        assertThat(userList.size()).isEqualTo(2);
-    }
-
-
-    @Test
-    @DisplayName("유저 전체 조회 테스트")
-    public void findAllUsersIdTest(){
-        // given
-        for (int i = 1; i <= 4; i++) {
-            User user = getUser(String.valueOf(i));
-            userRepository.saveAndFlush(user);
-        }
-        em.clear();
-
-        //when
         var userList = userRepository.findAll();
-
-        //then
-        for(var allUser : userList){
-            System.out.println(allUser.toString());
-        }
+        assertThat(userList.size()).isEqualTo(2);
     }
 
 }
