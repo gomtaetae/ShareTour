@@ -1,24 +1,20 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="postings")
-@Getter
-@Setter
-@ToString
-
+@Data
 public class Posting {
 
     @Id
-    @Column(name="postings_id")
+    @Column(name="posting_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int postingsid;
+    private Integer postingId;
 
     @Column(name="title", length = 32, nullable = false)
     private String title;
@@ -33,5 +29,11 @@ public class Posting {
     protected void onCreate() {
         createdat = LocalDateTime.now();
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="users_id", nullable = false)
+    private User user;
+
+
 
 }
