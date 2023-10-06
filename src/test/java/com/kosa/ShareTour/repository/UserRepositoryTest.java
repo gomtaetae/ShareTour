@@ -45,11 +45,10 @@ class UserRepositoryTest {
 
         return user;
     }
-
-//    @AfterEach
-//   public void cleanUp() {
-//       userRepository.deleteAll();
-//   }
+    @AfterEach
+    public void cleanUp() {
+       userRepository.deleteAll();
+   }
 
     @Test
     @DisplayName("유저 생성 테스트")
