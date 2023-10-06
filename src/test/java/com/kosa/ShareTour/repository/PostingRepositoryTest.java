@@ -40,7 +40,7 @@ class PostingRepositoryTest {
         Posting posting = new Posting();
         posting.setTitle("게시글 제목" + suffix);
         posting.setContent("게시글 내용" + suffix);
-        posting.setCreatedat(LocalDateTime.now());
+        posting.setCreatedAt(LocalDateTime.now());
         posting.setUser(user);
 
         return posting;
