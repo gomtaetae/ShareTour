@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.kosa.ShareTour.entity.Posting;
 import com.kosa.ShareTour.entity.User;
+import com.kosa.ShareTour.utils.STUtils;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 //@RequiredArgsConstructor
 class PostingRepositoryTest {
 
@@ -34,7 +36,7 @@ class PostingRepositoryTest {
 
 
     private Posting getPosting(String suffix) {
-        var user = User.getUser(suffix);
+        var user = STUtils.getUser(suffix);
         userRepository.save(user);
 
         Posting posting = new Posting();
@@ -67,25 +69,25 @@ class PostingRepositoryTest {
         assertThat(savedPosting.getTitle()).isEqualTo(posting.getTitle());
     }
 
-//    @Test
-//    @DisplayName("유저 ID로 게시글 조회 테스트")
-//    public void findByUserIdTest() {
-//        //given
-//        for (int i = 1; i <= 3; i++) {
-//            var posting = getPosting(String.valueOf(i));
-//            postingRepository.save(posting);
-//        }
-//        em.flush();
-//        em.clear();
-//
-//        //when
-//        var savedPosting = postingRepository.findByUser();
-//
-//        //then
-//        assertThat(savedPosting.size()).isEqualTo(1);
-//
-//
-//    }
+    @Test
+    @DisplayName("유저 ID로 게시글 조회 테스트")
+    public void findByUserIdTest() {
+        //given
+        for (int i = 1; i <= 3; i++) {
+            var posting = getPosting(String.valueOf(i));
+            postingRepository.save(posting);
+        }
+        em.flush();
+        em.clear();
+
+        //when
+        var savedPosting = postingRepository.findByUserId(1);
+
+        //then
+        assertThat(savedPosting.size()).isEqualTo(1);
+
+
+    }
 
 
 
