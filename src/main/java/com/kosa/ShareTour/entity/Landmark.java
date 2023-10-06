@@ -35,6 +35,9 @@ public class Landmark {
     @Column(name="area", length = 45)
     private String area;
 
+    @Column(name="parking")
+    private String parking;
+
     @Column(name="loc_x", length = 50, nullable = false)
     private String locx;
 

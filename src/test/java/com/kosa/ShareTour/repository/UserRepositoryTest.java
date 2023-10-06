@@ -125,14 +125,14 @@ class UserRepositoryTest {
         userRepository.saveAndFlush(user);
 
         //when
-        List<User> userList = userRepository.findByEmail(userEmail);
+        User targetUser = userRepository.findByEmail(userEmail);
 
         //then
-        assertThat(userList).isNotNull();
-        assertThat(userList.size()).isEqualTo(1);
-        User foundUser = userList.get(0);
-        assertThat(foundUser.getEmail()).isEqualTo(userEmail);
+        assertThat(targetUser.getNickname()).isNotNull();
+        assertThat(targetUser.getNickname()).isSameAs(userEmail);
     }
+
+
 
 
     @Test
