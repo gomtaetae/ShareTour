@@ -16,7 +16,7 @@ public class Accommodation {
     @Id
     @Column(name="accommodations_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int accommodationsid;
+    public int accommodationId;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -40,10 +40,10 @@ public class Accommodation {
     private String parking;
 
     @Column(name="loc_x", length = 50, nullable = false)
-    private String locx;
+    private String locX;
 
     @Column(name="loc_y", length = 50, nullable = false)
-    private String locy;
+    private String locY;
 
     @Column(name="price", nullable = false)
     private float price;

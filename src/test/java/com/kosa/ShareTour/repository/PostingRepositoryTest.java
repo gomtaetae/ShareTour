@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
 //@RequiredArgsConstructor
 class PostingRepositoryTest {
 
@@ -66,7 +65,6 @@ class PostingRepositoryTest {
 
         // then
         assertThat(savedPosting.getTitle()).isEqualTo(posting.getTitle());
-        System.out.println(posting.toString());
     }
 
 //    @Test

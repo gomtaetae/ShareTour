@@ -33,11 +33,11 @@ public class User {
     private String password;
 
     @Column(name="create_time")
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     @PrePersist
     protected void onCreate() {
-        create_time = LocalDateTime.now();
+        createTime = LocalDateTime.now();
     }
 
     @Column(name="img")
@@ -67,7 +67,7 @@ public class User {
         user.setEmail("user" + uniqueSuffix + "@email.com");
         user.setNickname("유저 닉네임" + uniqueSuffix);
         user.setPassword("유저 비밀번호" + uniqueSuffix);
-        user.setCreate_time(LocalDateTime.now());
+        user.setCreateTime(LocalDateTime.now());
         user.setImgUrl("유저 이미지" + uniqueSuffix);
         user.setGender("유저 성별");
         user.setBirthday(LocalDate.now());

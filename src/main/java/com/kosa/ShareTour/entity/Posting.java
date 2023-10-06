@@ -23,14 +23,14 @@ public class Posting {
     private String content;
 
     @Column(name="created_at", nullable = false)
-    private LocalDateTime createdat;
+    private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate() {
-        createdat = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="users_id", nullable = false)
     private User user;
 

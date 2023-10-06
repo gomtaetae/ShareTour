@@ -13,19 +13,19 @@ public class Packageimage implements Serializable {
     @Id
     @Column(name="packageimages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int packageimagesid;
+    private int packageimageId;
 
     @ManyToOne
     @JoinColumn(name="landmarks_id")
-    private Landmark landmarkid;
+    private Landmark landmark;
 
     @ManyToOne
     @JoinColumn(name="accommodations_id")
-    private Accommodation accommodationid;
+    private Accommodation accommodation;
 
     @ManyToOne
     @JoinColumn(name="restaurants_id")
-    private Restaurant restaurantid;
+    private Restaurant restaurant;
 
     @Column(name="img")
     private String img;

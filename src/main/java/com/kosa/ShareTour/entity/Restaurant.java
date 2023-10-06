@@ -16,7 +16,7 @@ public class Restaurant {
     @Id
     @Column(name="restaurants_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int restaurantsid;
+    private int restaurantId;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -34,10 +34,10 @@ public class Restaurant {
     private String parking;
 
     @Column(name="loc_x", length = 50, nullable = false)
-    private String locx;
+    private String locX;
 
     @Column(name="loc_y", length = 50, nullable = false)
-    private String locy;
+    private String locY;
 
     @Column(name="price", nullable = false)
     private float price;

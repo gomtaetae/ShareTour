@@ -14,17 +14,17 @@ public class Comment implements Serializable {
     @Id
     @Column(name="comments_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int commentsid;
+    private int commentId;
 
     @Column(name="content", nullable = false)
     private String content;
 
     @Column(name="created_at", nullable = false)
-    private LocalDateTime createdat;
+    private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate() {
-        createdat = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @Column(name="likes")
@@ -32,10 +32,10 @@ public class Comment implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="users_id")
-    private User userid;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="postings_id")
-    private Posting postingid;
+    private Posting posting;
 
 }
