@@ -14,7 +14,7 @@ public class Place {
     @Id
     @Column(name="places_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int placeId;
+    private Integer id;
 
     @Column(name="country", length = 50, nullable = false)
     private String country;

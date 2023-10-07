@@ -16,7 +16,7 @@ public class Admin {
     @Id
     @Column(name="admin_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int adminId;
+    private Integer id;
 
     @Column(name="name", length = 50, nullable = false)
     private String username;

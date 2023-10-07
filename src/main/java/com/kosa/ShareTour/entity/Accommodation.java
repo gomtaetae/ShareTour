@@ -16,7 +16,7 @@ public class Accommodation {
     @Id
     @Column(name="accommodations_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int accommodationId;
+    public Integer id;
 
     @Column(name="name", nullable = false)
     private String name;
