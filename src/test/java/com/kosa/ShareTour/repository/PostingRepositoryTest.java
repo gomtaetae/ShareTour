@@ -34,6 +34,10 @@ class PostingRepositoryTest {
     @PersistenceContext
     EntityManager em;
 
+    @AfterEach
+    public void cleanUp() {
+        postingRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("게시글 생성 테스트")
@@ -69,6 +73,7 @@ class PostingRepositoryTest {
 
         //when
         var savedPosting = postingRepository.findByTitle("게시글 제목1");
+        System.out.println(savedPosting.toString());
 
         //then
         assertThat(savedPosting.size()).isEqualTo(1);
@@ -77,8 +82,8 @@ class PostingRepositoryTest {
     }
 
     @Test
-    @DisplayName("유저 ID로 게시글 조회 테스트")
-    public void findByUserIdTest() {
+    @DisplayName("유저 닉네임으로 게시글 조회 테스트")
+    public void findByUserNicknameTest() {
         //given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
@@ -89,7 +94,10 @@ class PostingRepositoryTest {
         em.clear();
 
         //when
-        var savedPosting = postingRepository.findByUserId(1);
+        var allPosting = postingRepository.findAll();
+        var savedPosting = postingRepository.findByUserNickname("유저 닉네임1");
+        System.out.println(allPosting);
+        System.out.println(savedPosting.toString());
 
         //then
         assertThat(savedPosting.size()).isEqualTo(1);

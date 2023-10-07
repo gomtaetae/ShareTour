@@ -128,6 +128,7 @@ class UserRepositoryTest {
         assertThat(targetUser.getNickname()).isEqualTo("nickname1");
     }
 
+
     @Test
     @DisplayName("유저 ID 구분 삭제 테스트")
     public void deleteUsersByIdTest(){
