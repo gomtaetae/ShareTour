@@ -130,7 +130,7 @@ class PostingRepositoryTest {
         em.clear();
 
         //when
-        postingRepository.deleteByTitle("게시");
+        postingRepository.deleteByTitle("게시글 제목1");
 
 
     }
