@@ -125,6 +125,4 @@ class PostingRepositoryTest {
         assertThat(savedPosting.size()).isEqualTo(postings.size());
     }
 
-
-
 }
