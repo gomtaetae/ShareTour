@@ -1,28 +1,24 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name="postimages")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
 @Data
 
-public class postimages implements Serializable {
+public class Postimage implements Serializable {
 
     @Id
     @Column(name="postimages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int postimages_id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name="postings_id")
-    private postings postings_id;
+    private Posting posting;
 
     @Column(name="img")
     private String img;

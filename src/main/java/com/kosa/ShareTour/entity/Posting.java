@@ -1,24 +1,20 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="postings")
-@Getter
-@Setter
-@ToString
-
-public class postings {
+@Data
+public class Posting {
 
     @Id
-    @Column(name="postings_id")
+    @Column(name="posting_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int postings_id;
+    private Integer id;
 
     @Column(name="title", length = 32, nullable = false)
     private String title;
@@ -27,14 +23,17 @@ public class postings {
     private String content;
 
     @Column(name="created_at", nullable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate() {
-        created_at = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
-    @Column(name="password", length = 30, nullable = false)
-    private String password;
+    @ManyToOne
+    @JoinColumn(name="users_id", nullable = false)
+    private User user;
+
+
 
 }
