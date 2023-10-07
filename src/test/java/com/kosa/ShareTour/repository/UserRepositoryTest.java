@@ -2,7 +2,6 @@ package com.kosa.ShareTour.repository;
 
 import com.kosa.ShareTour.entity.User;
 import com.kosa.ShareTour.utils.STUtils;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

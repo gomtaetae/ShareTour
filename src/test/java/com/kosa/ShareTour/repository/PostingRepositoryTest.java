@@ -1,12 +1,8 @@
 package com.kosa.ShareTour.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.kosa.ShareTour.entity.Posting;
 import com.kosa.ShareTour.entity.User;
 import com.kosa.ShareTour.utils.STUtils;
-import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +17,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 @Transactional
-//@RequiredArgsConstructor
 class PostingRepositoryTest {
 
     @Autowired
@@ -33,11 +30,6 @@ class PostingRepositoryTest {
 
     @PersistenceContext
     EntityManager em;
-
-    @AfterEach
-    public void cleanUp() {
-        postingRepository.deleteAll();
-    }
 
     @Test
     @DisplayName("게시글 생성 테스트")
@@ -124,5 +116,24 @@ class PostingRepositoryTest {
         // then
         assertThat(savedPosting.size()).isEqualTo(postings.size());
     }
+
+    @Test
+    @DisplayName("제목으로 게시글 삭제 테스트")
+    public void deleteByTitleTest() {
+        //given
+        for (int i = 1; i <= 3; i++) {
+            var posting = STUtils.getPosting(String.valueOf(i));
+            var user = posting.getUser();
+            userRepository.save(user);
+            postingRepository.saveAndFlush(posting);
+        }
+        em.clear();
+
+        //when
+        postingRepository.deleteByTitle("게시글 제목1");
+
+
+    }
+
 
 }
