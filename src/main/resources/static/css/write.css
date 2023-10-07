@@ -124,11 +124,7 @@ input{width:500px;
         font-size: 0;}
     
 .board_write .title dl {font-size: 0;}
-    
-.board_write .info dl {
-        display: inline-block;
-        width: 50%;
-        vertical-align: middle;}
+
 
 .board_write .title dt,
 .board_write .title dd,

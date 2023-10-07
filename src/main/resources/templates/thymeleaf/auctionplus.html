@@ -8,14 +8,42 @@
     <title>메인 페이지 구상</title>
     <th:block layout:fragment="script"></th:block>
     <th:block layout:fragment="css"></th:block>
-    <link rel="stylesheet" href="/css/auction.css">
+    <link rel="stylesheet" href="/css/auctionplus.css">
     <script src="/js/jquery-1.12.3.js"></script>
     <script src="/js/layout.js"></script>
 </head>
 <body>
 <div id="wrap">
     <div class="center">
-        <div th:replace="fragments/header::header"></div>
+        <div id="product_info">
+            <div class="img">
+                <img src="room.jfif" alt="">
+            </div>
+            <div class="product_info_textbox">
+                <div class="text_box">
+                    <p>[경매 시작]</p>
+                    <p>롯뎅월드타워</p>
+                    <span>어느 객실에서나 서울이  한눈에 보이는 뷰를 보장할 수 있는 곳
+                              라운지에 간단한 간식이나 과일 음료 배치
+                        </span>
+                    <p>구성 상품</p>
+                    <p>시그네일: 디럭스 스위트룸</p>
+                    <p>1박 2일</p>
+                    <span>
+                            조식포함
+                        </span>
+                    <span>500,000원</span>
+                </div>
+                <div class="price">
+                    <p>입찰자 : </p>
+                    <p>시작가 : </p>
+                    <p>현재가 : </p>
+                </div>
+                <div class="purchase_button">
+                    <input type="button" value="참여하기"/>
+                </div>
+            </div>
+        </div>
         <div th:replace="fragments/footer::footer"></div>
     </div>
 </div>

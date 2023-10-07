@@ -3,15 +3,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Package_tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지 구상</title>
+    <!--thymeleaf script, css 불러오기-->
     <th:block layout:fragment="script"></th:block>
     <th:block layout:fragment="css"></th:block>
     <link rel="stylesheet" href="/css/layout2.css">
     <script src="/js/jquery-1.12.3.js"></script>
+    <script src="/js/layout.js"></script>
 </head>
 <body>
 <div id="wrap">
     <div class="center">
+        <!--thymeleaf header 불러오기-->
         <div th:replace="fragments/header::header"></div>
         <div class="top_text">
             <p>어디로 떠나세요?</p>
@@ -65,49 +69,49 @@
         </div>
         <div class="package_product">
             <div class="product_1">
-                <img src="/img/속초.jpg" alt="">
+                <img src="속초.jpg" alt="">
                 <div class="product_1_text">
                     <p>속초아이관람차로 예쁜 배경을 볼 수 있는 속초</p>
                     <strong>269,000원</strong>
                 </div>
             </div>
             <div class="product_2">
-                <img src="/img/속초.jpg" alt="">
+                <img src="속초.jpg" alt="">
                 <div class="product_2_text">
                     <p>속초아이관람차로 예쁜 배경을 볼 수 있는 속초</p>
                     <strong>269,000원</strong>
                 </div>
             </div>
             <div class="product_3">
-                <img src="/img/속초.jpg" alt="">
+                <img src="속초.jpg" alt="">
                 <div class="product_3_text">
                     <p>속초아이관람차로 예쁜 배경을 볼 수 있는 속초</p>
                     <strong>269,000원</strong>
                 </div>
             </div>
             <div class="product_4">
-                <img src="/img/속초.jpg" alt="">
+                <img src="속초.jpg" alt="">
                 <div class="product_4_text">
                     <p>속초아이관람차로 예쁜 배경을 볼 수 있는 속초</p>
                     <strong>269,000원</strong>
                 </div>
             </div>
             <div class="product_5">
-                <img src="/img/속초.jpg" alt="">
+                <img src="속초.jpg" alt="">
                 <div class="product_5_text">
                     <p>속초아이관람차로 예쁜 배경을 볼 수 있는 속초</p>
                     <strong>269,000원</strong>
                 </div>
             </div>
             <div class="product_6">
-                <img src="/img/속초.jpg" alt="">
+                <img src="속초.jpg" alt="">
                 <div class="product_6_text">
                     <p>속초아이관람차로 예쁜 배경을 볼 수 있는 속초</p>
                     <strong>269,000원</strong>
                 </div>
             </div>
-
         </div>
+        <!--thymeleaf footer 불러오기 -->
         <div th:replace="fragments/footer::footer"></div>
     </div>
 </div>
