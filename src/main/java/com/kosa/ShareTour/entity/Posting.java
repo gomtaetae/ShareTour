@@ -7,16 +7,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="comments")
+@Table(name="postings")
 @Data
-public class Comment implements Serializable {
+public class Posting {
 
     @Id
-    @Column(name="comments_id")
+    @Column(name="posting_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="content", nullable = false)
+    @Column(name="title", length = 32, nullable = false)
+    private String title;
+
+    @Column(name="content", columnDefinition = "LONGTEXT", nullable = false)
     private String content;
 
     @Column(name="created_at", nullable = false)
@@ -27,15 +30,10 @@ public class Comment implements Serializable {
         createdAt = LocalDateTime.now();
     }
 
-    @Column(name="likes")
-    private int likes;
-
     @ManyToOne
-    @JoinColumn(name="users_id")
+    @JoinColumn(name="users_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name="postings_id")
-    private Posting posting;
+
 
 }

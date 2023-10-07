@@ -18,30 +18,30 @@ public class User {
     @Id
     @Column(name="users_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int users_id;
+    private Integer id;
 
     @Column(name="username", length = 32, nullable = false)
     private String username;
 
-    @Column(name="email", length = 60, nullable = false)
+    @Column(name="email", length = 60, nullable = false, unique = true)
     private String email;
 
-    @Column(name="nickname", length = 45, nullable = false)
+    @Column(name="nickname", length = 45, nullable = false, unique = true)
     private String nickname;
 
     @Column(name="password", length = 30, nullable = false)
     private String password;
 
     @Column(name="create_time")
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     @PrePersist
     protected void onCreate() {
-        create_time = LocalDateTime.now();
+        createTime = LocalDateTime.now();
     }
 
     @Column(name="img")
-    private String img;
+    private String imgUrl;
 
     @Column(name="gender", length = 45, nullable = false)
     private String gender;
@@ -60,5 +60,6 @@ public class User {
 
     @Column(name="point")
     private int point;
+
 
 }

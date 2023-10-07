@@ -3,7 +3,7 @@ body{background-color:#fff; color:#000000;line-height:100%; font-weight:normal; 
 
 html{width:100%;letter-spacing:0px;}
 
-div,p,ul,li,table,th,td,input,span,form,h2,h1,h3,h5,h6,dd,dl,em,sup{padding:0px; margin:0px; line-height: 120%;}
+div,p,ul,li,table,th,td,input,span,form,h2,h1,h3,h5,h6,dd,dl,em,sup{padding:0px; margin:0px;}
 
 ul,li,ol,dl{list-style:none; margin:0px; padding:0px; line-height:100%; color:#000000; letter-spacing:0px; }
 
@@ -16,12 +16,11 @@ a,a :visited{text-decoration:none; color:black}
 .clearfix::after{content:""; display:block; clear:both;}
 .text_box{display:block;}
 .logo, nav, nav li,.icon li{float:left;}
-p,span{line-height:120%;}
 *{margin:0; padding:0;}
 
 #wrap{width:100%;}
 
-.center{width:1200px;
+.center{width:1060px;
        overflow:hidden;
        margin:0 auto;}
 
@@ -35,7 +34,7 @@ p,span{line-height:120%;}
        margin-top:30px;}
 
 .login li{float:left;
-          width:100px;
+          margin-left:30px;
           font-size:15px;}
 
 .search_box{width:500px;
@@ -46,13 +45,12 @@ nav{width:1200px;
     height:80px;
     margin-top:50px;}
 
-nav li{float:left;
-       width:100px;}
+nav li{float:left;}
 
 nav li img{width:20px;}
 
 .main_menu > li{text-align:center;
-                margin-left:114px;}
+                margin-left:124px;}
 
 .main_menu > li:nth-child(1){margin-left:0px;}
 
@@ -65,12 +63,11 @@ nav li img{width:20px;}
 .main_menu li:hover .sub_menu li{display:block;}
 
 .search_box input{width:500px;
-    height:50px;
-    margin-left:10px;
-    margin-top:20px;
-    border-radius:10px;
-    border:0px;}
-
+       height:50px;
+       margin-left:10px;
+       margin-top:20px;
+      border-radius:10px;
+      border:0px;}
 #product_info{width:1200px;
               height:400px;}
 
@@ -106,17 +103,15 @@ footer{height:250px;
 .footer_logo{width:300px;
               float: left;}
 
-.footer_logo p{font-size:30px;
-               font-weight: 500;
-               margin-top:50px;}
+
+.footer_logo img{width:150px;}
 
 .footer_li{width:600px;
            float:right;
-              margin-top:52px;}
+           margin-top:52px;}
 
 .footer_li li{width:100px;
           float:left;}
 
 .footer_info p{font-size:15px;
                font-weight:300;}
-

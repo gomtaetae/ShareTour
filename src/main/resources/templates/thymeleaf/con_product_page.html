@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 상세페이지</title>
+    <th:block layout:fragment="script"></th:block>
+    <th:block layout:fragment="css"></th:block>
+    <link rel="stylesheet" href="/css/layout3.css">
+    <script src="/js/jquery-1.12.3.js"></script>
+    <script src="/js/con_product_page.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div class="center">
+            <div th:replace="fragments/header::header"></div>
+            <div id="product_info">
+                <div class="img">
+                    <img src="/img/boat.jpg" alt="">
+                </div>
+                <div class="product_info_textbox">
+                    <div class="text_box">
+                        <h2>속초 여행 패키지 [1박 2일]</h2>
+                        <h3>구성 상품</h3>
+                        <p>1일차 : 호텔 - 속초아이관람차 - 앙젤루스 - 속초해변가 </p>
+                        <p>2일차 : 다이나믹메이즈 - 자유시간</p>
+                        <span>110,000원</span>
+                    </div>
+                    <div class="count">
+                        <input type='button'onclick='count("minus")' value='-'/>
+                        <div id='result'>0</div>
+                        <input type='button'onclick='count("plus")' value='+'/>
+                    </div>
+                    <input type="button" value="구매하기" />
+                </div>
+            </div>
+            <div th:replace="fragments/footer::footer"></div>
+        </div>
+    </div>
+</body>
+</html>
