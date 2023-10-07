@@ -27,46 +27,53 @@ import java.util.List;
 class PostingRepositoryTest {
 
     @Autowired
-    private PostingRepository postingRepository;
+    PostingRepository postingRepository;
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @PersistenceContext
     EntityManager em;
 
 
-    private Posting getPosting(String suffix) {
-        var user = STUtils.getUser(suffix);
-        userRepository.save(user);
-
-        Posting posting = new Posting();
-        posting.setTitle("게시글 제목" + suffix);
-        posting.setContent("게시글 내용" + suffix);
-        posting.setCreatedAt(LocalDateTime.now());
-        posting.setUser(user);
-
-        return posting;
-    }
-
-    @AfterEach
-    public void cleanUp() {
-        postingRepository.deleteAll();
-    }
-
     @Test
     @DisplayName("게시글 생성 테스트")
     public void createPostingList(){
         // given
-        Posting posting = getPosting("1");
-
+        var posting = STUtils.getPosting();
+        var user = posting.getUser();
+        System.out.println(user);
+        System.out.println(posting);
+        userRepository.save(user);
         postingRepository.saveAndFlush(posting);
         em.clear();
 
         //when
-        var savedPosting = postingRepository.findById(posting.getPostingId()).orElseThrow();
+        var savedPosting = postingRepository.findById(posting.getId()).orElseThrow();
 
         // then
         assertThat(savedPosting.getTitle()).isEqualTo(posting.getTitle());
+        System.out.println(savedPosting.toString());
+    }
+
+    @Test
+    @DisplayName("제목으로 게시글 조회 테스트")
+    public void findByTitleTest(){
+        //given
+        for (int i= 1; i <= 3; i++) {
+            var posting = STUtils.getPosting((String.valueOf(i)));
+            var user = posting.getUser();
+            userRepository.save(user);
+            postingRepository.saveAndFlush(posting);
+        }
+        em.clear();
+
+        //when
+        var savedPosting = postingRepository.findByTitle("게시글 제목1");
+
+        //then
+        assertThat(savedPosting.size()).isEqualTo(1);
+        System.out.println(savedPosting.toString());
+
     }
 
     @Test
@@ -74,10 +81,11 @@ class PostingRepositoryTest {
     public void findByUserIdTest() {
         //given
         for (int i = 1; i <= 3; i++) {
-            var posting = getPosting(String.valueOf(i));
-            postingRepository.save(posting);
+            var posting = STUtils.getPosting(String.valueOf(i));
+            var user = posting.getUser();
+            userRepository.save(user);
+            postingRepository.saveAndFlush(posting);
         }
-        em.flush();
         em.clear();
 
         //when
@@ -85,10 +93,29 @@ class PostingRepositoryTest {
 
         //then
         assertThat(savedPosting.size()).isEqualTo(1);
-
+        System.out.println(savedPosting.toString());
 
     }
 
+    @Test
+    @DisplayName("게시글(유저와 함께) 전체 조회 테스트")
+    public void findAllPosting() {
+        //given *true : each가 맞다, 각각의 유저별로 게시글을 작성한 상태, false : each가 아니다, 한 유저가 작성한 게시글들
+
+        var postings = STUtils.getPostings(3, true);
+        for (var posting : postings) {
+            userRepository.save(posting.getUser());
+            postingRepository.saveAndFlush(posting);
+        }
+        em.clear();
+
+        //when
+        var savedPosting = postingRepository.findAll();
+        System.out.println(savedPosting.toString());
+
+        // then
+        assertThat(savedPosting.size()).isEqualTo(postings.size());
+    }
 
 
 

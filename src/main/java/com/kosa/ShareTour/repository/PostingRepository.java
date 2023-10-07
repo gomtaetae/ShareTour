@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PostingRepository extends JpaRepository<Posting, Integer>{
+
+
     List<Posting> findByUserId(Integer userId);
+
+    List<Posting> findByTitle(String title);
 
 }

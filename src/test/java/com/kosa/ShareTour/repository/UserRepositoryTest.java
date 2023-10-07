@@ -10,22 +10,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional
 class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
     @PersistenceContext
     EntityManager em;
-
-    @AfterEach
-    public void cleanUp() {
-       userRepository.deleteAll();
-   }
 
     @Test
     @DisplayName("유저 생성 테스트")
@@ -41,6 +38,7 @@ class UserRepositoryTest {
 
         // then
         assertThat(savedUser.getUsername()).isEqualTo(user.getUsername());
+        System.out.println(savedUser.toString());
     }
 
     @Test
@@ -56,7 +54,7 @@ class UserRepositoryTest {
         user.setNickname("새로운 닉네임");
         user.setPassword("새로운 비밀번호");
         user.setImgUrl("새로운 이미지");
-        user.setGender("세로운 성별");
+        user.setGender("새로운 성별");
         user.setBirthday(LocalDate.now());
         user.setMobile("새로운 전화번호");
         user.setAddress("새로운 주소");
