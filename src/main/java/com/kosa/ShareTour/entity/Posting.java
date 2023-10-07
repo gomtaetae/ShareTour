@@ -3,7 +3,6 @@ package com.kosa.ShareTour.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,10 +29,8 @@ public class Posting {
         createdAt = LocalDateTime.now();
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="users_id", nullable = false)
     private User user;
-
-
 
 }

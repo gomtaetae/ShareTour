@@ -14,4 +14,7 @@ public interface PostingRepository extends JpaRepository<Posting, Integer>{
 
     List<Posting> findByTitle(String title);
 
+    void deleteByTitle(String title);
+
+
 }
