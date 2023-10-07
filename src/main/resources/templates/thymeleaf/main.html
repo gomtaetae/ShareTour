@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지 구상</title>
+    <!--thymeleaf script, css 불러오기-->
+    <th:block layout:fragment="script"></th:block>
+    <th:block layout:fragment="css"></th:block>
+    <link rel="stylesheet" href="/css/layout.css">
+    <script src="/js/jquery-1.12.3.js"></script>
+    <script src="/js/layout.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div class="center">
+        <!--thymeleaf header 불러오기-->
+        <div th:replace="fragments/header::header"></div>
+        <div class="slide_wrap">
+            <ul class="slide">
+                <li><img src="/img/banner (1).png" alt=""></li>
+                <li><img src="/img/banner (2).png" alt=""></li>
+                <li><img src="/img/banner (3).png" alt=""></li>
+            </ul>
+            <div class="buuton">
+                <div class="next">
+                    <img src="/img/오른쪽.png" alt="">
+                </div>
+                <div class="pre">
+                    <img src="/img/왼쪽.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="package_product">
+            <div class="text">
+                <img src="/img/가방.png" alt="">
+                <p>이 패키지 어때?</p>
+            </div>
+            <div class="travel_package">
+                <div class="package_img">
+                    <img src="/img/turkiye.jfif" alt="package1">
+                    <img src="/img/sea.jfif" alt="package2">
+                    <img src="/img/mountain.jpg" alt="package3">
+                    <img src="/img/hiking.jfif" alt="package4">
+                </div>
+            </div>
+        </div>
+        <div class="sale">
+            <div id="timer">
+            </div>
+            <div class="sale_product">
+                <img src="/img/특가.jpg" alt="">
+            </div>
+        </div>
+        <!--thymeleaf footer 불러오기 -->
+        <div th:replace="fragments/footer::footer"></div>
+    </div>
+</div>
+</body>
+</html>
