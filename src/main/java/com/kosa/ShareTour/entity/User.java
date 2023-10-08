@@ -1,9 +1,6 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -64,6 +61,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
+    private List<Comment> commentList = new ArrayList<>();
+    private List<Purchase> purchaseList = new ArrayList<>();
 
 //    @Override
 //    public String toString() {
