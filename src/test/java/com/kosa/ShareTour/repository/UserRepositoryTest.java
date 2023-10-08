@@ -20,6 +20,9 @@ class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PostingRepository postingRepository;
+
     @PersistenceContext
     EntityManager em;
 
@@ -133,8 +136,10 @@ class UserRepositoryTest {
     public void deleteUsersByIdTest(){
         // given
         for (int i = 1; i <= 3; i++) {
-            User user = STUtils.getUser(String.valueOf(i));
-            userRepository.saveAndFlush(user);
+            var posting = STUtils.getPosting(String.valueOf(i));
+            var user = posting.getUser();
+            userRepository.save(user);
+            postingRepository.saveAndFlush(posting);
         }
         em.clear();
 

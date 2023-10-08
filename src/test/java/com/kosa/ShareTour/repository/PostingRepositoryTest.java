@@ -1,21 +1,14 @@
 package com.kosa.ShareTour.repository;
 
-import com.kosa.ShareTour.entity.Posting;
-import com.kosa.ShareTour.entity.User;
 import com.kosa.ShareTour.utils.STUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,7 +41,7 @@ class PostingRepositoryTest {
 
         // then
         assertThat(savedPosting.getTitle()).isEqualTo(posting.getTitle());
-        System.out.println(savedPosting.toString());
+        System.out.println(savedPosting);
     }
 
     @Test
@@ -65,11 +58,11 @@ class PostingRepositoryTest {
 
         //when
         var savedPosting = postingRepository.findByTitle("게시글 제목1");
-        System.out.println(savedPosting.toString());
+        System.out.println(savedPosting);
 
         //then
         assertThat(savedPosting.size()).isEqualTo(1);
-        System.out.println(savedPosting.toString());
+        System.out.println(savedPosting);
 
     }
 
@@ -89,11 +82,11 @@ class PostingRepositoryTest {
         var allPosting = postingRepository.findAll();
         var savedPosting = postingRepository.findByUserNickname("유저 닉네임1");
         System.out.println(allPosting);
-        System.out.println(savedPosting.toString());
+        System.out.println(savedPosting);
 
         //then
         assertThat(savedPosting.size()).isEqualTo(1);
-        System.out.println(savedPosting.toString());
+        System.out.println(savedPosting);
 
     }
 
@@ -111,7 +104,7 @@ class PostingRepositoryTest {
 
         //when
         var savedPosting = postingRepository.findAll();
-        System.out.println(savedPosting.toString());
+        System.out.println(savedPosting);
 
         // then
         assertThat(savedPosting.size()).isEqualTo(postings.size());
@@ -132,6 +125,11 @@ class PostingRepositoryTest {
         //when
         postingRepository.deleteByTitle("게시글 제목1");
 
+        //then
+        var postingList = postingRepository.findAll();
+        assertThat(postingList.size()).isEqualTo(2);
+        System.out.println(userRepository.findAll());
+        System.out.println(postingRepository.findAll());
 
     }
 
