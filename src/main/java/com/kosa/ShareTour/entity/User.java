@@ -3,6 +3,7 @@ package com.kosa.ShareTour.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,8 +14,6 @@ import java.util.List;
 @Entity
 @Table(name="users")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     @Id
@@ -63,7 +62,7 @@ public class User {
     @Column(name="point")
     private int point;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
 
 //    @Override
