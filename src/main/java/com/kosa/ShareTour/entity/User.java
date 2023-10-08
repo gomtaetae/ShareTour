@@ -1,18 +1,20 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
-@Getter
-@Setter
-@ToString
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -61,5 +63,26 @@ public class User {
     @Column(name="point")
     private int point;
 
+    @OneToMany(mappedBy = "user")
+    private List<Posting> postingList = new ArrayList<>();
+
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", username='" + username + '\'' +
+//                ", email='" + email + '\'' +
+//                ", nickname='" + nickname + '\'' +
+//                ", password='" + password + '\'' +
+//                ", createTime=" + createTime +
+//                ", imgUrl='" + imgUrl + '\'' +
+//                ", gender='" + gender + '\'' +
+//                ", birthday=" + birthday +
+//                ", mobile='" + mobile + '\'' +
+//                ", address='" + address + '\'' +
+//                ", grade='" + grade + '\'' +
+//                ", point=" + point +
+//                '}';
+//    }
 
 }
