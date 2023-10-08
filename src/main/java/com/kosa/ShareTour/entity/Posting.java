@@ -37,10 +37,6 @@ public class Posting {
     @JoinColumn(name="users_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "posting", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList = new ArrayList<>();
-    private List<Postimage> postimageList = new ArrayList<>();
-
 //    @Override
 //    public String toString() {
 //        return "Posting{" +
