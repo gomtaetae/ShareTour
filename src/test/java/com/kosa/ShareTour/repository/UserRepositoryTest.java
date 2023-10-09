@@ -40,7 +40,7 @@ class UserRepositoryTest {
 
         // then
         assertThat(savedUser.getUsername()).isEqualTo(user.getUsername());
-        System.out.println(savedUser.toString());
+        System.out.println(savedUser);
     }
 
     @Test
@@ -108,7 +108,7 @@ class UserRepositoryTest {
 
         //then
         assertThat(targetUser.getEmail()).isNotNull();
-        assertThat(targetUser.getEmail()).isEqualTo("useremail@example.com");
+        assertThat(targetUser.getEmail()).isEqualTo(userEmail);
     }
 
     @Test
@@ -130,10 +130,30 @@ class UserRepositoryTest {
         assertThat(targetUser.getNickname()).isEqualTo("nickname1");
     }
 
+    //ID 구분으로 삭제시 시퀀스 문제(예상하는 ID값이 아닐 수 있음, 시퀀스 자동 생성으로 인해)
+//    @Test
+//    @DisplayName("유저 ID 구분 삭제 테스트")
+//    public void deleteUsersByIdTest(){
+//        // given
+//        for (int i = 1; i <= 3; i++) {
+//            var posting = STUtils.getPosting(String.valueOf(i));
+//            var user = posting.getUser();
+//            userRepository.save(user);
+//            postingRepository.saveAndFlush(posting);
+//        }
+//        em.clear();
+//
+//        //when
+//        userRepository.deleteById(1);
+//
+//        //then
+//        var userList = userRepository.findAll();
+//        assertThat(userList.size()).isEqualTo(2);
+//    }
 
     @Test
     @DisplayName("유저 ID 구분 삭제 테스트")
-    public void deleteUsersByIdTest(){
+    public void deleteUsersByNicknameTest(){
         // given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
@@ -144,7 +164,7 @@ class UserRepositoryTest {
         em.clear();
 
         //when
-        userRepository.deleteById(1);
+        userRepository.deleteByNickname("유저 닉네임1");
 
         //then
         var userList = userRepository.findAll();

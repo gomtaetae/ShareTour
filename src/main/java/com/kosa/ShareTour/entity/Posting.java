@@ -39,7 +39,6 @@ public class Posting {
 
     @OneToMany(mappedBy = "posting", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
-    private List<Postimage> postimageList = new ArrayList<>();
 
 //    @Override
 //    public String toString() {

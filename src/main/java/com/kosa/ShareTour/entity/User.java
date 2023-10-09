@@ -61,8 +61,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
-    private List<Comment> commentList = new ArrayList<>();
-    private List<Purchase> purchaseList = new ArrayList<>();
+
 
 //    @Override
 //    public String toString() {
