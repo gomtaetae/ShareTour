@@ -16,5 +16,4 @@ public interface PostingRepository extends JpaRepository<Posting, Integer>{
 
     void deleteByTitle(String title);
 
-
 }

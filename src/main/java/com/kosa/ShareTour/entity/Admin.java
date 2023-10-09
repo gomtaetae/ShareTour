@@ -19,7 +19,7 @@ public class Admin {
     private Integer id;
 
     @Column(name="name", length = 50, nullable = false)
-    private String username;
+    private String name;
 
     @Column(name="password", length = 50, nullable = false)
     private String password;
