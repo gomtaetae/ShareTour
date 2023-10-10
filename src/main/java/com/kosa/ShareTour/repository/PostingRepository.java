@@ -1,7 +1,6 @@
 package com.kosa.ShareTour.repository;
 
 import com.kosa.ShareTour.entity.Posting;
-import com.kosa.ShareTour.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -15,6 +14,5 @@ public interface PostingRepository extends JpaRepository<Posting, Integer>{
     List<Posting> findByTitle(String title);
 
     void deleteByTitle(String title);
-
 
 }

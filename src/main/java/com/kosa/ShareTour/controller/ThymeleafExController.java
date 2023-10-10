@@ -30,7 +30,7 @@ public class ThymeleafExController {
 
     @GetMapping(value = "/package")
     public String packagePage(Model model){
-        return "thymeleaf/package";
+        return "thymeleaf/package_tour";
     }
 
     @GetMapping(value = "/post")
@@ -45,7 +45,7 @@ public class ThymeleafExController {
 
     @GetMapping(value = "/view")
     public String viewPage(Model model){
-        return "thymeleaf/veiw";
+        return "thymeleaf/view";
     }
 
     @GetMapping(value = "/write")

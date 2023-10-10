@@ -1,6 +1,9 @@
 package com.kosa.ShareTour.entity;
 
+import com.kosa.ShareTour.constant.Role;
+import com.kosa.ShareTour.dto.MemberFormDto;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name="members")
 @Data
-public class User {
+public class Member {
 
     @Id
-    @Column(name="users_id")
+    @Column(name="members_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
@@ -59,26 +62,28 @@ public class User {
     @Column(name="point")
     private int point;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
 
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", username='" + username + '\'' +
-//                ", email='" + email + '\'' +
-//                ", nickname='" + nickname + '\'' +
-//                ", password='" + password + '\'' +
-//                ", createTime=" + createTime +
-//                ", imgUrl='" + imgUrl + '\'' +
-//                ", gender='" + gender + '\'' +
-//                ", birthday=" + birthday +
-//                ", mobile='" + mobile + '\'' +
-//                ", address='" + address + '\'' +
-//                ", grade='" + grade + '\'' +
-//                ", point=" + point +
-//                '}';
-//    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+        Member member = new Member();
+        member.setUsername(memberFormDto.getName());
+        member.setEmail(memberFormDto.getEmail());
+        member.setNickname(memberFormDto.getNickname());
+        member.setPassword(memberFormDto.getEmail());
+        member.setCreateTime(LocalDateTime.now());
+        member.setImgUrl(memberFormDto.getImgUrl());
+        member.setGender(memberFormDto.getGender());
+        member.setBirthday(memberFormDto.getBirthday());
+        member.setMobile(memberFormDto.getPhone());
+        member.setAddress(memberFormDto.getAddress());
+        member.setGrade(memberFormDto.getGrade());
+        member.setPoint(0);
+
+        return member;
+    }
 
 }

@@ -5,13 +5,11 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="postings")
 @Data
-@ToString(exclude = "user")
+@ToString(exclude = "member")
 public class Posting {
 
     @Id
@@ -34,8 +32,8 @@ public class Posting {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="users_id", nullable = false)
-    private User user;
+    @JoinColumn(name="members_id", nullable = false)
+    private Member member;
 
 //    @Override
 //    public String toString() {
