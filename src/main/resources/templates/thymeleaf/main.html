@@ -15,6 +15,7 @@
 <body>
 <div id="wrap">
     <div class="center">
+        <!--header는 center밑에 오기-->
         <!--thymeleaf header 불러오기-->
         <div th:replace="fragments/header::header"></div>
         <div class="slide_wrap">
@@ -54,6 +55,7 @@
             </div>
         </div>
         <!--thymeleaf footer 불러오기 -->
+        <!--footer은 div 두개 뒤에 오기-->
         <div th:replace="fragments/footer::footer"></div>
     </div>
 </div>
