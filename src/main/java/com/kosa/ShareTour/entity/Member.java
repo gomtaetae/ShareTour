@@ -73,7 +73,10 @@ public class Member {
         member.setUsername(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
         member.setNickname(memberFormDto.getNickname());
-        member.setPassword(memberFormDto.getEmail());
+
+        String hashedPassword = passwordEncoder.encode(memberFormDto.getPassword());
+        member.setPassword(hashedPassword);
+
         member.setCreateTime(LocalDateTime.now());
         member.setImgUrl(memberFormDto.getImgUrl());
         member.setGender(memberFormDto.getGender());
@@ -82,6 +85,8 @@ public class Member {
         member.setAddress(memberFormDto.getAddress());
         member.setGrade(memberFormDto.getGrade());
         member.setPoint(0);
+
+        member.setRole(Role.USER);
 
         return member;
     }
