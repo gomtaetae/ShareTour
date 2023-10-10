@@ -20,7 +20,7 @@ a,a :visited{text-decoration:none; color:black}
 
 #wrap{width:100%;}
 
-.center{width:1200px;
+.center{width:1060px;
        overflow:hidden;
        margin:0 auto;}
 
@@ -34,7 +34,7 @@ a,a :visited{text-decoration:none; color:black}
        margin-top:30px;}
 
 .login li{float:left;
-          width:100px;
+          margin-left:30px;
           font-size:15px;}
 
 .search_box{width:500px;
@@ -45,13 +45,12 @@ nav{width:1200px;
     height:80px;
     margin-top:50px;}
 
-nav li{float:left;
-       width:100px;}
+nav li{float:left;}
 
 nav li img{width:20px;}
 
 .main_menu > li{text-align:center;
-                margin-left:114px;}
+                margin-left:124px;}
 
 .main_menu > li:nth-child(1){margin-left:0px;}
 
@@ -106,20 +105,22 @@ input{width:500px;
     cursor: pointer;
 }
 footer{height:250px;
-       border-top: 1px solid gray;}
+    border-top: 1px solid gray;}
 
 .footer_top{height:150px;}
 
 .footer_logo{width:300px;
-              float: left;}
+           float: left;}
+
 
 .footer_logo img{width:150px;}
+
 .footer_li{width:600px;
-           float:right;
-              margin-top:52px;}
+        float:right;
+        margin-top:52px;}
 
 .footer_li li{width:100px;
-          float:left;}
+       float:left;}
 
 .footer_info p{font-size:15px;
-               font-weight:300;}
+            font-weight:300;}
