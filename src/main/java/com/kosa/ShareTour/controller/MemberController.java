@@ -23,8 +23,19 @@ public class MemberController {
 
     @GetMapping(value = "/new")
     public String memberForm(Model model){
+        /*객체만들어주기*/
         model.addAttribute("memberFormDto",new MemberFormDto());
-        return "member/memberForm";
+        return "thymeleaf/register";
+    }
+
+
+//    register 교수님이 말씀하신부분입니다 *****************************************
+    @GetMapping(value = "/register")
+    /*memberformdto로 넘겨갈 수 있게 선언 꼭 해주기*/
+    public String registerPage(Model model) {
+        model.addAttribute("memberFormDto", new MemberFormDto());
+
+        return "thymeleaf/register";
     }
 
     @PostMapping(value = "/new")
@@ -49,6 +60,7 @@ public class MemberController {
     public String loginMember(){
         return "member/memberLoginForm";
     }
+
 
     @GetMapping(value = "/login/error")
     public String loginForm(Model model){
