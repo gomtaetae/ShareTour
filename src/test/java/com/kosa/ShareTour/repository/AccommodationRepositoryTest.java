@@ -2,28 +2,19 @@ package com.kosa.ShareTour.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import com.kosa.ShareTour.entity.Accommodation;
-import com.kosa.ShareTour.entity.User;
 import com.kosa.ShareTour.utils.STUtils;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application-test.properties")
+@Transactional
 class AccommodationRepositoryTest {
 
     @Autowired
@@ -33,124 +24,124 @@ class AccommodationRepositoryTest {
     EntityManager em;
 
     @Test
-    @DisplayName("숙소 저장 테스트")
+    @DisplayName("숙소 리스트 생성 테스트")
     public void createAccommodationList(){
-        Accommodation accommo = STUtils.getAccommodation();
+        // given
+        for (int i = 1; i <= 3; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
 
-        accommodationRepository.saveAndFlush(accommo);
-        em.clear();
+        //when
+        var savedAccommodationList = accommodationRepository.findAll();
 
-        var savedAccommodation = accommodationRepository.findById(accommo.getId()).orElseThrow();
-
-        assertThat(savedAccommodation.getName()).isEqualTo(accommo.getName());
-        System.out.println(savedAccommodation.toString());
+        // then
+        assertThat(savedAccommodationList.size()).isEqualTo(3);
+        System.out.println(savedAccommodationList);
     }
 
     @Test
-    @DisplayName("숙소 업데이트 테스트")
-    public void updateAccommodation() {
-        // given
-        Accommodation accommo = STUtils.getAccommodation();
-        accommodationRepository.saveAndFlush(accommo);
+    @DisplayName("숙소 상세주소로 조회 테스트")
+    public void findByAddressTest(){
+        //given
+        String exampleAccommodation = "숙소 상세주소1";
 
-        // when
-        accommo.setName("새로운이름");
-        accommo.setAddress("새로운주소");
-        accommo.setUrl("https://www.naver.com");
-        accommo.setPhone("010-2342-2234");
-        accommo.setArea("경기도");
-        accommo.setGrade("4성급");
-        accommo.setParking("주차 가능");
-        accommo.setLocX("27.234453");
-        accommo.setLocY("36.674557");
-        accommo.setPrice(100000);
-        accommodationRepository.saveAndFlush(accommo);
-
+        for (int i = 1; i <= 3; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
         em.clear();
 
+        //when
+        var targetAccommodation = accommodationRepository.findByAddress(exampleAccommodation);
+
         // then
-        var updatedAccommodation = accommodationRepository.findById(accommo.getId()).orElseThrow();
-        assertThat(updatedAccommodation.getName()).isEqualTo(accommo.getName());
+        assertThat(targetAccommodation.getAddress()).isNotNull();
+        assertThat(targetAccommodation.getAddress()).isEqualTo(exampleAccommodation);
     }
 
     @Test
     @DisplayName("숙소 이름으로 조회 테스트")
-    public void findByName(){
+    public void findByNameTest(){
         //given
-        for (int i = 1; i <= 3; i++) {
-            Accommodation accommo = STUtils.getAccommodation(String.valueOf(i));
-            accommodationRepository.saveAndFlush(accommo);
+        for (int i = 1; i <= 2; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
         }
-        for (int i = 4; i < 6; i++) {
-            Accommodation accommo = STUtils.getAccommodation("1", String.valueOf(i));
-            accommodationRepository.saveAndFlush(accommo);
+        for (int i = 3; i <= 4; i++) {
+            Accommodation accommodation = STUtils.getAccommodation("", String.valueOf(i), String.valueOf(i), String.valueOf(i), String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
         }
         em.clear();
 
         //when
-        var accommodationList = accommodationRepository.findByName("숙소이름1");
+        var targetAccommodationList = accommodationRepository.findByName("숙소 이름");
 
         // then
-        assertThat(accommodationList.size()).isEqualTo(3);
+        assertThat(targetAccommodationList.size()).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("숙소 지역으로 조회 테스트")
-    public void findByArea(){
+    @DisplayName("숙소 도/시로 조회 테스트")
+    public void findByAreaTest(){
         //given
-        String accommodationArea = "경기도";
-
-        Accommodation accommo = STUtils.getAccommodation();
-        accommo.setArea(accommodationArea);
-        accommodationRepository.saveAndFlush(accommo);
-
-        //when
-        em.clear();
-        Accommodation targetAccommodation = accommodationRepository.findByArea(accommodationArea);
-
-        //then
-        assertThat(targetAccommodation.getArea()).isNotNull();
-        assertThat(targetAccommodation.getArea()).isEqualTo("경기도");
-    }
-
-    @Test
-    @DisplayName("숙소 가격으로 조회 테스트")
-    public void findByPrice(){
-        //given
-        float accommodationPrice = 100000;
-
-        Accommodation accommo = STUtils.getAccommodation();
-        accommo.setPrice(accommodationPrice);
-        accommodationRepository.saveAndFlush(accommo);
-
-        //when
-        em.clear();
-        Accommodation targetAccommodation = accommodationRepository.findByprice(accommodationPrice);
-
-        //then
-        assertThat(targetAccommodation.getPrice()).isNotNull();
-        assertThat(targetAccommodation.getPrice()).isEqualTo(100000);
-    }
-
-
-    @Test
-    @DisplayName("숙소 ID 구분 삭제 테스트")
-    public void deleteAccommoByIdTest(){
-        // given
-        for (int i = 1; i <= 3; i++) {
-            var accommo = STUtils.getAccommodation(String.valueOf(i));
-            var admin = accommo.getId();
-            userRepository.save(user);
-            postingRepository.saveAndFlush(posting);
+        for (int i = 1; i <= 2; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
+        for (int i = 3; i <= 4; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i), "", String.valueOf(i), String.valueOf(i), String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
         }
         em.clear();
 
         //when
-        userRepository.deleteById(1);
+        var targetAccommodationList = accommodationRepository.findByArea("숙소 도/시");
 
-        //then
-        var userList = userRepository.findAll();
-        assertThat(userList.size()).isEqualTo(2);
+        // then
+        assertThat(targetAccommodationList.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("숙소 등급으로 조회 테스트")
+    public void findByGradeTest(){
+        //given
+        for (int i = 1; i <= 2; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
+        for (int i = 3; i <= 4; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i), String.valueOf(i), "", String.valueOf(i), String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
+        em.clear();
+
+        //when
+        var targetAccommodationList = accommodationRepository.findByGrade("숙소 등급");
+
+        // then
+        assertThat(targetAccommodationList.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("숙소 주차장으로 조회 테스트")
+    public void findByParkingTest(){
+        //given
+        for (int i = 1; i <= 2; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
+        for (int i = 3; i <= 4; i++) {
+            Accommodation accommodation = STUtils.getAccommodation(String.valueOf(i), String.valueOf(i), String.valueOf(i), "", String.valueOf(i));
+            accommodationRepository.saveAndFlush(accommodation);
+        }
+        em.clear();
+
+        //when
+        var targetAccommodationList = accommodationRepository.findByParking("숙소 주차장");
+
+        // then
+        assertThat(targetAccommodationList.size()).isEqualTo(2);
     }
 
 }

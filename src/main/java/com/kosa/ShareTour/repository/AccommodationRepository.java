@@ -7,7 +7,12 @@ import java.util.List;
 
 public interface AccommodationRepository extends JpaRepository<Accommodation, Integer> {
 
+    Accommodation findByAddress(String address);
     List<Accommodation> findByName(String name);
-    Accommodation findByArea(String area);
-    Accommodation findByprice(float price);
+    List<Accommodation> findByArea(String area);
+    List<Accommodation> findByGrade(String grade);
+    List<Accommodation> findByParking(String parking);
+
+
+
 }
