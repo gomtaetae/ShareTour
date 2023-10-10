@@ -30,7 +30,7 @@ class MemberRepositoryTest {
     @DisplayName("유저 생성 테스트")
     public void createUserList(){
         // given
-        Member member = STUtils.getUser();
+        Member member = STUtils.getMember();
 
         memberRepository.saveAndFlush(member);
         em.clear();
@@ -47,7 +47,7 @@ class MemberRepositoryTest {
     @DisplayName("유저 업데이트 테스트")
     public void updateUser() {
         // given
-        Member member = STUtils.getUser();
+        Member member = STUtils.getMember();
         memberRepository.saveAndFlush(member);
 
         // when
@@ -76,11 +76,11 @@ class MemberRepositoryTest {
     public void findByUserNmTest(){
         //given
         for (int i = 1; i <= 3; i++) {
-            Member member = STUtils.getUser(String.valueOf(i));
+            Member member = STUtils.getMember(String.valueOf(i));
             memberRepository.saveAndFlush(member);
         }
         for (int i = 4; i < 6; i++) {
-            Member member = STUtils.getUser("1", String.valueOf(i));
+            Member member = STUtils.getMember("1", String.valueOf(i));
             memberRepository.saveAndFlush(member);
         }
         em.clear();
@@ -98,7 +98,7 @@ class MemberRepositoryTest {
         //given
         String userEmail = "useremail@example.com";
 
-        Member member = STUtils.getUser();
+        Member member = STUtils.getMember();
         member.setEmail(userEmail);
         memberRepository.saveAndFlush(member);
 
@@ -117,7 +117,7 @@ class MemberRepositoryTest {
         //given
         String userNickname = "nickname1";
 
-        Member member = STUtils.getUser();
+        Member member = STUtils.getMember();
         member.setNickname(userNickname);
         memberRepository.saveAndFlush(member);
 
