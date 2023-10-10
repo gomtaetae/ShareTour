@@ -31,8 +31,8 @@ public class Comment implements Serializable {
     private int likes;
 
     @ManyToOne
-    @JoinColumn(name="users_id")
-    private User user;
+    @JoinColumn(name="member_id")
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name="postings_id")

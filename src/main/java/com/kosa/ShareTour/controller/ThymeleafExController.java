@@ -45,7 +45,7 @@ public class ThymeleafExController {
 
     @GetMapping(value = "/view")
     public String viewPage(Model model){
-        return "thymeleaf/veiw";
+        return "thymeleaf/view";
     }
 
     @GetMapping(value = "/write")

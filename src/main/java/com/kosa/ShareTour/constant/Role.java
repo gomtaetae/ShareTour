@@ -1,5 +1,5 @@
 package com.kosa.ShareTour.constant;
 
 public enum Role {
-    MEMBER, ADMIN
+    USER, ADMIN
 }

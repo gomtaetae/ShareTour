@@ -1,6 +1,6 @@
 package com.kosa.ShareTour.repository;
 
-import com.kosa.ShareTour.entity.User;
+import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.utils.STUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class UserRepositoryTest {
+class MemberRepositoryTest {
     @Autowired
-    UserRepository userRepository;
+    MemberRepository memberRepository;
 
     @Autowired
     PostingRepository postingRepository;
@@ -30,16 +30,16 @@ class UserRepositoryTest {
     @DisplayName("유저 생성 테스트")
     public void createUserList(){
         // given
-        User user = STUtils.getUser();
+        Member member = STUtils.getUser();
 
-        userRepository.saveAndFlush(user);
+        memberRepository.saveAndFlush(member);
         em.clear();
 
         //when
-        var savedUser = userRepository.findById(user.getId()).orElseThrow();
+        var savedUser = memberRepository.findById(member.getId()).orElseThrow();
 
         // then
-        assertThat(savedUser.getUsername()).isEqualTo(user.getUsername());
+        assertThat(savedUser.getUsername()).isEqualTo(member.getUsername());
         System.out.println(savedUser);
     }
 
@@ -47,28 +47,28 @@ class UserRepositoryTest {
     @DisplayName("유저 업데이트 테스트")
     public void updateUser() {
         // given
-        User user = STUtils.getUser();
-        userRepository.saveAndFlush(user);
+        Member member = STUtils.getUser();
+        memberRepository.saveAndFlush(member);
 
         // when
-        user.setUsername("새로운 이름");
-        user.setEmail("newuser@email.com");
-        user.setNickname("새로운 닉네임");
-        user.setPassword("새로운 비밀번호");
-        user.setImgUrl("새로운 이미지");
-        user.setGender("새로운 성별");
-        user.setBirthday(LocalDate.now());
-        user.setMobile("새로운 전화번호");
-        user.setAddress("새로운 주소");
-        user.setGrade("새로운 등급");
-        user.setPoint(999);
-        userRepository.saveAndFlush(user);
+        member.setUsername("새로운 이름");
+        member.setEmail("newuser@email.com");
+        member.setNickname("새로운 닉네임");
+        member.setPassword("새로운 비밀번호");
+        member.setImgUrl("새로운 이미지");
+        member.setGender("새로운 성별");
+        member.setBirthday(LocalDate.now());
+        member.setMobile("새로운 전화번호");
+        member.setAddress("새로운 주소");
+        member.setGrade("새로운 등급");
+        member.setPoint(999);
+        memberRepository.saveAndFlush(member);
 
         em.clear();
 
         // then
-        var updatedUser = userRepository.findById(user.getId()).orElseThrow();
-        assertThat(updatedUser.getNickname()).isEqualTo(user.getNickname());
+        var updatedUser = memberRepository.findById(member.getId()).orElseThrow();
+        assertThat(updatedUser.getNickname()).isEqualTo(member.getNickname());
     }
 
     @Test
@@ -76,17 +76,17 @@ class UserRepositoryTest {
     public void findByUserNmTest(){
         //given
         for (int i = 1; i <= 3; i++) {
-            User user = STUtils.getUser(String.valueOf(i));
-            userRepository.saveAndFlush(user);
+            Member member = STUtils.getUser(String.valueOf(i));
+            memberRepository.saveAndFlush(member);
         }
         for (int i = 4; i < 6; i++) {
-            User user = STUtils.getUser("1", String.valueOf(i));
-            userRepository.saveAndFlush(user);
+            Member member = STUtils.getUser("1", String.valueOf(i));
+            memberRepository.saveAndFlush(member);
         }
         em.clear();
 
         //when
-        var userList = userRepository.findByUsername("유저 이름1");
+        var userList = memberRepository.findByUsername("유저 이름1");
 
         // then
         assertThat(userList.size()).isEqualTo(3);
@@ -98,17 +98,17 @@ class UserRepositoryTest {
         //given
         String userEmail = "useremail@example.com";
 
-        User user = STUtils.getUser();
-        user.setEmail(userEmail);
-        userRepository.saveAndFlush(user);
+        Member member = STUtils.getUser();
+        member.setEmail(userEmail);
+        memberRepository.saveAndFlush(member);
 
         //when
         em.clear();
-        User targetUser = userRepository.findByEmail(userEmail);
+        Member targetMember = memberRepository.findByEmail(userEmail);
 
         //then
-        assertThat(targetUser.getEmail()).isNotNull();
-        assertThat(targetUser.getEmail()).isEqualTo(userEmail);
+        assertThat(targetMember.getEmail()).isNotNull();
+        assertThat(targetMember.getEmail()).isEqualTo(userEmail);
     }
 
     @Test
@@ -117,17 +117,17 @@ class UserRepositoryTest {
         //given
         String userNickname = "nickname1";
 
-        User user = STUtils.getUser();
-        user.setNickname(userNickname);
-        userRepository.saveAndFlush(user);
+        Member member = STUtils.getUser();
+        member.setNickname(userNickname);
+        memberRepository.saveAndFlush(member);
 
         //when
         em.clear();
-        User targetUser = userRepository.findByNickname(userNickname);
+        Member targetMember = memberRepository.findByNickname(userNickname);
 
         //then
-        assertThat(targetUser.getNickname()).isNotNull();
-        assertThat(targetUser.getNickname()).isEqualTo("nickname1");
+        assertThat(targetMember.getNickname()).isNotNull();
+        assertThat(targetMember.getNickname()).isEqualTo("nickname1");
     }
 
     //ID 구분으로 삭제시 시퀀스 문제(예상하는 ID값이 아닐 수 있음, 시퀀스 자동 생성으로 인해)
@@ -157,17 +157,17 @@ class UserRepositoryTest {
         // given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
-            var user = posting.getUser();
-            userRepository.save(user);
+            var user = posting.getMember();
+            memberRepository.save(user);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
 
         //when
-        userRepository.deleteByNickname("유저 닉네임1");
+        memberRepository.deleteByNickname("유저 닉네임1");
 
         //then
-        var userList = userRepository.findAll();
+        var userList = memberRepository.findAll();
         assertThat(userList.size()).isEqualTo(2);
     }
 
