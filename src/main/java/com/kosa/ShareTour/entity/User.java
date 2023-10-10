@@ -1,6 +1,9 @@
 package com.kosa.ShareTour.entity;
 
+import com.kosa.ShareTour.constant.Role;
+import com.kosa.ShareTour.dto.UserFormDto;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -62,24 +65,25 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", username='" + username + '\'' +
-//                ", email='" + email + '\'' +
-//                ", nickname='" + nickname + '\'' +
-//                ", password='" + password + '\'' +
-//                ", createTime=" + createTime +
-//                ", imgUrl='" + imgUrl + '\'' +
-//                ", gender='" + gender + '\'' +
-//                ", birthday=" + birthday +
-//                ", mobile='" + mobile + '\'' +
-//                ", address='" + address + '\'' +
-//                ", grade='" + grade + '\'' +
-//                ", point=" + point +
-//                '}';
-//    }
+    public static User createUser(UserFormDto userFormDto, PasswordEncoder passwordEncoder) {
+        User user = new User();
+        user.setUsername(userFormDto.getName());
+        user.setEmail(userFormDto.getEmail());
+        user.setNickname(userFormDto.getNickname());
+        user.setPassword(userFormDto.getEmail());
+        user.setCreateTime(LocalDateTime.now());
+        user.setImgUrl(userFormDto.getImgUrl());
+        user.setGender(userFormDto.getGender());
+        user.setBirthday(userFormDto.getBirthday());
+        user.setMobile(userFormDto.getPhone());
+        user.setAddress(userFormDto.getAddress());
+        user.setGrade(userFormDto.getGrade());
+        user.setPoint(0);
+
+        return user;
+    }
 
 }
