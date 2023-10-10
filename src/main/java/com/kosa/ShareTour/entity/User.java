@@ -1,47 +1,45 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
-@Getter
-@Setter
-@ToString
+@Data
 public class User {
 
     @Id
     @Column(name="users_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int users_id;
+    private Integer id;
 
     @Column(name="username", length = 32, nullable = false)
     private String username;
 
-    @Column(name="email", length = 60, nullable = false)
+    @Column(name="email", length = 60, nullable = false, unique = true)
     private String email;
 
-    @Column(name="nickname", length = 45, nullable = false)
+    @Column(name="nickname", length = 45, nullable = false, unique = true)
     private String nickname;
 
     @Column(name="password", length = 30, nullable = false)
     private String password;
 
     @Column(name="create_time")
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     @PrePersist
     protected void onCreate() {
-        create_time = LocalDateTime.now();
+        createTime = LocalDateTime.now();
     }
 
     @Column(name="img")
-    private String img;
+    private String imgUrl;
 
     @Column(name="gender", length = 45, nullable = false)
     private String gender;
@@ -60,5 +58,27 @@ public class User {
 
     @Column(name="point")
     private int point;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Posting> postingList = new ArrayList<>();
+
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", username='" + username + '\'' +
+//                ", email='" + email + '\'' +
+//                ", nickname='" + nickname + '\'' +
+//                ", password='" + password + '\'' +
+//                ", createTime=" + createTime +
+//                ", imgUrl='" + imgUrl + '\'' +
+//                ", gender='" + gender + '\'' +
+//                ", birthday=" + birthday +
+//                ", mobile='" + mobile + '\'' +
+//                ", address='" + address + '\'' +
+//                ", grade='" + grade + '\'' +
+//                ", point=" + point +
+//                '}';
+//    }
 
 }
