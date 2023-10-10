@@ -39,14 +39,14 @@ class MemberServiceTest {
         memberFormDto.setPhone("010-1234-5678");
         memberFormDto.setAddress("서울시 마포구 합정동");
         memberFormDto.setGrade("1급");
-        return Member.createUser(memberFormDto, passwordEncoder);
+        return Member.createMember(memberFormDto, passwordEncoder);
     }
 
     @Test
     @DisplayName("회원가입 테스트")
     public void saveUserTest(){
         Member member = createUser();
-        Member savedMember = memberService.saveUser(member);
+        Member savedMember = memberService.saveMember(member);
 
         assertEquals(member.getEmail(), savedMember.getEmail());
         assertEquals(member.getUsername(), savedMember.getUsername());
@@ -60,10 +60,10 @@ class MemberServiceTest {
     public void saveDuplicateUserTest(){
         Member member1 = createUser();
         Member member2 = createUser();
-        memberService.saveUser(member1);
+        memberService.saveMember(member1);
 
         Throwable e = assertThrows(IllegalStateException.class, () -> {
-            memberService.saveUser(member2);});
+            memberService.saveMember(member2);});
         assertEquals("이미 가입된 회원입니다.", e.getMessage());
     }
 
