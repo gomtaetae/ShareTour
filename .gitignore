@@ -14,18 +14,17 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
+*.properties
 .idea
 *.iws
 *.iml
 *.ipr
-*.properties
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
-/nbdist/kim!!61128
-
+/nbdist/
 /.nb-gradle/
 build/
 !**/src/main/**/build/
@@ -34,3 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 
+/src/main/resources/application.properties

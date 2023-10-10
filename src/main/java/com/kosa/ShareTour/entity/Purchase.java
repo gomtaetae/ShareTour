@@ -13,10 +13,10 @@ public class Purchase implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name="users_id")
-    private User userid;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name="packages_id")
-    private Package packageid;
+    private Package packageId;
 
 }

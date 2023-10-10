@@ -15,7 +15,7 @@ public class Package implements Serializable {
     @Id
     @Column(name="packages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int packagesid;
+    private Integer id;
 
     @Column(name="title", length = 50, nullable = false)
     private String title;
@@ -24,32 +24,32 @@ public class Package implements Serializable {
     private String content;
 
     @Column(name="start_date", nullable = false)
-    private LocalDate startdate;
+    private LocalDate startDate;
 
     @Column(name="end_date", nullable = false)
-    private LocalDate enddate;
+    private LocalDate endDate;
 
     @Column(name="created_at", nullable = false)
-    private LocalDateTime createdat;
+    private LocalDateTime createdAt;
 
     @Column(name="modified_at")
-    private LocalDateTime modifiedat;
+    private LocalDateTime modifiedAt;
 
     @PrePersist
     protected void onCreate() {
-        createdat = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        modifiedat = LocalDateTime.now();
+        modifiedAt = LocalDateTime.now();
     }
 
     @Column(name="img", nullable = false)
     private String img;
 
     @Column(name="totalprice", nullable = false)
-    private float totalprice;
+    private float totalPrice;
 
     @Column(name="duration", nullable = false)
     private int duration;
@@ -58,25 +58,25 @@ public class Package implements Serializable {
     private LocalDateTime expire;
 
     @Column(name="in_stock")
-    private int instock;
+    private int inStock;
 
     @Column(name="stock_left")
-    private int stockleft;
+    private int stockLeft;
 
     @ManyToOne
     @JoinColumn(name="places_id")
-    private Place placeid;
+    private Place place;
 
     @ManyToOne
     @JoinColumn(name="landmarks_id")
-    private Landmark landmarkid;
+    private Landmark landmark;
 
     @ManyToOne
     @JoinColumn(name="accommodations_id")
-    private Accommodation accommodationid;
+    private Accommodation accommodation;
 
     @ManyToOne
     @JoinColumn(name="restaurants_id")
-    private Restaurant restaurantid;
+    private Restaurant restaurant;
 
 }

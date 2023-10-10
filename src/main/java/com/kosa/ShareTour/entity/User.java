@@ -1,24 +1,25 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.kosa.ShareTour.constant.Role;
+import com.kosa.ShareTour.dto.UserFormDto;
+import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
-@Getter
-@Setter
-@ToString
+@Data
 public class User {
 
     @Id
     @Column(name="users_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
+    private Integer id;
 
     @Column(name="username", length = 32, nullable = false)
     private String username;
@@ -61,29 +62,28 @@ public class User {
     @Column(name="point")
     private int point;
 
-    public static User getUser(String name, String uniqueSuffix) {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Posting> postingList = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public static User createUser(UserFormDto userFormDto, PasswordEncoder passwordEncoder) {
         User user = new User();
-        user.setUsername("유저 이름" + name);
-        user.setEmail("user" + uniqueSuffix + "@email.com");
-        user.setNickname("유저 닉네임" + uniqueSuffix);
-        user.setPassword("유저 비밀번호" + uniqueSuffix);
+        user.setUsername(userFormDto.getName());
+        user.setEmail(userFormDto.getEmail());
+        user.setNickname(userFormDto.getNickname());
+        user.setPassword(userFormDto.getEmail());
         user.setCreateTime(LocalDateTime.now());
-        user.setImgUrl("유저 이미지" + uniqueSuffix);
-        user.setGender("유저 성별");
-        user.setBirthday(LocalDate.now());
-        user.setMobile("유저 전화번호");
-        user.setAddress("유저 주소");
-        user.setGrade("유저 등급");
-        user.setPoint(10);
+        user.setImgUrl(userFormDto.getImgUrl());
+        user.setGender(userFormDto.getGender());
+        user.setBirthday(userFormDto.getBirthday());
+        user.setMobile(userFormDto.getPhone());
+        user.setAddress(userFormDto.getAddress());
+        user.setGrade(userFormDto.getGrade());
+        user.setPoint(0);
 
         return user;
-    }
-    public static User getUser() {
-        return getUser("", "");
-    }
-
-    public static User getUser(String uniqueSuffix) {
-        return getUser(uniqueSuffix, uniqueSuffix);
     }
 
 }
