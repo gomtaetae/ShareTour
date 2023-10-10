@@ -19,7 +19,7 @@ class PostingRepositoryTest {
     @Autowired
     PostingRepository postingRepository;
     @Autowired
-    UserRepository userRepository;
+    MemberRepository memberRepository;
 
     @PersistenceContext
     EntityManager em;
@@ -29,10 +29,10 @@ class PostingRepositoryTest {
     public void createPostingList(){
         // given
         var posting = STUtils.getPosting();
-        var user = posting.getUser();
+        var user = posting.getMember();
         System.out.println(user);
         System.out.println(posting);
-        userRepository.save(user);
+        memberRepository.save(user);
         postingRepository.saveAndFlush(posting);
         em.clear();
 
@@ -50,8 +50,8 @@ class PostingRepositoryTest {
         //given
         for (int i= 1; i <= 3; i++) {
             var posting = STUtils.getPosting((String.valueOf(i)));
-            var user = posting.getUser();
-            userRepository.save(user);
+            var user = posting.getMember();
+            memberRepository.save(user);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
@@ -72,8 +72,8 @@ class PostingRepositoryTest {
         //given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
-            var user = posting.getUser();
-            userRepository.save(user);
+            var user = posting.getMember();
+            memberRepository.save(user);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
@@ -97,7 +97,7 @@ class PostingRepositoryTest {
 
         var postings = STUtils.getPostings(3, true);
         for (var posting : postings) {
-            userRepository.save(posting.getUser());
+            memberRepository.save(posting.getMember());
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
@@ -116,8 +116,8 @@ class PostingRepositoryTest {
         //given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
-            var user = posting.getUser();
-            userRepository.save(user);
+            var user = posting.getMember();
+            memberRepository.save(user);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
@@ -128,7 +128,7 @@ class PostingRepositoryTest {
         //then
         var postingList = postingRepository.findAll();
         assertThat(postingList.size()).isEqualTo(2);
-        System.out.println(userRepository.findAll());
+        System.out.println(memberRepository.findAll());
         System.out.println(postingRepository.findAll());
 
     }
