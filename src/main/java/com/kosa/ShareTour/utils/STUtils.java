@@ -14,7 +14,7 @@ import java.util.List;
 public class STUtils {
 
     //유저 생성
-    public static Member getUser(String name, String suffix) {
+    public static Member getMember(String name, String suffix) {
         Member member = new Member();
         member.setUsername("유저 이름" + name);
         member.setEmail("user" + suffix + "@email.com");
@@ -31,23 +31,23 @@ public class STUtils {
 
         return member;
     }
-    public static Member getUser() {
-        return getUser("", "");
+    public static Member getMember() {
+        return getMember("", "");
     }
 
-    public static Member getUser(String Suffix) {
-        return getUser(Suffix, Suffix);
+    public static Member getMember(String Suffix) {
+        return getMember(Suffix, Suffix);
     }
 
     // 게시글 작성
     public static Posting getPosting(String suffix) {
-        var user = STUtils.getUser(suffix);
+        var member = STUtils.getMember(suffix);
 
         Posting posting = new Posting();
         posting.setTitle("게시글 제목" + suffix);
         posting.setContent("게시글 내용" + suffix);
         posting.setCreatedAt(LocalDateTime.now());
-        posting.setMember(user);
+        posting.setMember(member);
 
         return posting;
     }
@@ -59,14 +59,14 @@ public class STUtils {
     // 각 유저가 작성한 글, 혹은 한 유저가 여러 글을 동시 작성한 상태를 만들기 위한 생성 코드
     public static List<Posting> getPostings(int numOfPosts, boolean each) {
         var postings = new ArrayList<Posting>();
-        var user = STUtils.getUser();
+        var member = STUtils.getMember();
 
         for (int i = 1; i <= numOfPosts; i++) {
             if (each) {
-                user = getUser(String.valueOf(i));
+                member = getMember(String.valueOf(i));
             }
             var posting = getPosting(String.valueOf(i));
-            posting.setMember(user);
+            posting.setMember(member);
             postings.add(posting);
         }
         return postings;

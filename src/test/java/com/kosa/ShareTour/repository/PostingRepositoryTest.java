@@ -29,10 +29,10 @@ class PostingRepositoryTest {
     public void createPostingList(){
         // given
         var posting = STUtils.getPosting();
-        var user = posting.getMember();
-        System.out.println(user);
+        var member = posting.getMember();
+        System.out.println(member);
         System.out.println(posting);
-        memberRepository.save(user);
+        memberRepository.save(member);
         postingRepository.saveAndFlush(posting);
         em.clear();
 
@@ -68,19 +68,19 @@ class PostingRepositoryTest {
 
     @Test
     @DisplayName("유저 닉네임으로 게시글 조회 테스트")
-    public void findByUserNicknameTest() {
+    public void findByMemberNicknameTest() {
         //given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
-            var user = posting.getMember();
-            memberRepository.save(user);
+            var member = posting.getMember();
+            memberRepository.save(member);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
 
         //when
         var allPosting = postingRepository.findAll();
-        var savedPosting = postingRepository.findByUserNickname("유저 닉네임1");
+        var savedPosting = postingRepository.findByMemberNickname("유저 닉네임1");
         System.out.println(allPosting);
         System.out.println(savedPosting);
 
@@ -116,8 +116,8 @@ class PostingRepositoryTest {
         //given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
-            var user = posting.getMember();
-            memberRepository.save(user);
+            var member = posting.getMember();
+            memberRepository.save(member);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
