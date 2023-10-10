@@ -2,6 +2,10 @@ package com.kosa.ShareTour.utils;
 
 import com.kosa.ShareTour.entity.Posting;
 import com.kosa.ShareTour.entity.User;
+import com.kosa.ShareTour.entity.Accommodation;
+import com.kosa.ShareTour.entity.Admin;
+import com.kosa.ShareTour.entity.Landmark;
+import com.kosa.ShareTour.entity.Restaurant;
 import com.kosa.ShareTour.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,5 +82,68 @@ public class STUtils {
         return postings;
     }
 
+    //관리자 생성
+    public static Admin getAdmin(String suffix) {
+        var user = STUtils.getUser(suffix);
+
+        Admin admin = new Admin();
+        admin.set("게시글 제목" + suffix);
+        admin.setContent("게시글 내용" + suffix);
+        admin.setCreatedAt(LocalDateTime.now());
+        admin.setUser(user);
+
+        return posting;
+    }
+
+    public static Posting getPosting() {
+        return getPosting("");
+    }
+
+    // 각 유저가 작성한 글, 혹은 한 유저가 여러 글을 동시 작성한 상태를 만들기 위한 생성 코드
+    public static List<Posting> getPostings(int numOfPosts, boolean each) {
+        var postings = new ArrayList<Posting>();
+        var user = STUtils.getUser();
+
+        for (int i = 1; i <= numOfPosts; i++) {
+            if (each) {
+                user = getUser(String.valueOf(i));
+            }
+            var posting = getPosting(String.valueOf(i));
+            posting.setUser(user);
+            postings.add(posting);
+        }
+        return postings;
+    }
+
+
+    //숙소 추가
+    public static Accommodation getAccommodation(String name, String uniqueSuffix) {
+        Accommodation accommo = new Accommodation();
+        accommo.setName("햇빛이 비추는 곳");
+        accommo.setAddress("경기도 고양시 덕양구 성신로 99 햇빛마을 10단지 백양고등학교");
+        accommo.setUrl("https://www.naver.com");
+        accommo.setPhone("010-2342-2345");
+        accommo.setArea("경기도");
+        accommo.setGrade("5성급");
+        accommo.setParking("주차 불가");
+        accommo.setLocX("27.3423423");
+        accommo.setLocY("36.123443");
+        accommo.setPrice(100000);
+
+        return accommo;
+    }
+
+    public static Accommodation getAccommodation() {
+        return getAccommodation("", "");
+    }
+
+    public static Accommodation getAccommodation(String uniqueSuffix) {
+        return getAccommodation(uniqueSuffix, uniqueSuffix);
+    }
+
+    //레스토랑 추가
+
+
+    //랜드마크 추가
 }
 
