@@ -1,15 +1,7 @@
 package com.kosa.ShareTour.utils;
 
-import com.kosa.ShareTour.entity.Posting;
-import com.kosa.ShareTour.entity.User;
-import com.kosa.ShareTour.entity.Comment;
-import com.kosa.ShareTour.entity.Admin;
-import com.kosa.ShareTour.entity.Place;
-import com.kosa.ShareTour.entity.Accommodation;
-import com.kosa.ShareTour.entity.Landmark;
-import com.kosa.ShareTour.entity.Restaurant;
-
-import org.springframework.stereotype.Service;
+import com.kosa.ShareTour.entity.*;
+import com.kosa.ShareTour.entity.Member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,28 +14,28 @@ import java.util.List;
 public class STUtils {
 
     //유저 생성
-    public static User getUser(String name, String suffix) {
-        User user = new User();
-        user.setUsername("유저 이름" + name);
-        user.setEmail("user" + suffix + "@email.com");
-        user.setNickname("유저 닉네임" + suffix);
-        user.setPassword("유저 비밀번호" + suffix);
-        user.setCreateTime(LocalDateTime.now());
-        user.setImgUrl("유저 이미지" + suffix);
-        user.setGender("유저 성별");
-        user.setBirthday(LocalDate.now());
-        user.setMobile("유저 전화번호" + suffix);
-        user.setAddress("유저 주소" + suffix);
-        user.setGrade("유저 등급");
-        user.setPoint(10);
+    public static Member getUser(String name, String suffix) {
+        Member member = new Member();
+        member.setUsername("유저 이름" + name);
+        member.setEmail("user" + suffix + "@email.com");
+        member.setNickname("유저 닉네임" + suffix);
+        member.setPassword("유저 비밀번호" + suffix);
+        member.setCreateTime(LocalDateTime.now());
+        member.setImgUrl("유저 이미지" + suffix);
+        member.setGender("유저 성별");
+        member.setBirthday(LocalDate.now());
+        member.setMobile("유저 전화번호" + suffix);
+        member.setAddress("유저 주소" + suffix);
+        member.setGrade("유저 등급");
+        member.setPoint(10);
 
-        return user;
+        return member;
     }
-    public static User getUser() {
+    public static Member getUser() {
         return getUser("", "");
     }
 
-    public static User getUser(String Suffix) {
+    public static Member getUser(String Suffix) {
         return getUser(Suffix, Suffix);
     }
 
@@ -55,7 +47,7 @@ public class STUtils {
         posting.setTitle("게시글 제목" + suffix);
         posting.setContent("게시글 내용" + suffix);
         posting.setCreatedAt(LocalDateTime.now());
-        posting.setUser(user);
+        posting.setMember(user);
 
         return posting;
     }
@@ -74,7 +66,7 @@ public class STUtils {
                 user = getUser(String.valueOf(i));
             }
             var posting = getPosting(String.valueOf(i));
-            posting.setUser(user);
+            posting.setMember(user);
             postings.add(posting);
         }
         return postings;

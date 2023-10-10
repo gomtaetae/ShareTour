@@ -1,7 +1,7 @@
 package com.kosa.ShareTour.entity;
 
 import com.kosa.ShareTour.constant.Role;
-import com.kosa.ShareTour.dto.UserFormDto;
+import com.kosa.ShareTour.dto.MemberFormDto;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name="members")
 @Data
-public class User {
+public class Member {
 
     @Id
-    @Column(name="users_id")
+    @Column(name="members_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
@@ -62,28 +62,28 @@ public class User {
     @Column(name="point")
     private int point;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static User createUser(UserFormDto userFormDto, PasswordEncoder passwordEncoder) {
-        User user = new User();
-        user.setUsername(userFormDto.getName());
-        user.setEmail(userFormDto.getEmail());
-        user.setNickname(userFormDto.getNickname());
-        user.setPassword(userFormDto.getEmail());
-        user.setCreateTime(LocalDateTime.now());
-        user.setImgUrl(userFormDto.getImgUrl());
-        user.setGender(userFormDto.getGender());
-        user.setBirthday(userFormDto.getBirthday());
-        user.setMobile(userFormDto.getPhone());
-        user.setAddress(userFormDto.getAddress());
-        user.setGrade(userFormDto.getGrade());
-        user.setPoint(0);
+    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+        Member member = new Member();
+        member.setUsername(memberFormDto.getName());
+        member.setEmail(memberFormDto.getEmail());
+        member.setNickname(memberFormDto.getNickname());
+        member.setPassword(memberFormDto.getEmail());
+        member.setCreateTime(LocalDateTime.now());
+        member.setImgUrl(memberFormDto.getImgUrl());
+        member.setGender(memberFormDto.getGender());
+        member.setBirthday(memberFormDto.getBirthday());
+        member.setMobile(memberFormDto.getPhone());
+        member.setAddress(memberFormDto.getAddress());
+        member.setGrade(memberFormDto.getGrade());
+        member.setPoint(0);
 
-        return user;
+        return member;
     }
 
 }

@@ -2,17 +2,15 @@ package com.kosa.ShareTour.dto;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import org.thymeleaf.spring5.processor.SpringErrorClassTagProcessor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class UserFormDto {
+public class MemberFormDto {
 
     @NotBlank(message = "이름은 필수 입력 값입니다")
     private String name;

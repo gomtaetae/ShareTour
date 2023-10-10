@@ -18,8 +18,8 @@ public class Auction implements Serializable {
     private float finalPrice;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="member_id")
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name="accommodation_id")
