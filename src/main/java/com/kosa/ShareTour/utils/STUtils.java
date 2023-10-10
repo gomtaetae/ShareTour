@@ -94,11 +94,11 @@ public class STUtils {
     }
 
     // Place 생성
-    public static Place getPlace(String suffix) {
+    public static Place getPlace(String country, String province, String city, String suffix) {
         Place place = new Place();
-        place.setCountry("여행지(국가)" + suffix);
-        place.setProvince("여행지(도)" + suffix);
-        place.setCity("여행지(시)" + suffix);
+        place.setCountry("여행지(국가)" + country);
+        place.setProvince("여행지(도)" + province);
+        place.setCity("여행지(시)" + city);
         place.setLocX("위도" + suffix);
         place.setLocY("경도" + suffix);
         place.setImg("이미지" + suffix);
@@ -106,8 +106,12 @@ public class STUtils {
         return place;
     }
 
+    public  static Place getPlace(String suffix) {
+        return getPlace(suffix, suffix, suffix, suffix);
+    }
+
     public static Place getPlace() {
-        return getPlace("");
+        return getPlace("", "", "", "");
     }
 
     // Accommodation 생성

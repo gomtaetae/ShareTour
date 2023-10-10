@@ -13,4 +13,6 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, In
     List<Accommodation> findByGrade(String grade);
     List<Accommodation> findByParking(String parking);
 
+
+
 }
