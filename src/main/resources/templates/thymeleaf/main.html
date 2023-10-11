@@ -14,48 +14,66 @@
 </head>
 <body>
 <div id="wrap">
-    <div class="center">
         <!--thymeleaf header 불러오기-->
         <div th:replace="fragments/header::header"></div>
-        <div class="slide_wrap">
-            <ul class="slide">
-                <li><img src="/img/banner (1).png" alt=""></li>
-                <li><img src="/img/banner (2).png" alt=""></li>
-                <li><img src="/img/banner (3).png" alt=""></li>
-            </ul>
-            <div class="buuton">
-                <div class="next">
-                    <img src="/img/오른쪽.png" alt="">
+    <div class="slide_bg">
+        <div class="slide_center">
+            <div class="slide_wrap">
+                <ul class="slide">
+                    <li><img src="배너.jfif" alt=""></li>
+                    <li><img src="배너2.jpg" alt=""></li>
+                    <li><img src="속초.jpg" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="package_product">
+        <div class="text">
+            <img src="가방.png" alt="">
+            <p>이 패키지 어때?</p>
+        </div>
+        <div class="travel_package">
+            <div class="package_img">
+                <div class="box">
+                    <div class="box_img">
+                        <img src="hiking.jfif" alt="">
+                    </div>
+                    <div class="box_info">
+                        <p>속초 여행 패키지</p>
+                    </div>
                 </div>
-                <div class="pre">
-                    <img src="/img/왼쪽.png" alt="">
+                <div class="box">
+                    <div class="box_img">
+                        <img src="sea.jfif" alt="">
+                    </div>
+                    <div class="box_info">
+                        <p>제주 여행 패키지</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_img">
+                        <img src="turkiye.jfif" alt="">
+                    </div>
+                    <div class="box_info">
+                        <p>부산 여행 패키지</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_img">
+                        <img src="mountain.jpg" alt="">
+                    </div>
+                    <div class="box_info">
+                        <p>춘천 여행 패키지</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="package_product">
-            <div class="text">
-                <img src="/img/가방.png" alt="">
-                <p>이 패키지 어때?</p>
-            </div>
-            <div class="travel_package">
-                <div class="package_img">
-                    <img src="/img/turkiye.jfif" alt="package1">
-                    <img src="/img/sea.jfif" alt="package2">
-                    <img src="/img/mountain.jpg" alt="package3">
-                    <img src="/img/hiking.jfif" alt="package4">
-                </div>
-            </div>
-        </div>
-        <div class="sale">
-            <div id="timer">
-            </div>
-            <div class="sale_product">
-                <img src="/img/특가.jpg" alt="">
-            </div>
-        </div>
+    </div>
+    <div class="sale">
+        <a href="#">*경매페이지 출력 예정*</a>
+    </div>
         <!--thymeleaf footer 불러오기 -->
         <div th:replace="fragments/footer::footer"></div>
-    </div>
 </div>
 </body>
 </html>
