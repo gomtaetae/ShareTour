@@ -3,10 +3,10 @@ jQuery(document).ready(function(){
     setInterval(function(){
         
         $('.slide').delay(3000)
-        $('.slide').animate({"left":"-1060px"})
+        $('.slide').animate({"left":"-500px"})
 
         $('.slide').delay(3000)
-        $('.slide').animate({"left":"-2120px"})
+        $('.slide').animate({"left":"-1000px"})
 
         $('.slide').delay(3000)
         $('.slide').animate({"left":"0px"})
