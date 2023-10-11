@@ -10,23 +10,22 @@ import java.util.List;
 
 // repository 주입은 test 혹은 기능을 사용하는 곳에서 실시, 우선 저장 되어야함.
 
-
 public class STUtils {
 
     //유저 생성
     public static Member getMember(String name, String suffix) {
         Member member = new Member();
-        member.setUsername("유저 이름" + name);
-        member.setEmail("user" + suffix + "@email.com");
-        member.setNickname("유저 닉네임" + suffix);
-        member.setPassword("유저 비밀번호" + suffix);
+        member.setUsername("멤버 이름" + name);
+        member.setEmail("member" + suffix + "@email.com");
+        member.setNickname("멤버 닉네임" + suffix);
+        member.setPassword("멤버 비밀번호" + suffix);
         member.setCreateTime(LocalDateTime.now());
-        member.setImgUrl("유저 이미지" + suffix);
-        member.setGender("유저 성별");
+        member.setImgUrl("멤버 이미지" + suffix);
+        member.setGender("멤버 성별");
         member.setBirthday(LocalDate.now());
-        member.setMobile("유저 전화번호" + suffix);
-        member.setAddress("유저 주소" + suffix);
-        member.setGrade("유저 등급");
+        member.setMobile("멤버 전화번호" + suffix);
+        member.setAddress("멤버 주소" + suffix);
+        member.setGrade("멤버 등급");
         member.setPoint(10);
 
         return member;

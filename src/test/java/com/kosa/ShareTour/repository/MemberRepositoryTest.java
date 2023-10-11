@@ -86,7 +86,7 @@ class MemberRepositoryTest {
         em.clear();
 
         //when
-        var userList = memberRepository.findByUsername("유저 이름1");
+        var userList = memberRepository.findByUsername("멤버 이름1");
 
         // then
         assertThat(userList.size()).isEqualTo(3);
@@ -96,34 +96,34 @@ class MemberRepositoryTest {
     @DisplayName("유저 이메일로 조회 테스트")
     public void findByUserEmailTest(){
         //given
-        String userEmail = "useremail@example.com";
+        String memberEmail = "useremail@example.com";
 
         Member member = STUtils.getMember();
-        member.setEmail(userEmail);
+        member.setEmail(memberEmail);
         memberRepository.saveAndFlush(member);
 
         //when
         em.clear();
-        Member targetMember = memberRepository.findByEmail(userEmail);
+        Member targetMember = memberRepository.findByEmail(memberEmail);
 
         //then
         assertThat(targetMember.getEmail()).isNotNull();
-        assertThat(targetMember.getEmail()).isEqualTo(userEmail);
+        assertThat(targetMember.getEmail()).isEqualTo(memberEmail);
     }
 
     @Test
     @DisplayName("유저 닉네임으로 조회 테스트")
     public void findByUserNicknameTest(){
         //given
-        String userNickname = "nickname1";
+        String memberNickname = "nickname1";
 
         Member member = STUtils.getMember();
-        member.setNickname(userNickname);
+        member.setNickname(memberNickname);
         memberRepository.saveAndFlush(member);
 
         //when
         em.clear();
-        Member targetMember = memberRepository.findByNickname(userNickname);
+        Member targetMember = memberRepository.findByNickname(memberNickname);
 
         //then
         assertThat(targetMember.getNickname()).isNotNull();
@@ -152,23 +152,23 @@ class MemberRepositoryTest {
 //    }
 
     @Test
-    @DisplayName("유저 ID 구분 삭제 테스트")
-    public void deleteUsersByNicknameTest(){
+    @DisplayName("멤버 닉네임 구분 삭제 테스트")
+    public void deleteMembersByNicknameTest(){
         // given
         for (int i = 1; i <= 3; i++) {
             var posting = STUtils.getPosting(String.valueOf(i));
-            var user = posting.getMember();
-            memberRepository.save(user);
+            var member = posting.getMember();
+            memberRepository.save(member);
             postingRepository.saveAndFlush(posting);
         }
         em.clear();
 
         //when
-        memberRepository.deleteByNickname("유저 닉네임1");
+        memberRepository.deleteByNickname("멤버 닉네임1");
 
         //then
-        var userList = memberRepository.findAll();
-        assertThat(userList.size()).isEqualTo(2);
+        var memberList = memberRepository.findAll();
+        assertThat(memberList.size()).isEqualTo(2);
     }
 
 }

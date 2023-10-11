@@ -2,6 +2,7 @@ package com.kosa.ShareTour.service;
 
 import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.repository.MemberRepository;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.userdetails.User;
@@ -25,11 +26,10 @@ public class MemberService implements UserDetailsService {
 
     private void validateDuplicateUser(Member member){
         Member findMember = memberRepository.findByEmail(member.getEmail());
-        if(findMember !=null){
+        if(findMember != null){
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

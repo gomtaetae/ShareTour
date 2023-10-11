@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 
-@RequestMapping("/members")
+@RequestMapping("")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -21,28 +21,18 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/register")
     public String memberForm(Model model){
         /*객체만들어주기*/
-        model.addAttribute("memberFormDto",new MemberFormDto());
-        return "thymeleaf/register";
-    }
-
-
-//    register 교수님이 말씀하신부분입니다 *****************************************
-    @GetMapping(value = "/register")
-    /*memberformdto로 넘겨갈 수 있게 선언 꼭 해주기*/
-    public String registerPage(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
-
-        return "thymeleaf/register";
+        return "members/register";
     }
 
-    @PostMapping(value = "/new")
-    public String memberUser(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
+    @PostMapping(value = "/register")
+    public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
-            return "member/memberForm";
+            return "members/register";
         }
 
         try {
@@ -50,7 +40,7 @@ public class MemberController {
             memberService.saveMember(member);
         } catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "member/userForm";
+            return "members/register";
         }
 
         return "redirect:/";
@@ -58,14 +48,14 @@ public class MemberController {
 
     @GetMapping(value = "/login")
     public String loginMember(){
-        return "member/memberLoginForm";
+        return "members/login";
     }
 
 
     @GetMapping(value = "/login/error")
     public String loginForm(Model model){
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-        return "member/memberLoginForm";
+        return "members/login";
     }
 
 
