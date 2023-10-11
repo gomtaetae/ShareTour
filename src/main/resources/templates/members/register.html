@@ -5,36 +5,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
-    <th:block layout:fragment="script"></th:block>
-    <th:block layout:fragment="css"></th:block>
     <link rel="stylesheet" href="/css/register.css">
-</head>
+    </head>
 <body>
 <div id="wrap">
     <div class="center">
         <div th:replace="fragments/header::header"></div>
         <div class="registration-container">
-            <h2>회원가입</h2>
-            <form class="registration-form" action="register" method="post" th:object="${memberFormDto}">
-                <!--object선언-->
-                <input type="text" th:field="*{name}" name="name" placeholder="이름 (한글 및 영문만 입력 가능)" required pattern="[a-zA-Z가-힣]+">
-                <!--db이름과 다 똑같이 맞추기-->
-                <input type="text" th:field="*{nickname}" name="nickname" placeholder="아이디 (영문 소문자와 숫자, 20자 이내)" required pattern="[a-z0-9]{1,20}">
-                <input type="password" th:field="*{password}" name="password" placeholder="비밀번호 (영문, 숫자, 특수문자 조합, 8자 이상 16자 이하)" required
-                       pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*?~]).{8,}$">
-                <input type="text" th:field="*{birthday}" name="birthday" placeholder="8자리 숫자">
-                <input type="tel" th:field="*{phone}" name="phone" placeholder="핸드폰 번호" required>
-                <input type="email" th:field="*{email}" name="email" placeholder="이메일 주소" required>
-                <select name="gender" th:field="*{gender}">
-                    <option value="남">남</option>
-                    <option value="여">여</option>
-                </select>
-                <button name="address" required>주소</button>
-                <input type="text" th:field="*{addressMain}" name="address-main" placeholder="주소">
-                <input type="text" th:field="*{addressSub}" name="address-sub" placeholder="상세주소">
-                <button type="submit">가입하기</button>
-            </form>
-
+            <div layout:fragment="content">
+                <th:block layout:fragment="script">
+                    <script th:inline="javascript">
+                        $(document).ready(function(){
+                            var errorMessage = [[${errorMessage}]];
+                            if(errorMessage != null){
+                                alert(errorMessage);
+                            }
+                        });
+                    </script>
+                </th:block>
+                <h2>회원가입</h2>
+                <form class="registration-form" action="register" role="form" method="post"
+                      th:object="${memberFormDto}">
+                    <!--object선언-->
+                    <div class="form-group">
+                        <label th:for="name">이름</label>
+                        <input class="form-control" type="text" th:field="*{name}" name="name"
+                               placeholder="이름 (한글 및 영문만 입력 가능)" required
+                               pattern="[a-zA-Z가-힣]+">
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect
+                            data</p>
+                    </div>
+                    <!--db이름과 다 똑같이 맞추기-->
+                    <div class="form-group">
+                        <label th:for="nickname">아이디</label>
+                        <input class="form-control" type="text" th:field="*{nickname}" name="nickname"
+                               placeholder="아이디 (영문 소문자와 숫자, 20자 이내)"
+                               required pattern="[a-z0-9]{1,20}">
+                        <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="fieldError">Incorrect
+                            data</p>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="password">비밀번호</label>
+                        <input type="password" th:field="*{password}" name="password"
+                               placeholder="비밀번호 (영문, 숫자, 특수문자 조합, 8자 이상 16자 이하)" required
+                               pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*?~]).{8,}$">
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect
+                            data</p>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="email">이메일</label>
+                        <input class="form-control" type="email" th:field="*{email}" name="email" placeholder="이메일 주소"
+                               required>
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect
+                            data</p>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="birthday">생년월일(8자리)</label>
+                        <input type="text" th:field="*{birthday}" name="birthday" placeholder="생년월일을 입력하세요 ex)20200904">
+                    </div>
+                    <div class="form-group">
+                        <label th:for="mobile">핸드폰번호</label>
+                        <input type="tel" th:field="*{mobile}" name="mobile" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="gender">성별</label>
+                        <select name="gender" th:field="*{gender}">
+                            <option value="남">남</option>
+                            <option value="여">여</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="address">주소</label>
+                        <input type="text" th:field="*{addressMain}" name="address-main" placeholder="주소">
+                        <input type="text" th:field="*{addressSub}" name="address-sub" placeholder="상세주소를 입력해주세요">
+                    </div>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn primary" style="">가입하기</button>
+                    </div>
+                    <!-- 사이트간 위조 요청 금지 코드-->
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </form>
+            </div>
         </div>
         <!--thymeleaf footer 불러오기 -->
         <div th:replace="fragments/footer::footer"></div>
