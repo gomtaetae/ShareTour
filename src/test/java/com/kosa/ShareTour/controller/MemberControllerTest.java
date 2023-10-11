@@ -30,7 +30,6 @@ class MemberControllerTest {
     private MemberService memberService;
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -44,11 +43,39 @@ class MemberControllerTest {
         memberFormDto.setGender("남성");
         memberFormDto.setBirthday(LocalDate.parse("2023-10-10"));
         memberFormDto.setPhone("010-1234-5678");
-        memberFormDto.setAddress("서울시 마포구 합정동");
+        memberFormDto.setAddressMain("서울시 마포구 합정동");
         memberFormDto.setGrade("1급");
 
         Member member = Member.createMember(memberFormDto, passwordEncoder);
         return memberService.saveMember(member);
+    }
+
+    @Test
+    @DisplayName("로그인 성공 테스트")
+    public void loginSuccessTest() throws Exception {
+        String email = "test@email.com";
+        String password = "1234";
+        this.createMember(email, password);
+        mockMvc.perform(formLogin().userParameter("email")
+                .loginProcessingUrl("/login")
+                .user(email).password(password))
+                .andExpect(SecurityMockMvcResultMatchers.authenticated());
+
+    }
+
+    @Test
+    @DisplayName("로그인 실패 테스트")
+    public void loginFailTest() throws Exception {
+        String email = "test@email.com";
+        String password = "1234";
+        this.createMember(email, password);
+        mockMvc.perform(formLogin().userParameter("email")
+                .loginProcessingUrl("/login")
+                .user(email).password("123"))
+                .andExpect(SecurityMockMvcResultMatchers.unauthenticated());
+
+
+
     }
 
 
