@@ -51,20 +51,6 @@ class MemberControllerTest {
         return memberService.saveMember(member);
     }
 
-    @Test
-    @DisplayName("로그인 성공 테스트")
-    public void loginSuccessTest() throws Exception {
-
-        String email = "test@email.com";
-        String password = "1234";
-        this.createMember(email, password);
-
-        mockMvc.perform(formLogin().userParameter("email"))
-                .loginProcessingUrl("/members/login")
-                .user(email).password(password))
-
-
-    }
 
 
 }

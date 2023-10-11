@@ -32,19 +32,20 @@ class MemberServiceTest {
         memberFormDto.setName("홍길동");
         memberFormDto.setEmail("test@email.com");
         memberFormDto.setNickname("Hongs");
-        memberFormDto.setPassword("1234");
-        memberFormDto.setCreateTime(LocalDateTime.now());
+        memberFormDto.setPassword("12345678");
+//        memberFormDto.setCreateTime(LocalDateTime.now());
         memberFormDto.setGender("남성");
         memberFormDto.setBirthday(LocalDate.parse("2023-10-10"));
         memberFormDto.setPhone("010-1234-5678");
         memberFormDto.setAddress("서울시 마포구 합정동");
         memberFormDto.setGrade("1급");
+
         return Member.createMember(memberFormDto, passwordEncoder);
     }
 
     @Test
     @DisplayName("회원가입 테스트")
-    public void saveUserTest(){
+    public void saveMemberTest(){
         Member member = createMember();
         Member savedMember = memberService.saveMember(member);
 
@@ -57,7 +58,7 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("중복 회원 가입 테스트")
-    public void saveDuplicateUserTest(){
+    public void saveDuplicateMemberTest(){
         Member member1 = createMember();
         Member member2 = createMember();
         memberService.saveMember(member1);

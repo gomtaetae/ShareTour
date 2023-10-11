@@ -86,7 +86,7 @@ class MemberRepositoryTest {
         em.clear();
 
         //when
-        var userList = memberRepository.findByUsername("유저 이름1");
+        var userList = memberRepository.findByUsername("멤버 이름1");
 
         // then
         assertThat(userList.size()).isEqualTo(3);
@@ -152,7 +152,7 @@ class MemberRepositoryTest {
 //    }
 
     @Test
-    @DisplayName("유저 ID 구분 삭제 테스트")
+    @DisplayName("멤버 닉네임 구분 삭제 테스트")
     public void deleteUsersByNicknameTest(){
         // given
         for (int i = 1; i <= 3; i++) {
@@ -164,7 +164,7 @@ class MemberRepositoryTest {
         em.clear();
 
         //when
-        memberRepository.deleteByNickname("유저 닉네임1");
+        memberRepository.deleteByNickname("멤버 닉네임1");
 
         //then
         var userList = memberRepository.findAll();
