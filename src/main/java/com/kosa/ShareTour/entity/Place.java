@@ -14,10 +14,10 @@ public class Place {
     @Id
     @Column(name="places_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int places_id;
+    private Integer id;
 
-    @Column(name="countries", length = 50, nullable = false)
-    private String countries;
+    @Column(name="country", length = 50, nullable = false)
+    private String country;
 
     @Column(name="province", length = 50, nullable = false)
     private String province;
@@ -26,10 +26,10 @@ public class Place {
     private String city;
 
     @Column(name="loc_x", length = 50, nullable = false)
-    private String loc_x;
+    private String locX;
 
     @Column(name="loc_y", length = 50, nullable = false)
-    private String loc_y;
+    private String locY;
 
     @Column(name="img")
     private String img;
