@@ -10,17 +10,17 @@ public class PackageController {
 
     @GetMapping(value = "/auction")
     public String auctionPage(Model model){
-        return "package/auction";
+        return "packages/auction";
     }
 
     @GetMapping(value = "/con_pro")
     public String conproductPage(Model model){
-        return "package/con_product_page";
+        return "packages/con_product_page";
     }
 
     @GetMapping(value = "/package")
     public String packagePage(Model model){
-        return "package/package_tour";
+        return "packages/package_tour";
     }
 
 

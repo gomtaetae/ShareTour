@@ -10,16 +10,16 @@ public class PostController {
 
     @GetMapping(value = "/post")
     public String postPage(Model model){
-        return "post/post";
+        return "posts/post";
     }
 
     @GetMapping(value = "/view")
     public String viewPage(Model model){
-        return "post/view";
+        return "posts/view";
     }
 
     @GetMapping(value = "/write")
     public String writePage(Model model){
-        return "post/write";
+        return "posts/write";
     }
 }
