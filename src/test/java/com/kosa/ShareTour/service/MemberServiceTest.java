@@ -3,6 +3,7 @@ package com.kosa.ShareTour.service;
 import com.kosa.ShareTour.dto.MemberFormDto;
 import com.kosa.ShareTour.entity.Member;
 
+import com.kosa.ShareTour.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ class MemberServiceTest {
     MemberService memberService;
 
     @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     public Member createMember(){
@@ -32,21 +36,30 @@ class MemberServiceTest {
         memberFormDto.setName("홍길동");
         memberFormDto.setEmail("test@email.com");
         memberFormDto.setNickname("Hongs");
-        memberFormDto.setPassword("1234");
-        memberFormDto.setCreateTime(LocalDateTime.now());
+        memberFormDto.setPassword("12345678");
+//        memberFormDto.setCreateTime(LocalDateTime.now());
         memberFormDto.setGender("남성");
         memberFormDto.setBirthday(LocalDate.parse("2023-10-10"));
         memberFormDto.setPhone("010-1234-5678");
-        memberFormDto.setAddress("서울시 마포구 합정동");
+        memberFormDto.setAddressMain("서울시 마포구 합정동");
         memberFormDto.setGrade("1급");
+
         return Member.createMember(memberFormDto, passwordEncoder);
     }
 
     @Test
     @DisplayName("회원가입 테스트")
-    public void saveUserTest(){
+    public void saveMemberTest(){
         Member member = createMember();
         Member savedMember = memberService.saveMember(member);
+
+        Member retrievedMember = memberRepository.findById(savedMember.getId()).orElse(null);
+
+        assertEquals(member.getEmail(), retrievedMember.getEmail());
+        assertEquals(member.getUsername(), retrievedMember.getUsername());
+        assertEquals(member.getAddress(), retrievedMember.getAddress());
+        assertEquals(member.getPassword(), retrievedMember.getPassword());
+        assertEquals(member.getRole(), retrievedMember.getRole());
 
         assertEquals(member.getEmail(), savedMember.getEmail());
         assertEquals(member.getUsername(), savedMember.getUsername());
@@ -57,7 +70,7 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("중복 회원 가입 테스트")
-    public void saveDuplicateUserTest(){
+    public void saveDuplicateMemberTest(){
         Member member1 = createMember();
         Member member2 = createMember();
         memberService.saveMember(member1);

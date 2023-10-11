@@ -22,7 +22,7 @@ public class MemberFormDto {
     @NotBlank(message = "닉네임은 필 수 입력 값입니다")
     private String nickname;
 
-    @NotBlank(message = "비밀번호는 필수 입력값입니다")
+    @NotBlank(message = "비밀번호는 필수 입력 값입니다")
     @Length(min=8, max=16, message = "비밀번호는 8자 이상, 16자 이하로 입력 해야 합니다")
     private String password;
 
@@ -33,16 +33,22 @@ public class MemberFormDto {
     @NotBlank(message = "성별은 필수 입력 ")
     private String gender;
 
-    @NotBlank(message = "생년월일은 필수 입력값입니다")
+    @NotBlank(message = "생년월일은 필수 입력 값입니다")
     @Length(min = 8, max = 8, message = "생년월일은 8자로 입력 해야 됩니다")
     private LocalDate birthday;
 
-    @NotBlank(message = "전화번호는 필수 입력값입니다")
-    @Length(min = 8, max= 8, message = "전화번호는 '-'없이 11자 이하로 입력 해야 됩니다")
+    @NotBlank(message = "전화번호는 필수 입력 값입니다")
+    @Length(min = 1, max= 11, message = "전화번호는 '-'없이 11자 이하로 입력 해야 됩니다")
     private String phone;
 
-    private String address;
+    @NotBlank(message = "주소는 필수 입력 값입니다")
+    private String addressMain;
 
+    private String addressSub;
+
+    @NotBlank(message = "등급은 필수 입력 값입니다")
     private String grade;
+
+    private int point;
 
 }

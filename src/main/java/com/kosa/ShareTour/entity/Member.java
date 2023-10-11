@@ -30,7 +30,7 @@ public class Member {
     @Column(name="nickname", length = 45, nullable = false, unique = true)
     private String nickname;
 
-    @Column(name="password", length = 30, nullable = false)
+    @Column(name="password", nullable = false)
     private String password;
 
     @Column(name="create_time")
@@ -73,15 +73,20 @@ public class Member {
         member.setUsername(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
         member.setNickname(memberFormDto.getNickname());
-        member.setPassword(memberFormDto.getEmail());
+
+        String password = passwordEncoder.encode(memberFormDto.getPassword());
+        member.setPassword(password);
+
         member.setCreateTime(LocalDateTime.now());
         member.setImgUrl(memberFormDto.getImgUrl());
         member.setGender(memberFormDto.getGender());
         member.setBirthday(memberFormDto.getBirthday());
         member.setMobile(memberFormDto.getPhone());
-        member.setAddress(memberFormDto.getAddress());
+        member.setAddress(memberFormDto.getAddressMain() + memberFormDto.getAddressSub());
         member.setGrade(memberFormDto.getGrade());
-        member.setPoint(0);
+        member.setPoint(memberFormDto.getPoint());
+
+        member.setRole(Role.USER);
 
         return member;
     }
