@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="restaurants")
@@ -41,5 +43,8 @@ public class Restaurant {
 
     @Column(name="price", nullable = false)
     private float price;
+
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
+    private List<Package> packageList = new ArrayList<>();
 
 }

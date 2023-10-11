@@ -1,6 +1,7 @@
 package com.kosa.ShareTour.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="packages")
 @Data
+@ToString(exclude = {"place", "landmark", "accommodation", "restaurant"})
 public class Package implements Serializable {
 
     @Id
@@ -17,7 +19,7 @@ public class Package implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="title", length = 50, nullable = false)
+    @Column(name="title", length = 100, nullable = false)
     private String title;
 
     @Column(name="content", columnDefinition = "LONGTEXT", nullable = false)
@@ -63,19 +65,19 @@ public class Package implements Serializable {
     @Column(name="stock_left")
     private int stockLeft;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="places_id")
     private Place place;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="landmarks_id")
     private Landmark landmark;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="accommodations_id")
     private Accommodation accommodation;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="restaurants_id")
     private Restaurant restaurant;
 

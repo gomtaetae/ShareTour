@@ -4,6 +4,8 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="landmarks")
@@ -46,5 +48,8 @@ public class Landmark {
 
     @Column(name="price")
     private float price;
+
+    @OneToMany(mappedBy = "landmark", cascade = CascadeType.REMOVE)
+    private List<Package> packageList = new ArrayList<>();
 
 }

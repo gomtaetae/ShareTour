@@ -3,6 +3,8 @@ package com.kosa.ShareTour.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="places")
@@ -33,5 +35,8 @@ public class Place {
 
     @Column(name="img")
     private String img;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
+    private List<Package> packageList = new ArrayList<>();
 
 }
