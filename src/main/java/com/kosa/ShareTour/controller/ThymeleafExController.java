@@ -1,12 +1,12 @@
 package com.kosa.ShareTour.controller;
 
+import com.kosa.ShareTour.dto.MemberFormDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/thymeleaf")
 public class ThymeleafExController {
     @GetMapping(value = "/main")
     public String mainPage(Model model){
@@ -39,7 +39,9 @@ public class ThymeleafExController {
     }
 
     @GetMapping(value = "/register")
-    public String registerPage(Model model){
+    public String registerPage(Model model) {
+        model.addAttribute("memberFormDto", new MemberFormDto());
+
         return "thymeleaf/register";
     }
 
