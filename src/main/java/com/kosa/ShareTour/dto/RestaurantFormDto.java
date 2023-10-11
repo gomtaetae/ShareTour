@@ -10,20 +10,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class AccommodationFormDto {
+public class RestaurantFormDto {
 
     @NotBlank(message = "이름은 필수 입력 값입니다")
     private String name;
 
     private String address;
 
-    private String url;
-
     private String phone;
 
     private String area;
-
-    private String grade;
 
     private String parking;
 
@@ -31,6 +27,7 @@ public class AccommodationFormDto {
 
     private String locY;
 
-    @NotBlank(message = "가격은 필수 입력 값입니다")
+    @NotBlank(message = "가격은 필수 입력 입니다.")
     private String price;
+
 }
