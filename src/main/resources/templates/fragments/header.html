@@ -2,20 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="header">
-    <header>
         <div class="header_wrap">
             <div class="header_top">
                 <div class="header_center">
                     <div class="login">
                         <ul class="clearfix">
-                            <li><a href="#">로그인</a></li>
-                            <li><a href="#">회원가입</a></li>
+                            <li><a href="login">로그인</a></li>
+                            <li><a href="register">회원가입</a></li>
                         </ul>
                     </div>
                     <div class="header_2">
                         <div class="logo">
-                            <a href="#">
-                                <img src="logo.png" alt="">
+                            <a href="">
+                                <img src="/img/logo.png" alt="">
                                 <p>Share tour</p>
                             </a>
                         </div>
@@ -28,14 +27,13 @@
             </div>
             <nav>
                 <ul class="clearfix main_menu" >
-                    <li><a href="#"><img src="icons8-비행기-48.png" alt="">패키지 여행</a></li>
-                    <li><a href="#"><img src="icons8-게시판-48.png" alt="">나의 여행 이야기</a></li>
-                    <li><a href="#"><img src="icons8-법-48.png" alt="">경매</a></li>
-                    <li><a href="#"><img src="icons8-sparkles-48.png" alt="">특가</a></li>
-                    <li><a href="#"><img src="icons8-이야기-책-48.png" alt="">마이페이지</a></li>
+                    <li><a href="package_tour"><img src="/img/icons8-비행기-48.png" alt="">패키지 여행</a></li>
+                    <li><a href="post"><img src="/img/icons8-게시판-48.png" alt="">나의 여행 이야기</a></li>
+                    <li><a href="auction"><img src="/img/icons8-법-48.png" alt="">경매</a></li>
+                    <li><a href="con_pro"><img src="/img/icons8-sparkles-48.png" alt="">특가</a></li>
+                    <li><a href="mypage"><img src="/img/icons8-이야기-책-48.png" alt="">마이페이지</a></li>
                 </ul>
             </nav>
         </div>
-    </header>
 </div>
 </html>
