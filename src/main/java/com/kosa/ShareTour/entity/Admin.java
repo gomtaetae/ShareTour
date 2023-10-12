@@ -1,27 +1,42 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.kosa.ShareTour.constant.Role;
+import com.kosa.ShareTour.dto.AdminFormDto;
+import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="admin")
-@Getter
-@Setter
-@ToString
+@Table(name="admins")
+@Data
 public class Admin {
 
     @Id
-    @Column(name="admin_id")
+    @Column(name = "admin_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
-    @Column(name="name", length = 50, nullable = false)
+    @Column(name = "name", length = 32, nullable = false)
     private String name;
 
-    @Column(name="password", length = 50, nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+
+    private Role role;
+
+    public static Admin createAdmin(AdminFormDto adminFormDto, PasswordEncoder passwordEncoder) {
+        Admin admin = new Admin();
+        admin.setName(adminFormDto.getName());
+        String password = passwordEncoder.encode(adminFormDto.getPassword());
+        admin.setPassword(password);
+        admin.setRole(Role.ADMIN);
+        return admin;
+    }
 }

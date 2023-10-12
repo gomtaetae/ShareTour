@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PostingRepository extends JpaRepository<Posting, Integer>{
+public interface PostingRepository extends JpaRepository<Posting, Long>{
 
 
     List<Posting> findByMemberNickname(String userNickname);

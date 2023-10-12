@@ -1,7 +1,7 @@
 package com.kosa.ShareTour.entity;
 
 import com.kosa.ShareTour.constant.Role;
-import com.kosa.ShareTour.dto.MemberFormDto;
+/*import com.kosa.ShareTour.dto.MemberFormDto;*/
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,7 +19,7 @@ public class Member {
     @Id
     @Column(name="members_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name="username", length = 32, nullable = false)
     private String username;
@@ -56,7 +56,7 @@ public class Member {
     @Column(name="address", length = 45, nullable = false)
     private String address;
 
-    @Column(name="grade", length = 45, nullable = false)
+    @Column(name="grade", length = 45)
     private String grade;
 
     @Column(name="point")
@@ -68,27 +68,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
-        Member member = new Member();
-        member.setUsername(memberFormDto.getName());
-        member.setEmail(memberFormDto.getEmail());
-        member.setNickname(memberFormDto.getNickname());
-
-        String password = passwordEncoder.encode(memberFormDto.getPassword());
-        member.setPassword(password);
-
-        member.setCreateTime(LocalDateTime.now());
-        member.setImgUrl(memberFormDto.getImgUrl());
-        member.setGender(memberFormDto.getGender());
-        member.setBirthday(memberFormDto.getBirthday());
-        member.setMobile(memberFormDto.getPhone());
-        member.setAddress(memberFormDto.getAddressMain() + memberFormDto.getAddressSub());
-        member.setGrade(memberFormDto.getGrade());
-        member.setPoint(memberFormDto.getPoint());
-
-        member.setRole(Role.USER);
-
-        return member;
+    private static void flush() {
     }
 
 }

@@ -15,7 +15,7 @@ public class Package implements Serializable {
     @Id
     @Column(name="packages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name="title", length = 50, nullable = false)
     private String title;

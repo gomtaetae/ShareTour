@@ -1,16 +1,14 @@
 package com.kosa.ShareTour.config;
 
-import com.kosa.ShareTour.service.MemberService;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.kosa.ShareTour.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -20,28 +18,62 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    MemberService memberService;
+    AdminService adminService;
+
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.formLogin()
+//                .loginPage("/admins/login")
+//                .defaultSuccessUrl("/")
+//                .usernameParameter("email")
+//                .failureUrl("/admins/login/error")
+//                .and()
+//                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/admins/logout"))
+//                .logoutSuccessUrl("/")
+//        ;
+//
+//        http.authorizeRequests()
+//                .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll()
+//                .mvcMatchers("/", "/register", "/login").permitAll()
+//                .mvcMatchers("/admin/**").hasRole("ADMIN")
+//                .anyRequest().authenticated()
+//        ;
+//
+//        http.exceptionHandling()
+//                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+//        ;
+//
+//        return http.build();
+//    }
+
+    //@Configuration
+//@EnableWebSecurity
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/login")
+                .loginPage("/admins/login")
                 .defaultSuccessUrl("/")
-                .usernameParameter("email")
-                .failureUrl("/login/error")
+                .usernameParameter("name")
+                .failureUrl("/admins/login/error")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/admins/logout"))
+                .logoutSuccessUrl("/")
+
+        ;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(adminService).passwordEncoder(passwordEncoder());
     }
-
 
 }

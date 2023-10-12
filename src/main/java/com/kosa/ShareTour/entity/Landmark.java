@@ -15,7 +15,7 @@ public class Landmark {
     @Id
     @Column(name="landmarks_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name="name", nullable = false)
     private String name;
