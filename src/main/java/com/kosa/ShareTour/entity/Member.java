@@ -71,8 +71,6 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @
-
     private static void flush() {
     }
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
