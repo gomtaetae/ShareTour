@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="packages")
+@Table(name="items")
 @Data
 @ToString(exclude = {"place", "landmark", "accommodation", "restaurant"})
-public class Package implements Serializable {
+public class Item implements Serializable {
 
     @Id
-    @Column(name="packages_id")
+    @Column(name="items_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

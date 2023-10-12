@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PostingRepository extends JpaRepository<Posting, Long>{
 
-    List<Posting> findByMemberNickname(String userNickname);
+    List<Posting> findByMemberNickname(String memberNickname);
 
     List<Posting> findByTitle(String title);
 

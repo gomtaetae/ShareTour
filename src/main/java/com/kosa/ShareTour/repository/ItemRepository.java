@@ -1,12 +1,9 @@
 package com.kosa.ShareTour.repository;
 
-import com.kosa.ShareTour.entity.Package;
+import com.kosa.ShareTour.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDate;
-import java.util.List;
-
-public interface PackageRepository extends JpaRepository<Package, Long>{
+public interface ItemRepository extends JpaRepository<Item, Long>{
 
 //    //패키지 제목으로 찾기(여럿)
 //    List<Package> findByPackageTitle(String title);

@@ -45,6 +45,6 @@ public class Restaurant {
     private float price;
 
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
-    private List<Package> packageList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
 }

@@ -37,6 +37,6 @@ public class Place {
     private String img;
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
-    private List<Package> packageList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
 }

@@ -3,6 +3,7 @@ package com.kosa.ShareTour.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,9 +63,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
                 .logoutSuccessUrl("/")
-
         ;
+
+        http.authorizeRequests()
+                .mvcMatchers("/", "/members/**", "/images/**").permitAll()
+                .mvcMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+        ;
+
+        http.exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+        ;
+
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().mvcMatchers("/css/**", "/js/**", "*/img/**");
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){

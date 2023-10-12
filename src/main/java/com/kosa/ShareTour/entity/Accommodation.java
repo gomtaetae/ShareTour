@@ -1,14 +1,11 @@
 package com.kosa.ShareTour.entity;
 
-import com.kosa.ShareTour.constant.Role;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +52,7 @@ public class Accommodation {
     private float price;
 
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
-    private List<Package> packageList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
 
 //    public static Accommodation createAccommodation(AccommodationFormDto accommodationFormDto) {

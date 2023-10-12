@@ -16,6 +16,7 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Lob
     @Column(name="content", nullable = false)
     private String content;
 
@@ -30,11 +31,11 @@ public class Comment implements Serializable {
     @Column(name="likes")
     private int likes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="postings_id")
     private Posting posting;
 

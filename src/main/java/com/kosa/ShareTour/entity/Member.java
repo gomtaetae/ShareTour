@@ -65,9 +65,16 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Posting> postingList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @
+
+    private static void flush() {
+    }
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setUsername(memberFormDto.getName());
@@ -90,9 +97,6 @@ public class Member {
         flush();
 
         return member;
-    }
-
-    private static void flush() {
     }
 
 }

@@ -5,6 +5,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="postings")
@@ -17,9 +19,10 @@ public class Posting {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="title", length = 32, nullable = false)
+    @Column(name="title", nullable = false)
     private String title;
 
+    @Lob
     @Column(name="content", columnDefinition = "LONGTEXT", nullable = false)
     private String content;
 
@@ -35,27 +38,19 @@ public class Posting {
     @JoinColumn(name="members_id", nullable = false)
     private Member member;
 
-//    @Override
-//    public String toString() {
-//        return "Posting{" +
-//                "id=" + id +
-//                ", title='" + title + '\'' +
-//                ", content='" + content + '\'' +
-//                ", createdAt='" + createdAt +
-//                ", user_id=" + (user != null ? user.getId() : null) +
-//                ", user_username=" + (user != null ? user.getUsername() : null) +
-//                ", user_email=" + (user != null ? user.getEmail() : null) +
-//                ", user_nickname=" + (user != null ? user.getNickname() : null) +
-//                ", user_password=" + (user != null ? user.getPassword() : null) +
-//                ", user_createTime=" + (user != null ? user.getCreateTime() : null) +
-//                ", user_imgUrl=" + (user != null ? user.getImgUrl() : null) +
-//                ", user_gender=" + (user != null ? user.getGender() : null) +
-//                ", user_birthday=" + (user != null ? user.getBirthday() : null) +
-//                ", user_mobile=" + (user != null ? user.getMobile() : null) +
-//                ", user_address=" + (user != null ? user.getAddress() : null) +
-//                ", user_grade=" + (user != null ? user.getGrade() : null) +
-//                ", user_point=" + (user != null ? user.getPoint() : null) +
-//                '}';
-//    }
+    @OneToMany(mappedBy = "posting", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
+
+    public void createPosting(String title, String content) {
+        Posting posting = new Posting();
+        posting.setTitle(title);
+        posting.setContent(content);
+        posting.setCreatedAt(LocalDateTime.now());
+    }
+
+    public void updatePosting(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
 }

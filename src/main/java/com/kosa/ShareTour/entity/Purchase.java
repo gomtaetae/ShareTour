@@ -17,6 +17,6 @@ public class Purchase implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="packages_id")
-    private Package packageId;
+    private Item itemId;
 
 }

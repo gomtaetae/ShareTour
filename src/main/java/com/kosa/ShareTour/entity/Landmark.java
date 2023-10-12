@@ -50,6 +50,6 @@ public class Landmark {
     private float price;
 
     @OneToMany(mappedBy = "landmark", cascade = CascadeType.REMOVE)
-    private List<Package> packageList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
 }

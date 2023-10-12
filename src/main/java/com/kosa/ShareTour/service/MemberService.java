@@ -4,6 +4,7 @@ import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +45,18 @@ public class MemberService implements UserDetailsService{
                 .password(member.getPassword())
                 .roles(member.getRole().toString())
                 .build();
+    }
+
+    public String getCurrentLoggedInMemberNickname() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = userDetails.getUsername();
+        Member member = memberRepository.findByEmail(email);
+
+        if (member == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        return member.getNickname();
     }
 
 }
