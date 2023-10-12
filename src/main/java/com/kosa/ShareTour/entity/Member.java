@@ -56,7 +56,7 @@ public class Member {
     @Column(name="address", length = 45, nullable = false)
     private String address;
 
-    @Column(name="grade", length = 45, nullable = false)
+    @Column(name="grade", length = 45)
     private String grade;
 
     @Column(name="point")
@@ -80,15 +80,19 @@ public class Member {
         member.setCreateTime(LocalDateTime.now());
         member.setImgUrl(memberFormDto.getImgUrl());
         member.setGender(memberFormDto.getGender());
-        member.setBirthday(memberFormDto.getBirthday());
+        member.setBirthday(LocalDate.parse(memberFormDto.getBirthday()));
         member.setMobile(memberFormDto.getPhone());
         member.setAddress(memberFormDto.getAddressMain() + memberFormDto.getAddressSub());
         member.setGrade(memberFormDto.getGrade());
         member.setPoint(memberFormDto.getPoint());
 
         member.setRole(Role.USER);
+        flush();
 
         return member;
+    }
+
+    private static void flush() {
     }
 
 }

@@ -1,13 +1,11 @@
 package com.kosa.ShareTour.entity;
 
 import com.kosa.ShareTour.constant.Role;
-import com.kosa.ShareTour.dto.AccommodationFormDto;
-import com.kosa.ShareTour.dto.MemberFormDto;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

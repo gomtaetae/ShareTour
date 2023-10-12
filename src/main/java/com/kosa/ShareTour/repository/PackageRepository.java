@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PackageRepository extends JpaRepository<Package, Integer>{
-//
+
 //    //패키지 제목으로 찾기(여럿)
 //    List<Package> findByPackageTitle(String title);
 //
