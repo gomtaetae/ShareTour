@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AccommodationRepository extends JpaRepository<Accommodation, Integer> {
+public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
 
     Accommodation findByAddress(String address);
     List<Accommodation> findByName(String name);

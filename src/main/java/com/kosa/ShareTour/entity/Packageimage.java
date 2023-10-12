@@ -13,7 +13,7 @@ public class Packageimage implements Serializable {
     @Id
     @Column(name="packageimages_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name="landmarks_id")

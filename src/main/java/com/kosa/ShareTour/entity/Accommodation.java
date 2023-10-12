@@ -22,7 +22,7 @@ public class Accommodation {
     @Id
     @Column(name="accommodations_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
+    public Long id;
 
     @Column(name="name", nullable = false)
     private String name;

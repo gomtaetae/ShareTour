@@ -4,7 +4,7 @@ import com.kosa.ShareTour.entity.Landmark;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-public interface LandmarkRepository extends JpaRepository<Landmark, Integer>{
+public interface LandmarkRepository extends JpaRepository<Landmark, Long>{
 
     Landmark findByAddress(String address);
     List<Landmark> findByName(String name);

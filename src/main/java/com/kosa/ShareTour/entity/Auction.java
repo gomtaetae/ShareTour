@@ -12,7 +12,7 @@ public class Auction implements Serializable {
 
     @Id
     @Column(name="auctions_id")
-    private Integer id;
+    private Long id;
 
     @Column(name="finalprice")
     private float finalPrice;
