@@ -1,15 +1,16 @@
 package com.kosa.ShareTour.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="comments")
 @Data
-public class Comment implements Serializable {
+public class Comment extends BaseEntity {
 
     @Id
     @Column(name="comments_id")
@@ -38,5 +39,7 @@ public class Comment implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="postings_id")
     private Posting posting;
+
+
 
 }

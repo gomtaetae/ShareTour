@@ -1,6 +1,7 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,9 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name="postings")
-@Data
+@Setter
+@Getter
 @ToString(exclude = "member")
-public class Posting {
+public class Posting extends BaseEntity {
 
     @Id
     @Column(name="posting_id")
@@ -26,14 +28,6 @@ public class Posting {
     @Column(name="content", columnDefinition = "LONGTEXT", nullable = false)
     private String content;
 
-    @Column(name="created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="members_id", nullable = false)
     private Member member;
@@ -45,7 +39,6 @@ public class Posting {
         Posting posting = new Posting();
         posting.setTitle(title);
         posting.setContent(content);
-        posting.setCreatedAt(LocalDateTime.now());
     }
 
     public void updatePosting(String title, String content) {

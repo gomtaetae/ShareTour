@@ -18,8 +18,6 @@ public class PostingFormDto {
     @NotBlank(message = "내용을 적어주세요")
     private String content;
 
-    private LocalDateTime createTime;
-
     private Member member;
 
 }

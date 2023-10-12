@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Admin {
+public class Admin extends BaseTimeEntity{
 
     @Id
     @Column(name="admin_id")
@@ -21,7 +21,7 @@ public class Admin {
     @Column(name="name", length = 50, nullable = false)
     private String name;
 
-    @Column(name="password", length = 50, nullable = false)
+    @Column(name="password", nullable = false)
     private String password;
 
 }

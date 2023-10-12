@@ -19,7 +19,7 @@ public class Item implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="title", length = 100, nullable = false)
+    @Column(name="title", nullable = false)
     private String title;
 
     @Column(name="content", columnDefinition = "LONGTEXT", nullable = false)
@@ -31,22 +31,7 @@ public class Item implements Serializable {
     @Column(name="end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name="created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name="modified_at")
-    private LocalDateTime modifiedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        modifiedAt = LocalDateTime.now();
-    }
-
+    @Lob
     @Column(name="img", nullable = false)
     private String img;
 

@@ -12,9 +12,4 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/thymeleaf")
-    public String thymeleafExample0() {
-        return "thymeleaf/ThymeleafEx01";
-    }
-
 }

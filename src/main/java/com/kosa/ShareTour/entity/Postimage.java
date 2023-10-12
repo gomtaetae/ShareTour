@@ -1,15 +1,15 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="postimages")
-@Data
-
-public class Postimage implements Serializable {
+@Setter
+@Getter
+public class Postimage extends BaseEntity {
 
     @Id
     @Column(name="postimages_id")

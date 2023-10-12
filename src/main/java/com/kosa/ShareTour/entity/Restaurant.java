@@ -23,22 +23,22 @@ public class Restaurant {
     @Column(name="name", nullable = false)
     private String name;
 
-    @Column(name="address", length = 45)
+    @Column(name="address")
     private String address;
 
-    @Column(name="phone", length = 45)
+    @Column(name="phone")
     private String phone;
 
-    @Column(name="area", length = 45)
+    @Column(name="area")
     private String area;
 
-    @Column(name="parking", length = 45)
+    @Column(name="parking")
     private String parking;
 
-    @Column(name="loc_x", length = 50, nullable = false)
+    @Column(name="loc_x", nullable = false)
     private String locX;
 
-    @Column(name="loc_y", length = 50, nullable = false)
+    @Column(name="loc_y", nullable = false)
     private String locY;
 
     @Column(name="price", nullable = false)

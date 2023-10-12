@@ -2,7 +2,9 @@ package com.kosa.ShareTour.entity;
 
 import com.kosa.ShareTour.constant.Role;
 import com.kosa.ShareTour.dto.MemberFormDto;
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -13,8 +15,9 @@ import java.util.List;
 
 @Entity
 @Table(name="members")
-@Data
-public class Member {
+@Setter
+@Getter
+public class Member extends BaseTimeEntity{
 
     @Id
     @Column(name="members_id")
@@ -33,14 +36,7 @@ public class Member {
     @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name="create_time")
-    private LocalDateTime createTime;
-
-    @PrePersist
-    protected void onCreate() {
-        createTime = LocalDateTime.now();
-    }
-
+    @Lob
     @Column(name="img")
     private String imgUrl;
 
@@ -82,7 +78,6 @@ public class Member {
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
 
-        member.setCreateTime(LocalDateTime.now());
         member.setImgUrl(memberFormDto.getImgUrl());
         member.setGender(memberFormDto.getGender());
         member.setBirthday(LocalDate.parse(memberFormDto.getBirthday()));

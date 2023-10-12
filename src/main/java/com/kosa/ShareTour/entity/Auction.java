@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="auctions")
 @Data
-public class Auction implements Serializable {
+public class Auction extends BaseEntity {
 
     @Id
     @Column(name="auctions_id")
