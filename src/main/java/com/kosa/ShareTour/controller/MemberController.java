@@ -12,8 +12,8 @@ import com.kosa.ShareTour.entity.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.validation.BindingResult;
-//import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
 
 @RequestMapping("/members")
 @Controller
@@ -36,8 +36,29 @@ public class MemberController {
         return "member/memberForm";
     }
 
-//    @PostMapping(value = "/register")
-//    public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
+    @PostMapping(value = "/new")
+    public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
+
+        if (bindingResult.hasErrors()){
+            return "member/memberForm";
+        }
+
+        try {
+            Member member = Member.createMember(memberFormDto, passwordEncoder);
+            memberService.saveMember(member);
+        } catch (IllegalStateException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "member/memberForm";
+        }
+
+        return "redirect:/";
+    }
+
+//    @PostMapping(value = "/new")
+//    public String memberForm(MemberFormDto memberFormDto){
+//
+//        Member member = Member.createMember(memberFormDto, passwordEncoder);
+//        memberService.saveMember(member);
 //
 //        if (bindingResult.hasErrors()){
 //            return "members/register";
@@ -54,39 +75,18 @@ public class MemberController {
 //
 //        return "redirect:/";
 //    }
-    @PostMapping(value = "/new")
-    public String memberForm(MemberFormDto memberFormDto){
 
-        Member member = Member.createMember(memberFormDto, passwordEncoder);
-        memberService.saveMember(member);
-
-//        if (bindingResult.hasErrors()){
-//            return "members/register";
-//        }
-//
-//        try {
-//            Member member = Member.createMember(memberFormDto, passwordEncoder);
-//            memberService.saveMember(member);
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMessage", e.getMessage());
-//            return "members/register";
-//        }
-
-        return "redirect:/";
+    @GetMapping(value = "/login")
+    public String loginMember(){
+        return "member/memberLogin";
     }
 
-//    @GetMapping(value = "/login")
-//    public String loginMember(){
-//        return "members/login";
-//    }
 
-
-//    @GetMapping(value = "/login/error")
-//    public String loginForm(Model model){
-//        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-//        return "members/login";
-//    }
+    @GetMapping(value = "/login/error")
+    public String loginForm(Model model){
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
+        return "member/memberLogin";
+    }
 
 
 }
