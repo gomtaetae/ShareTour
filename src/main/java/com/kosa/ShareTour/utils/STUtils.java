@@ -45,7 +45,6 @@ public class STUtils {
         Posting posting = new Posting();
         posting.setTitle("게시글 제목" + suffix);
         posting.setContent("게시글 내용" + suffix);
-        posting.setCreatedAt(LocalDateTime.now());
         posting.setMember(member);
 
         return posting;

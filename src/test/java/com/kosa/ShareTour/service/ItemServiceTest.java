@@ -58,7 +58,6 @@ class ItemServiceTest {
         itemFormDto.setTitle("테스트상품");
         itemFormDto.setTotalPrice(1000);
         itemFormDto.setContent("테스트 상품 입니다.");
-        itemFormDto.setImg("이미지 경로");
         itemFormDto.setInStock(100);
         itemFormDto.setStockLeft(20);
         itemFormDto.setItemSellStatus(ItemSellStatus.SELL);
@@ -73,7 +72,6 @@ class ItemServiceTest {
         assertEquals(itemFormDto.getTitle(), item.getTitle());
         assertEquals(itemFormDto.getTotalPrice(), item.getTotalPrice());
         assertEquals(itemFormDto.getContent(), item.getContent());
-        assertEquals(itemFormDto.getImg(), item.getImg());
         assertEquals(itemFormDto.getInStock(), item.getInStock());
         assertEquals(itemFormDto.getStockLeft(), item.getStockLeft());
         assertEquals(itemFormDto.getItemSellStatus(), item.getItemSellStatus());
