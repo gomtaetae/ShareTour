@@ -19,7 +19,7 @@ public class MemberFormDto {
     @Email(message = "이메일 형식으로 입력 해야됩니다")
     private String email;
 
-    @NotBlank(message = "닉네임은 필 수 입력 값입니다")
+    @NotBlank(message = "닉네임은 필수 입력 값입니다")
     private String nickname;
 
     @NotBlank(message = "비밀번호는 필수 입력 값입니다")
@@ -34,8 +34,7 @@ public class MemberFormDto {
     private String gender;
 
     @NotBlank(message = "생년월일은 필수 입력 값입니다")
-    @Length(min = 8, max = 8, message = "생년월일은 8자로 입력 해야 됩니다")
-    private LocalDate birthday;
+    private String birthday;
 
     @NotBlank(message = "전화번호는 필수 입력 값입니다")
     @Length(min = 1, max= 11, message = "전화번호는 '-'없이 11자 이하로 입력 해야 됩니다")
@@ -46,7 +45,6 @@ public class MemberFormDto {
 
     private String addressSub;
 
-    @NotBlank(message = "등급은 필수 입력 값입니다")
     private String grade;
 
     private int point;

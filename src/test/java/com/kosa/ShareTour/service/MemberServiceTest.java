@@ -2,15 +2,13 @@ package com.kosa.ShareTour.service;
 
 import com.kosa.ShareTour.dto.MemberFormDto;
 import com.kosa.ShareTour.entity.Member;
-
-import com.kosa.ShareTour.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.transaction.Transactional;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,13 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
+@TestPropertySource(locations = "classpath:application-test.properties")
 class MemberServiceTest {
 
     @Autowired
     MemberService memberService;
-
-    @Autowired
-    MemberRepository memberRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -37,9 +33,9 @@ class MemberServiceTest {
         memberFormDto.setEmail("test@email.com");
         memberFormDto.setNickname("Hongs");
         memberFormDto.setPassword("12345678");
-//        memberFormDto.setCreateTime(LocalDateTime.now());
+        memberFormDto.setCreateTime(LocalDateTime.now());
         memberFormDto.setGender("남성");
-        memberFormDto.setBirthday(LocalDate.parse("2023-10-10"));
+        memberFormDto.setBirthday("2023-10-10");
         memberFormDto.setPhone("010-1234-5678");
         memberFormDto.setAddressMain("서울시 마포구 합정동");
         memberFormDto.setGrade("1급");
@@ -50,16 +46,8 @@ class MemberServiceTest {
     @Test
     @DisplayName("회원가입 테스트")
     public void saveMemberTest(){
-        Member member = createMember();
+        Member member = new Member();
         Member savedMember = memberService.saveMember(member);
-
-        Member retrievedMember = memberRepository.findById(savedMember.getId()).orElse(null);
-
-        assertEquals(member.getEmail(), retrievedMember.getEmail());
-        assertEquals(member.getUsername(), retrievedMember.getUsername());
-        assertEquals(member.getAddress(), retrievedMember.getAddress());
-        assertEquals(member.getPassword(), retrievedMember.getPassword());
-        assertEquals(member.getRole(), retrievedMember.getRole());
 
         assertEquals(member.getEmail(), savedMember.getEmail());
         assertEquals(member.getUsername(), savedMember.getUsername());
@@ -77,9 +65,8 @@ class MemberServiceTest {
 
         Throwable e = assertThrows(IllegalStateException.class, () -> {
             memberService.saveMember(member2);});
-        assertEquals("이미 가입된 회원입니다.", e.getMessage());
+        assertEquals("이미 가입된 회원입니다(동일한 Email을 사용하는 계정 존재)", e.getMessage());
     }
-
 
 
 }

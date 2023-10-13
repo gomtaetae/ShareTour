@@ -14,12 +14,12 @@ import java.util.List;
 @Entity
 @Table(name="members")
 @Data
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @Column(name="members_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name="username", length = 32, nullable = false)
     private String username;
@@ -36,10 +36,11 @@ public class Member {
     @Column(name="create_time")
     private LocalDateTime createTime;
 
-    @PrePersist
-    protected void onCreate() {
-        createTime = LocalDateTime.now();
-    }
+
+    //@PrePersist
+    //protected void onCreate() {
+    //    createTime = LocalDateTime.now();
+    //}
 
     @Column(name="img")
     private String imgUrl;
@@ -56,7 +57,7 @@ public class Member {
     @Column(name="address", length = 45, nullable = false)
     private String address;
 
-    @Column(name="grade", length = 45, nullable = false)
+    @Column(name="grade", length = 45)
     private String grade;
 
     @Column(name="point")
@@ -80,15 +81,19 @@ public class Member {
         member.setCreateTime(LocalDateTime.now());
         member.setImgUrl(memberFormDto.getImgUrl());
         member.setGender(memberFormDto.getGender());
-        member.setBirthday(memberFormDto.getBirthday());
+        member.setBirthday(LocalDate.parse(memberFormDto.getBirthday()));
         member.setMobile(memberFormDto.getPhone());
         member.setAddress(memberFormDto.getAddressMain() + memberFormDto.getAddressSub());
         member.setGrade(memberFormDto.getGrade());
         member.setPoint(memberFormDto.getPoint());
 
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
+        flush();
 
         return member;
+    }
+
+    private static void flush() {
     }
 
 }
