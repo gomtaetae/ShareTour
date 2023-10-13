@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Table(name="purchases")
 @Setter
 @Getter
-public class Purchase extends BaseTimeEntity {
+public class Purchase implements Serializable {
 
     @Id
     @ManyToOne

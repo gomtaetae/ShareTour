@@ -20,7 +20,18 @@ public class Postimage extends BaseEntity {
     @JoinColumn(name="postings_id")
     private Posting posting;
 
-    @Column(name="img")
-    private String img;
+    private String imgName;
+
+    private String oriImgName;
+
+    private String imgUrl;
+
+    private String repimgYn;
+
+    public void updatePostImage(String oriImgName, String imgName, String imgUrl) {
+        this.oriImgName = oriImgName;
+        this.imgName = imgName;
+        this.imgUrl = imgUrl;
+    }
 
 }

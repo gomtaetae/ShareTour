@@ -19,7 +19,6 @@ public class STUtils {
         member.setEmail("member" + suffix + "@email.com");
         member.setNickname("멤버 닉네임" + suffix);
         member.setPassword("멤버 비밀번호" + suffix);
-        member.setCreateTime(LocalDateTime.now());
         member.setImgUrl("멤버 이미지" + suffix);
         member.setGender("멤버 성별");
         member.setBirthday(LocalDate.now());
@@ -45,7 +44,6 @@ public class STUtils {
         Posting posting = new Posting();
         posting.setTitle("게시글 제목" + suffix);
         posting.setContent("게시글 내용" + suffix);
-        posting.setCreatedAt(LocalDateTime.now());
         posting.setMember(member);
 
         return posting;

@@ -5,12 +5,15 @@ import com.kosa.ShareTour.entity.Posting;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 
-import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class PostingFormDto {
+
+    private Long id;
 
     @NotBlank(message = "제목을 적어주세요")
     private String title;
@@ -19,5 +22,13 @@ public class PostingFormDto {
     private String content;
 
     private Member member;
+
+    private List<PostimageDto> postimageDtoList = new ArrayList<>();
+
+    private List<Long> postimageIds = new ArrayList<>();
+
+//    private static
+
+
 
 }

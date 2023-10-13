@@ -3,6 +3,8 @@ package com.kosa.ShareTour.entity;
 import com.kosa.ShareTour.constant.Role;
 import com.kosa.ShareTour.dto.MemberFormDto;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,10 +15,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="members")
-@Setter
-@Getter
+@Data
 public class Member extends BaseTimeEntity{
 
     @Id

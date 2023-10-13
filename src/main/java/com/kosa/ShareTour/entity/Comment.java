@@ -21,14 +21,6 @@ public class Comment extends BaseEntity {
     @Column(name="content", nullable = false)
     private String content;
 
-    @Column(name="created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
     @Column(name="likes")
     private int likes;
 
