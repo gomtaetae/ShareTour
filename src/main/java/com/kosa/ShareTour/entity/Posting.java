@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +38,7 @@ public class Posting extends BaseEntity {
         Posting posting = new Posting();
         posting.setTitle(title);
         posting.setContent(content);
+        posting.setMember(member);
     }
 
     public void updatePosting(String title, String content) {

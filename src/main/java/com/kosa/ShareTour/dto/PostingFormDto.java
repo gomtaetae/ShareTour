@@ -6,7 +6,6 @@ import lombok.Data;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +26,15 @@ public class PostingFormDto {
 
     private List<Long> postimageIds = new ArrayList<>();
 
-//    private static
+    private static ModelMapper modelMapper = new ModelMapper();
 
+    public Posting createPosting() {
+        return modelMapper.map(this, Posting.class);
+    }
+
+    public static PostingFormDto of(Posting posting) {
+        return modelMapper.map(posting, PostingFormDto.class);
+    }
 
 
 }

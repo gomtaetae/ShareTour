@@ -5,8 +5,6 @@ import com.kosa.ShareTour.dto.MemberFormDto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -69,8 +67,7 @@ public class Member extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private static void flush() {
-    }
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setUsername(memberFormDto.getName());
@@ -89,7 +86,6 @@ public class Member extends BaseTimeEntity{
         member.setPoint(memberFormDto.getPoint());
 
         member.setRole(Role.USER);
-        flush();
 
         return member;
     }

@@ -32,6 +32,7 @@ public class Postimage extends BaseEntity {
         this.oriImgName = oriImgName;
         this.imgName = imgName;
         this.imgUrl = imgUrl;
+        this.setPosting(posting);
     }
 
 }
