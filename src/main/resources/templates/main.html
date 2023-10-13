@@ -1,78 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인 페이지 구상</title>
-    <!--thymeleaf script, css 불러오기-->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-    <th:block layout:fragment="script"></th:block>
-    <th:block layout:fragment="css"></th:block>
-    <link rel="stylesheet" href="/css/layout.css">
-    <script src="/js/jquery-1.12.3.js"></script>
-    <script src="/js/layout.js"></script>
-</head>
-<body>
-<div id="wrap">
-    <div th:replace="fragments/header::header"></div>
-    <div class="slide_bg">
-        <div class="slide_center">
-            <div class="slide_wrap">
-                <ul class="slide">
-                    <li><img src="/img/배너.jfif" alt=""></li>
-                    <li><img src="/img/배너2.jpg" alt=""></li>
-                    <li><img src="/img/속초.jpg" alt=""></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="package_product">
-        <div class="text">
-            <img src="/img/가방.png" alt="">
-            <p>이 패키지 어때?</p>
-        </div>
-        <div class="travel_package">
-            <div class="package_img">
-                <div class="box">
-                    <div class="box_img">
-                        <img src="/img/hiking.jfif" alt="">
-                    </div>
-                    <div class="box_info">
-                        <p>속초 여행 패키지</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_img">
-                        <img src="/img/sea.jfif" alt="">
-                    </div>
-                    <div class="box_info">
-                        <p>제주 여행 패키지</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_img">
-                        <img src="/img/turkiye.jfif" alt="">
-                    </div>
-                    <div class="box_info">
-                        <p>부산 여행 패키지</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_img">
-                        <img src="/img/mountain.jpg" alt="">
-                    </div>
-                    <div class="box_info">
-                        <p>춘천 여행 패키지</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="sale">
-        <a href="#">*경매페이지 출력 예정*</a>
-    </div>
-    <div th:replace="fragments/footer::footer"></div>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+<h1>메인페이지입니다</h1>
 </div>
-</body>
-</html>

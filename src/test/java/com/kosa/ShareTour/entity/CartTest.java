@@ -1,7 +1,8 @@
-package com.kosa.ShareTour.service;
+package com.kosa.ShareTour.entity;
 
 import com.kosa.ShareTour.dto.MemberFormDto;
-import com.kosa.ShareTour.entity.Member;
+import com.kosa.ShareTour.repository.CartRepository;
+import com.kosa.ShareTour.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,22 +11,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
+
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-@TestPropertySource(locations = "classpath:application-test.properties")
-class MemberServiceTest {
+@TestPropertySource(locations="classpath:application-test.properties")
+
+class CartTest {
 
     @Autowired
-    MemberService memberService;
+    CartRepository cartRepository;
+
+    @Autowired
+    MemberRepository memberRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @PersistenceContext
+    EntityManager em;
 
     public Member createMember(){
         MemberFormDto memberFormDto = new MemberFormDto();
@@ -44,29 +54,20 @@ class MemberServiceTest {
     }
 
     @Test
-    @DisplayName("회원가입 테스트")
-    public void saveMemberTest(){
-        Member member = new Member();
-        Member savedMember = memberService.saveMember(member);
+    @DisplayName("장바구니 회원 엔티티 매핑 조회 테스트")
+    public void findCartAndMemberTest(){
+        Member member = createMember();
+        memberRepository.save(member);
+        Cart cart = new Cart();
+        cart.setMember(member);
+        cartRepository.save(cart);
 
-        assertEquals(member.getEmail(), savedMember.getEmail());
-        assertEquals(member.getUsername(), savedMember.getUsername());
-        assertEquals(member.getAddress(), savedMember.getAddress());
-        assertEquals(member.getPassword(), savedMember.getPassword());
-        assertEquals(member.getRole(), savedMember.getRole());
+        em.flush();
+        em.clear();
+
+        Cart savedCart = cartRepository.findById(cart.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        assertEquals(savedCart.getMember().getId(), member.getId());
     }
-
-    @Test
-    @DisplayName("중복 회원 가입 테스트")
-    public void saveDuplicateMemberTest(){
-        Member member1 = createMember();
-        Member member2 = createMember();
-        memberService.saveMember(member1);
-
-        Throwable e = assertThrows(IllegalStateException.class, () -> {
-            memberService.saveMember(member2);});
-        assertEquals("이미 가입된 회원입니다(동일한 Email을 사용하는 계정 존재)", e.getMessage());
-    }
-
 
 }
