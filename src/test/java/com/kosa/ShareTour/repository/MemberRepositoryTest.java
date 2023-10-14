@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -104,7 +105,8 @@ class MemberRepositoryTest {
 
         //when
         em.clear();
-        Member targetMember = memberRepository.findByEmail(memberEmail);
+        var targetMember = memberRepository.findByEmail(memberEmail)
+                .orElseThrow(EntityNotFoundException::new);
 
         //then
         assertThat(targetMember.getEmail()).isNotNull();

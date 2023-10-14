@@ -28,22 +28,21 @@ public class Posting extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="members_id", nullable = false)
+    @JoinColumn(name="members_id")
     private Member member;
 
     @OneToMany(mappedBy = "posting", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
-    public void createPosting(String title, String content) {
-        Posting posting = new Posting();
-        posting.setTitle(title);
-        posting.setContent(content);
-        posting.setMember(member);
-    }
+//    public void createPosting(String title, String content) {
+//        Posting posting = new Posting();
+//        posting.setTitle(title);
+//        posting.setContent(content);
+//    }
 
-    public void updatePosting(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
+//    public void updatePosting(String title, String content) {
+//        this.title = title;
+//        this.content = content;
+//    }
 
 }

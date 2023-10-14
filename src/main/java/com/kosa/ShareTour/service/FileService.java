@@ -11,15 +11,16 @@ import java.util.UUID;
 @Log
 public class FileService {
 
-    public String uploadFile(String uploadPath, String originalFilename, byte[] fileData) throws Exception {
+    public String uploadFile(String uploadPath, String originalFileName, byte[] fileData) throws Exception {
         UUID uuid = UUID.randomUUID();
-        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String savedFileName = uuid.toString() + extension;
-        String fileUploadFullUrl = uploadPath + "/" + savedFileName;
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String saveFileName = uuid.toString() + extension;
+        String fileUploadFullUrl = uploadPath + "/" + saveFileName;
+
         FileOutputStream fos = new FileOutputStream(fileUploadFullUrl);
         fos.write(fileData);
         fos.close();
-        return savedFileName;
+        return saveFileName;
     }
 
     public void deleteFile (String filePath) throws Exception {

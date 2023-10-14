@@ -1,6 +1,5 @@
 package com.kosa.ShareTour.dto;
 
-import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.entity.Posting;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
@@ -19,8 +18,6 @@ public class PostingFormDto {
 
     @NotBlank(message = "내용을 적어주세요")
     private String content;
-
-    private Member member;
 
     private List<PostimageDto> postimageDtoList = new ArrayList<>();
 

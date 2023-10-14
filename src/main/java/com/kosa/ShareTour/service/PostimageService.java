@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class PostimageService {
 
-    @Value("${postimageLocation")
+    @Value("${postimageLocation}")
     private String postimageLocation;
 
     private final PostimageRepository postimageRepository;
@@ -28,11 +29,15 @@ public class PostimageService {
 
         if (!StringUtils.isEmpty(oriImgName)) {
             imgName = fileService.uploadFile(postimageLocation, oriImgName, postimageFile.getBytes());
-            imgUrl = "/images/item/" + imgName;
+            imgUrl = "/images/posting/" + imgName;
         }
 
-        postimage.updatePostImage(oriImgName, imgName, imgUrl);
+        postimage.updatePostimage(oriImgName, imgName, imgUrl);
         postimageRepository.save(postimage);
     }
+
+//    public void updatePostimage(Long postimageId, MultipartFile postimageFile) throws Exception {
+//        if(!)
+//    }
 
 }
