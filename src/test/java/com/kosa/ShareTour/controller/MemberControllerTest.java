@@ -41,7 +41,7 @@ class MemberControllerTest {
         memberFormDto.setPassword("1234");
         memberFormDto.setCreateTime(LocalDateTime.now());
         memberFormDto.setGender("남성");
-        memberFormDto.setBirthday(LocalDate.parse("2023-10-10"));
+//        memberFormDto.setBirthday(LocalDate.parse("2023-10-10"));
         memberFormDto.setPhone("010-1234-5678");
         memberFormDto.setAddressMain("서울시 마포구 합정동");
         memberFormDto.setGrade("1급");

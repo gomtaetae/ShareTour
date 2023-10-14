@@ -5,7 +5,7 @@ import com.kosa.ShareTour.dto.ItemFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import com.kosa.ShareTour.exception.OutOfStockException;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Item extends BaseEntity{
+public class Item extends BaseEntity {
 
     @Id
     @Column(name = "item_id")
@@ -28,16 +28,16 @@ public class Item extends BaseEntity{
     @Column(name = "content", columnDefinition = "LONGTEXT", nullable = false)
     private String content;       //패키지 설명
 
-    @Column(name="img")
+    @Column(name = "img")
     private String img;
 
-    @Column(name="totalprice", nullable = false)
+    @Column(name = "totalprice", nullable = false)
     private Integer totalPrice;
 
-    @Column(name="in_stock", nullable = false)
+    @Column(name = "in_stock", nullable = false)//재고수량
     private Integer inStock;
 
-    @Column(name="stock_left")
+    @Column(name = "stock_left")
     private Integer stockLeft;
 
     @Enumerated(EnumType.STRING)
@@ -53,7 +53,6 @@ public class Item extends BaseEntity{
         this.itemSellStatus = itemFormDto.getItemSellStatus();
 
     }
-
 //    @ManyToOne
 //    @JoinColumn(name="places_id")
 //    private Place place;
@@ -69,4 +68,18 @@ public class Item extends BaseEntity{
 //    @ManyToOne
 //    @JoinColumn(name="restaurants_id")
 //    private Restaurant restaurant;
+
+        public void removeStock ( int inStock){
+            int restStock = this.inStock - inStock;
+            if (restStock < 0) {
+                throw new OutOfStockException("상품의 재고가 부족 합니다.(현재 재고 수량: " + this.inStock + ")");
+            }
+            this.inStock = restStock;
+        }
+
+        public void addStock(int inStock){
+            this.inStock += inStock;
+
+    }
 }
+

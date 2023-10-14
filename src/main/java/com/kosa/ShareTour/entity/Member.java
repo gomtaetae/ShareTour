@@ -54,7 +54,7 @@ public class Member extends BaseEntity{
     @Column(name="mobile", length = 45, nullable = false)
     private String mobile;
 
-    @Column(name="address", length = 45, nullable = false)
+    @Column(name="address", nullable = false)
     private String address;
 
     @Column(name="grade", length = 45)
@@ -88,12 +88,9 @@ public class Member extends BaseEntity{
         member.setPoint(memberFormDto.getPoint());
 
         member.setRole(Role.ADMIN);
-        flush();
 
         return member;
     }
 
-    private static void flush() {
-    }
 
 }

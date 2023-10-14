@@ -1,3 +1,5 @@
+/*
+
 package com.kosa.ShareTour.entity;
 
 import lombok.Data;
@@ -20,3 +22,4 @@ public class Purchase implements Serializable {
     private Package packageId;
 
 }
+*/
