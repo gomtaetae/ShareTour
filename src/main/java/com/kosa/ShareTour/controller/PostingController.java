@@ -13,8 +13,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+//Principal 활용
 import java.security.Principal;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import javax.persistence.EntityNotFoundException;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,10 +46,48 @@ public class PostingController {
 //            return "posting/postingForm";
 //        }
 
+        //Principle를 활용하여 게시글 작성자와 함께 가져오기 멤버 Id 가져오기
         try {
             postingService.savePosting(postingFormDto, postimageFileList, principal.getName());
         } catch (Exception e){
             model.addAttribute("errorMessage", "게시글 등록 중 에러가 발생하였습니다.");
+            return "posting/postingForm";
+        }
+
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/user/posting/{postingId}")
+    public String postingDtl(@PathVariable("postingId") Long postingId, Model model){
+
+        try {
+            PostingFormDto postingFormDto = postingService.getPostingDtl(postingId);
+            model.addAttribute("postingFormDto", postingFormDto);
+        } catch(EntityNotFoundException e){
+            model.addAttribute("errorMessage", "존재하지 않는 게시글 입니다.");
+            model.addAttribute("postingFormDto", new PostingFormDto());
+            return "posting/postingForm";
+        }
+
+        return "posting/postingForm";
+    }
+
+    @PostMapping(value = "/user/posting/{postingId}")
+    public String postingUpdate(@Valid PostingFormDto postingFormDto, BindingResult bindingResult,
+                             @RequestParam("postimageFile") List<MultipartFile> postimageFileList, Model model){
+        if(bindingResult.hasErrors()){
+            return "posting/postingForm";
+        }
+
+//        if(postimageFileList.get(0).isEmpty() && postingFormDto.getId() == null){
+//            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값 입니다.");
+//            return "posting/postingForm";
+//        }
+
+        try {
+            postingService.updatePosting(postingFormDto, postimageFileList);
+        } catch (Exception e){
+            model.addAttribute("errorMessage", "게시글 수정 중 에러가 발생하였습니다.");
             return "posting/postingForm";
         }
 

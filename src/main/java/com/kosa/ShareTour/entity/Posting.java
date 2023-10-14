@@ -1,5 +1,6 @@
 package com.kosa.ShareTour.entity;
 
+import com.kosa.ShareTour.dto.PostingFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -40,9 +41,9 @@ public class Posting extends BaseEntity {
 //        posting.setContent(content);
 //    }
 
-//    public void updatePosting(String title, String content) {
-//        this.title = title;
-//        this.content = content;
-//    }
+    public void updatePosting(PostingFormDto postingFormDto){
+        this.title = postingFormDto.getTitle();
+        this.content = postingFormDto.getContent();
+    }
 
 }

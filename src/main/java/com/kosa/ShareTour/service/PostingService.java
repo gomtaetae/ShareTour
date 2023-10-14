@@ -3,6 +3,7 @@ package com.kosa.ShareTour.service;
 import com.kosa.ShareTour.dto.PostingFormDto;
 import com.kosa.ShareTour.entity.Posting;
 import com.kosa.ShareTour.entity.Postimage;
+import com.kosa.ShareTour.dto.PostimageDto;
 import com.kosa.ShareTour.repository.MemberRepository;
 import com.kosa.ShareTour.repository.PostimageRepository;
 import com.kosa.ShareTour.repository.PostingRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 @Transactional
@@ -24,6 +26,7 @@ public class PostingService {
     private final PostimageRepository postimageRepository;
     private final MemberRepository memberRepository;
 
+    //Principle 활용하여 Posting에 Member(email) 함께 저장시키기
     public Long savePosting(PostingFormDto postingFormDto,
                             List<MultipartFile> postimageFileList,
                             String email)
@@ -51,6 +54,38 @@ public class PostingService {
 
         return posting.getId();
 
+    }
+
+    @Transactional(readOnly = true)
+    public PostingFormDto getPostingDtl(Long postingId){
+        List<Postimage> postimageList = postimageRepository.findByPostingIdOrderByIdAsc(postingId);
+        List<PostimageDto> postimageDtoList = new ArrayList<>();
+        for (Postimage postimage : postimageList) {
+            PostimageDto postimageDto = PostimageDto.of(postimage);
+            postimageDtoList.add(postimageDto);
+        }
+
+        Posting posting = postingRepository.findById(postingId)
+                .orElseThrow(EntityNotFoundException::new);
+        PostingFormDto postingFormDto = PostingFormDto.of(posting);
+        postingFormDto.setPostimageDtoList(postimageDtoList);
+        return postingFormDto;
+    }
+
+    public Long updatePosting(PostingFormDto postingFormDto, List<MultipartFile> postimageFileList) throws Exception{
+        //상품 수정
+        Posting posting = postingRepository.findById(postingFormDto.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        posting.updatePosting(postingFormDto);
+        List<Long> postimageIds = postingFormDto.getPostimageIds();
+
+        //이미지 등록
+        for(int i = 0; i < postimageFileList.size();i++){
+            postimageService.updatePostimage(postimageIds.get(i),
+                    postimageFileList.get(i));
+        }
+
+        return posting.getId();
     }
 
 

@@ -36,8 +36,23 @@ public class PostimageService {
         postimageRepository.save(postimage);
     }
 
-//    public void updatePostimage(Long postimageId, MultipartFile postimageFile) throws Exception {
-//        if(!)
-//    }
+    public void updatePostimage(Long postimageId, MultipartFile postimageFile) throws Exception{
+        if(!postimageFile.isEmpty()){
+            Postimage savedPostimage = postimageRepository.findById(postimageId)
+                    .orElseThrow(EntityNotFoundException::new);
+
+            //기존 이미지 파일 삭제
+            if(!StringUtils.isEmpty(savedPostimage.getImgName())) {
+                fileService.deleteFile(postimageLocation+"/"+
+                        savedPostimage.getImgName());
+            }
+
+            String oriImgName = postimageFile.getOriginalFilename();
+            assert oriImgName != null;
+            String imgName = fileService.uploadFile(postimageLocation, oriImgName, postimageFile.getBytes());
+            String imgUrl = "/images/item/" + imgName;
+            savedPostimage.updatePostimage(oriImgName, imgName, imgUrl);
+        }
+    }
 
 }
