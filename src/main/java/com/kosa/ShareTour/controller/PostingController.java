@@ -113,11 +113,11 @@ public class PostingController {
         return "posting/postingMng";
     }
 
-//    @GetMapping(value = "/posting/{postingId}")
-//    public String postingDtl(Model model, @PathVariable("postingId") Long itemId){
-//        PostingFormDto postingFormDto = postingService.getPostingDtl(itemId);
-//        model.addAttribute("posting", postingFormDto);
-//        return "posting/postingDtl";
-//    }
+    @GetMapping(value = "/posting/{postingId}")
+    public String postingDtl(Model model, @PathVariable("postingId") Long itemId){
+        PostingFormDto postingFormDto = postingService.getPostingDtl(itemId);
+        model.addAttribute("posting", postingFormDto);
+        return "posting/postingDtl";
+    }
 
 }
