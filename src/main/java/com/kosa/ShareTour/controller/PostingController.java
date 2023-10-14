@@ -37,10 +37,10 @@ public class PostingController {
             return "posting/postingForm";
         }
 
-        if(postimageFileList.get(0).isEmpty() && postingFormDto.getId() == null){
-            model.addAttribute("errorMessage", "첫번째 이미지는 필수 입력 값 입니다.");
-            return "posting/postingForm";
-        }
+//        if(postimageFileList.get(0).isEmpty() && postingFormDto.getId() == null){
+//            model.addAttribute("errorMessage", "첫번째 이미지는 필수 입력 값 입니다.");
+//            return "posting/postingForm";
+//        }
 
         try {
             postingService.savePosting(postingFormDto, postimageFileList, principal.getName());
