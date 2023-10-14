@@ -8,6 +8,7 @@ import com.kosa.ShareTour.repository.MemberRepository;
 import com.kosa.ShareTour.repository.PostimageRepository;
 import com.kosa.ShareTour.repository.PostingRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
+
+import com.kosa.ShareTour.dto.PostingSearchDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @Transactional
@@ -86,6 +91,11 @@ public class PostingService {
         }
 
         return posting.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Posting> getUserPostingPage(PostingSearchDto postingSearchDto, Pageable pageable) {
+        return postingRepository.getUserPostingPage(postingSearchDto, pageable);
     }
 
 

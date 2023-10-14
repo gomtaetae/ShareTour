@@ -20,6 +20,13 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import javax.persistence.EntityNotFoundException;
 
+import com.kosa.ShareTour.dto.PostingSearchDto;
+import com.kosa.ShareTour.entity.Posting;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 public class PostingController {
@@ -93,5 +100,24 @@ public class PostingController {
 
         return "redirect:/";
     }
+
+    @GetMapping(value = {"/user/postings", "/user/postings/{page}"})
+    public String postingManage(PostingSearchDto postingSearchDto, @PathVariable("page") Optional<Integer> page, Model model){
+
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        Page<Posting> postings = postingService.getUserPostingPage(postingSearchDto, pageable);
+        model.addAttribute("postings", postings);
+        model.addAttribute("postingSearchDto", postingSearchDto);
+        model.addAttribute("maxPage", 5);
+
+        return "posting/postingMng";
+    }
+
+//    @GetMapping(value = "/posting/{postingId}")
+//    public String postingDtl(Model model, @PathVariable("postingId") Long itemId){
+//        PostingFormDto postingFormDto = postingService.getPostingDtl(itemId);
+//        model.addAttribute("posting", postingFormDto);
+//        return "posting/postingDtl";
+//    }
 
 }
