@@ -2,40 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header">
-    <header>
-        <div class="header_wrap">
-            <div class="header_top">
-                <div class="header_center">
-                    <div class="login">
-                        <ul class="clearfix">
-                            <li><a href="/members/login">로그인</a></li>
-                            <li><a href="/members/new">회원가입</a></li>
-                        </ul>
-                    </div>
-                    <div class="header_2">
-                        <div class="logo">
-                            <a href="#">
-                                <img src="logo.png" alt="">
-                                <p>Share tour</p>
-                            </a>
+                <header>
+                    <div class="header_wrap">
+                        <div class="header_top">
+                            <div class="header_center">
+                                <div class="login">
+                                    <ul class="clearfix">
+                                        <li sec:authorize="isAnonymous()"><a href="/members/login">로그인</a></li>
+                                        <li sec:authorize="isAnonymous()"><a href="/members/new">회원가입</a></li>
+                                        <li  sec:authorize="isAuthenticated()"><a href="/members/logout">로그아웃</a></li>
+                                    </ul>
+                                </div>
+                                <div class="header_2">
+                                    <div class="logo">
+                                        <a href="/">
+                                            <img src="/img/logo.png" alt="">
+                                            <p>Share tour</p>
+                                        </a>
+                                    </div>
+                                    <div class="search">
+                                        <input type="text" placeholder="검색어를 입력해주세요">
+                                        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="search">
-                            <input type="text" placeholder="검색어를 입력해주세요">
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                        </div>
+                        <nav>
+                            <ul class="clearfix main_menu" >
+                                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" ><a href="/admin/item/new"><img src="/img/icons8-비행기-48.png" alt="">패키지상품 등록</a></li>
+                                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" ><a href="/admin/items"><img src="/img/icons8-비행기-48.png" alt="">패키지상품 관리</a></li>
+                                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="#"><img src="/img/icons8-이야기-책-48.png" alt="">유저 관리페이지</a></li>
+                                <li sec:authorize="isAuthenticated()"><a href="/user/postings/new"><img src="/img/icons8-비행기-48.png" alt="">게시글 작성</a></li>
+                                <li sec:authorize="isAnonymous()"><a href="/user/postings"><img src="/img/icons8-게시판-48.png" alt="">게시글 조회</a></li>
+                                <li sec:authorize="isAuthenticated()"><a href="/cart"><img src="/img/icons8-법-48.png" alt="">장바구니</a></li>
+                                <li sec:authorize="isAuthenticated()"><a href="/order"><img src="/img/icons8-sparkles-48.png" alt="">구매이력</a></li>
+                                <li sec:authorize="isAuthenticated()"><a href="/mypage"><img src="/img/icons8-이야기-책-48.png" alt="">마이페이지</a></li>
+                            </ul>
+                        </nav>
                     </div>
-                </div>
-            </div>
-            <nav>
-                <ul class="clearfix main_menu" >
-                    <li><a href="#"><img src="icons8-비행기-48.png" alt="">패키지 여행</a></li>
-                    <li><a href="#"><img src="icons8-게시판-48.png" alt="">나의 여행 이야기</a></li>
-                    <li><a href="#"><img src="icons8-법-48.png" alt="">경매</a></li>
-                    <li><a href="#"><img src="icons8-sparkles-48.png" alt="">특가</a></li>
-                    <li><a href="#"><img src="icons8-이야기-책-48.png" alt="">마이페이지</a></li>
-                </ul>
-            </nav>
+                </header>
         </div>
-    </header>
+
+    </nav>
+
 </div>
 </html>
