@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,37 +32,48 @@ public class Member extends BaseEntity{
     @Column(name="password", nullable = false)
     private String password;
 
-    //@PrePersist
-    //protected void onCreate() {
-    //    createTime = LocalDateTime.now();
-    //}
-
     @Column(name="img")
     private String imgUrl;
 
-    @Column(name="gender", length = 45)
+    @Column(name="gender", length = 45, nullable = false)
     private String gender;
 
     @Column(name="birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name="mobile", length = 45)
+    @Column(name="mobile", length = 45, nullable = false)
     private String mobile;
 
     @Column(name="address", length = 45, nullable = false)
     private String address;
 
-//    @Column(name="grade", length = 45)
-//    private String grade;
+    @Column(name="grade")
+    private String grade;
 
     @Column(name="point")
     private int point;
 
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-//    private List<Posting> postingList = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Posting> postingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Purchase> purchaseList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Auction> auctionList = new ArrayList<>();
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private Cart cart;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Order> orderList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
@@ -79,29 +89,12 @@ public class Member extends BaseEntity{
         member.setBirthday(LocalDate.parse(memberFormDto.getBirthday()));
         member.setMobile(memberFormDto.getPhone());
         member.setAddress(memberFormDto.getAddressMain() + memberFormDto.getAddressSub());
-//        member.setGrade(memberFormDto.getGrade());
+        member.setGrade(memberFormDto.getGrade());
         member.setPoint(memberFormDto.getPoint());
 
         member.setRole(Role.USER);
-        flush();
 
         return member;
-    }
-
-    //사용자 수정 안되면 지우기
-//    public void updateMember(MemberFormDto memberFormDto) {
-//        this.username = memberFormDto.getName();
-//        this.email = memberFormDto.getEmail();
-//        this.nickname = memberFormDto.getNickname();
-//        this.password = memberFormDto.getPassword();
-//        this.gender = memberFormDto.getGender();
-//        this.mobile = memberFormDto.getPhone();
-//        this.grade = memberFormDto.getGrade();
-//        this.point = memberFormDto.getPoint();
-//    }
-    //여기 위까지 사용자 수정 추가
-
-    private static void flush() {
     }
 
 }

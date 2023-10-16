@@ -24,6 +24,7 @@ public class STUtils {
         member.setBirthday(LocalDate.now());
         member.setMobile("멤버 전화번호" + suffix);
         member.setAddress("멤버 주소" + suffix);
+        member.setGrade("멤버 등급");
         member.setPoint(10);
 
         return member;

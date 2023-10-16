@@ -17,11 +17,11 @@ public class ItemDto {
 
     private String content;
 
-    private String img;
-
     private Integer price;
 
     private Integer inStock;
+
+    private Integer stockLeft;
 
     private ItemSellStatus itemSellStatus;
 }

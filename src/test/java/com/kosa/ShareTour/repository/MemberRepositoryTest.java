@@ -105,8 +105,8 @@ class MemberRepositoryTest {
 
         //when
         em.clear();
-        var targetMember = memberRepository.findByEmail(memberEmail)
-                .orElseThrow(EntityNotFoundException::new);
+        var targetMember = memberRepository.findByEmail(memberEmail);
+//                .orElseThrow(EntityNotFoundException::new);
 
         //then
         assertThat(targetMember.getEmail()).isNotNull();

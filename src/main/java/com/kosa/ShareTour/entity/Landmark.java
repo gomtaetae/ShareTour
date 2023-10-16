@@ -53,4 +53,7 @@ public class Landmark {
     @OneToMany(mappedBy = "landmark", cascade = CascadeType.REMOVE)
     private List<Item> itemList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "landmark", cascade = CascadeType.REMOVE)
+    private List<Packageimage> packageimageList = new ArrayList<>();
+
 }

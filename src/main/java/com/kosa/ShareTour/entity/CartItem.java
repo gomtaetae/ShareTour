@@ -2,12 +2,14 @@ package com.kosa.ShareTour.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name="cart_item")
-public class CartItem extends BaseEntity {
+public class CartItem {
 
     @Id
     @GeneratedValue
@@ -15,7 +17,7 @@ public class CartItem extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="cart_id")
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,21 +25,4 @@ public class CartItem extends BaseEntity {
     private Item item;
 
     private int count;
-
-    public static CartItem createCartItem(Cart cart, Item item, int count) {
-        CartItem cartItem = new CartItem();
-        cartItem.setCart(cart);
-        cartItem.setItem(item);
-        cartItem.setCount(count);
-        return cartItem;
-    }
-
-    public void addCount(int count){
-        this.count += count;
-    }
-
-    public void updateCount(int count){
-        this.count = count;
-    }
-
 }

@@ -37,12 +37,12 @@ public class PostingService {
                             String email)
             throws Exception{
 
-        var member = memberRepository.findByEmail(email);       //멤버 이메일을 조회해서 함께저장
+        var member = memberRepository.findByEmail(email);
 //                .orElseThrow(EntityNotFoundException::new);
         //상품 등록
-        Posting posting = postingFormDto.createPosting();       //조회된 이메일을 posting에 작성
-//        posting.setMember(member);
-        postingRepository.save(posting);                        //posting에 **member-email을 같이저장
+        Posting posting = postingFormDto.createPosting();
+        posting.setMember(member);
+        postingRepository.save(posting);
 
         //이미지 등록
         for(int i=0; i < postimageFileList.size(); i++){
@@ -50,9 +50,9 @@ public class PostingService {
             postimage.setPosting(posting);
 
             if(i == 0)
-                postimage.setRepimgYn("Y");
+                postimage.setRepImgYn("Y");
             else
-                postimage.setRepimgYn("N");
+                postimage.setRepImgYn("N");
 
             postimageService.savePostimage(postimage, postimageFileList.get(i));
         }

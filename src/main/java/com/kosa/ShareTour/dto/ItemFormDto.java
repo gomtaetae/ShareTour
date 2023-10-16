@@ -28,6 +28,8 @@ public class ItemFormDto {
     @NotNull(message = "재고는 필수 값입니다")
     private Integer inStock;
 
+    private Integer stockLeft;
+
     private ItemSellStatus itemSellStatus;
 
     //상품 저장후 수정할때 상품 이미지를 저장하는 리스트

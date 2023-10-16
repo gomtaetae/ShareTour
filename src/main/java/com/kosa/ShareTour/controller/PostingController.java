@@ -81,7 +81,7 @@ public class PostingController {
 
     @PostMapping(value = "/user/posting/{postingId}")
     public String postingUpdate(@Valid PostingFormDto postingFormDto, BindingResult bindingResult,
-                                @RequestParam("postimageFile") List<MultipartFile> postimageFileList, Model model){
+                             @RequestParam("postimageFile") List<MultipartFile> postimageFileList, Model model){
         if(bindingResult.hasErrors()){
             return "posting/postingForm";
         }
@@ -114,8 +114,8 @@ public class PostingController {
     }
 
     @GetMapping(value = "/posting/{postingId}")
-    public String postingDtl(Model model, @PathVariable("postingId") Long itemId){
-        PostingFormDto postingFormDto = postingService.getPostingDtl(itemId);
+    public String postingDtl(Model model, @PathVariable("postingId") Long postingId){
+        PostingFormDto postingFormDto = postingService.getPostingDtl(postingId);
         model.addAttribute("posting", postingFormDto);
         return "posting/postingDtl";
     }

@@ -4,7 +4,6 @@ import com.kosa.ShareTour.constant.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -25,5 +24,8 @@ public class Admin extends BaseTimeEntity{
 
     @Column(name="password", nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }

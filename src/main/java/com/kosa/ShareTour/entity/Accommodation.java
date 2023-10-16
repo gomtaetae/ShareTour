@@ -58,6 +58,9 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
     private List<Auction> auctionList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
+    private List<Packageimage> packageimageList = new ArrayList<>();
+
 
 //    public static Accommodation createAccommodation(AccommodationFormDto accommodationFormDto) {
 //        Accommodation accommo = new Accommodation();
