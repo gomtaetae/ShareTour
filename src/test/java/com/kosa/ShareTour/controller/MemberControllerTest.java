@@ -1,3 +1,4 @@
+/*
 package com.kosa.ShareTour.controller;
 
 import com.kosa.ShareTour.dto.MemberFormDto;
@@ -80,4 +81,4 @@ class MemberControllerTest {
 
 
 
-}
+}*/

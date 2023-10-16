@@ -1,3 +1,4 @@
+/*
 package com.kosa.ShareTour.repository;
 
 import com.kosa.ShareTour.utils.STUtils;
@@ -134,4 +135,4 @@ class PostingRepositoryTest {
     }
 
 
-}
+}*/

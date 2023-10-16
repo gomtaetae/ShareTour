@@ -127,10 +127,10 @@ nav img{width:30px;}
               height:400px;}
 
 .package_product{width:1200px;
-                 height:350px;
+                 height:300px;
                  margin:0 auto;}
 
-.travel_package{height:250px;
+.travel_package{height:200px;
                 margin-top:10px;}
 
 .text{height:50px;
@@ -167,7 +167,7 @@ button{position:absolute;}
 .box_info{ color: #fff;
        position: absolute;
        background: rgba(0,0,0,0.5);
-       width: 22.2%;
+       width: 16.6%;
        padding: 15px;
        top:30;
        opacity: 0;
@@ -178,6 +178,7 @@ button{position:absolute;}
 .box:hover .box_info{opacity: 1;}
 
 .sale{height:100px;
+       margin-top:20px;
       text-align:center;}
 
 footer{width:100%;
