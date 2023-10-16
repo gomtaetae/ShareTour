@@ -33,14 +33,6 @@ public class Member extends BaseEntity{
     @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name="create_time")
-    private LocalDateTime createTime;
-
-
-    //@PrePersist
-    //protected void onCreate() {
-    //    createTime = LocalDateTime.now();
-    //}
 
     @Column(name="img")
     private String imgUrl;
