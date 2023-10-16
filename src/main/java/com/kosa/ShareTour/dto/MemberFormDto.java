@@ -1,6 +1,7 @@
 package com.kosa.ShareTour.dto;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -8,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class MemberFormDto {
+
+    private Long id;
 
     @NotBlank(message = "이름은 필수 입력 값입니다")
     private String name;

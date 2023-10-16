@@ -26,7 +26,7 @@ public class Postimage extends BaseEntity {
 
     private String imgUrl;
 
-    private String repimgYn;
+    private String repImgYn;
 
     public void updatePostimage(String oriImgName, String imgName, String imgUrl) {
         this.oriImgName = oriImgName;

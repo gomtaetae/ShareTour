@@ -1,5 +1,6 @@
 package com.kosa.ShareTour.service;
 
+import com.kosa.ShareTour.dto.MemberFormDto;
 import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.repository.MemberRepository;
 
@@ -63,5 +64,14 @@ public class MemberService implements UserDetailsService{
 
         return member.getNickname();
     }
+
+    ////
+//    public Long updateMember(MemberFormDto memberFormDto) throws Exception {
+//        //회원 정보 수정
+//        Member member = memberRepository.findById(memberFormDto.getId())
+//                .orElseThrow(EntityNotFoundException::new);
+//        member.updateMember(memberFormDto);
+//        return member.getId();
+//    }
 
 }

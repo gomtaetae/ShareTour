@@ -1,6 +1,7 @@
 package com.kosa.ShareTour.controller;
 
 import com.kosa.ShareTour.dto.MemberFormDto;
+import com.kosa.ShareTour.dto.PostingFormDto;
 import com.kosa.ShareTour.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kosa.ShareTour.entity.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
+
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 @RequestMapping("/members")
@@ -59,6 +63,21 @@ public class MemberController {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "member/memberLogin";
     }
+
+    //////
+//    @GetMapping(value = "/user/info/{memberId}")
+//    public String memberInfo(@PathVariable("memberId") Long memberId, Model model){
+//
+//        try {
+//            MemberFormDto memberFormDto = memberService.getMemberInfo(memberId);
+//            model.addAttribute("memberFormDto", memberFormDto);
+//        } catch(EntityNotFoundException e){
+//            model.addAttribute("errorMessage", "존재하지 않는 유저입니다.");
+//            return "redirect:/";
+//        }
+//
+//        return "member/memberForm";
+//    }
 
 
 }

@@ -86,4 +86,20 @@ public class Member extends BaseEntity{
         return member;
     }
 
+    //회원 정보 업데이트
+//    public void updateMember(MemberFormDto memberFormDto) {
+//        this.username = memberFormDto.getName();
+//        this.email = memberFormDto.getEmail();
+//        this.nickname = memberFormDto.getNickname();
+//        this.password = memberFormDto.getPassword();
+//        this.imgUrl = memberFormDto.getImgUrl();
+//        this.gender = memberFormDto.getGender();
+//        this.birthday = LocalDate.parse(memberFormDto.getBirthday());
+//        this.mobile = memberFormDto.getPhone();
+//        this.address = memberFormDto.getAddressMain() + memberFormDto.getAddressSub();
+//        this.grade = memberFormDto.getGrade();
+//        this.point = memberFormDto.getPoint();
+//        this.role = Role.valueOf(memberFormDto.getGrade());
+//    }
+
 }

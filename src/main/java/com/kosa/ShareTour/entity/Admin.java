@@ -1,8 +1,10 @@
 package com.kosa.ShareTour.entity;
 
+import com.kosa.ShareTour.constant.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 

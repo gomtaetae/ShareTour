@@ -17,8 +17,6 @@ public class ItemDto {
 
     private String content;
 
-    private String img;
-
     private Integer totalPrice;
 
     private Integer inStock;

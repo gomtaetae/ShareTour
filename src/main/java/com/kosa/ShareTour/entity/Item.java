@@ -28,9 +28,6 @@ public class Item extends BaseEntity{
     @Column(name = "content", columnDefinition = "LONGTEXT", nullable = false)
     private String content;       //패키지 설명
 
-    @Column(name="img")
-    private String img;
-
     @Column(name="totalprice", nullable = false)
     private Integer totalPrice;
 
@@ -54,19 +51,19 @@ public class Item extends BaseEntity{
 
     }
 
-//    @ManyToOne
-//    @JoinColumn(name="places_id")
-//    private Place place;
-//
-//    @ManyToOne
-//    @JoinColumn(name="landmarks_id")
-//    private Landmark landmark;
-//
-//    @ManyToOne
-//    @JoinColumn(name="accommodations_id")
-//    private Accommodation accommodation;
-//
-//    @ManyToOne
-//    @JoinColumn(name="restaurants_id")
-//    private Restaurant restaurant;
+    @ManyToOne
+    @JoinColumn(name="places_id")
+    private Place place;
+
+    @ManyToOne
+    @JoinColumn(name="landmarks_id")
+    private Landmark landmark;
+
+    @ManyToOne
+    @JoinColumn(name="accommodations_id")
+    private Accommodation accommodation;
+
+    @ManyToOne
+    @JoinColumn(name="restaurants_id")
+    private Restaurant restaurant;
 }
