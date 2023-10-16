@@ -2,21 +2,19 @@ package com.kosa.ShareTour.entity;
 
 import com.kosa.ShareTour.constant.Role;
 import com.kosa.ShareTour.dto.MemberFormDto;
-
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="members")
 @Data
-public class Member extends BaseTimeEntity{
+public class Member extends BaseEntity{
 
     @Id
     @Column(name="members_id")
@@ -35,7 +33,6 @@ public class Member extends BaseTimeEntity{
     @Column(name="password", nullable = false)
     private String password;
 
-    @Lob
     @Column(name="img")
     private String imgUrl;
 

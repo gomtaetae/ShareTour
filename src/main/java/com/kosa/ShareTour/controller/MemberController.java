@@ -23,13 +23,6 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-//    @GetMapping(value = "/register")
-//    public String memberForm(Model model){
-//        /*객체만들어주기*/
-//        model.addAttribute("memberFormDto", new MemberFormDto());
-//        return "members/register";
-//    }
-
     @GetMapping(value = "/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
@@ -47,34 +40,13 @@ public class MemberController {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
         } catch (IllegalStateException e) {
+            e.printStackTrace();
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
         }
 
         return "redirect:/";
     }
-
-//    @PostMapping(value = "/new")
-//    public String memberForm(MemberFormDto memberFormDto){
-//
-//        Member member = Member.createMember(memberFormDto, passwordEncoder);
-//        memberService.saveMember(member);
-//
-//        if (bindingResult.hasErrors()){
-//            return "members/register";
-//        }
-//
-//        try {
-//            Member member = Member.createMember(memberFormDto, passwordEncoder);
-//            memberService.saveMember(member);
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//            model.addAttribute("errorMessage", e.getMessage());
-//            return "members/register";
-//        }
-//
-//        return "redirect:/";
-//    }
 
     @GetMapping(value = "/login")
     public String loginMember(){

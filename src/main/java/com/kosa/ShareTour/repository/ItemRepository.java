@@ -2,39 +2,34 @@ package com.kosa.ShareTour.repository;
 
 import com.kosa.ShareTour.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
 
-public interface ItemRepository extends JpaRepository<Item, Long>{
+import java.util.List;
 
-//    //패키지 제목으로 찾기(여럿)
-//    List<Package> findByPackageTitle(String title);
-//
-//    //패키지 시작일로 찾기(여럿)
-//    List<Package> findByPackageStartDate(LocalDate startDate);
-//
-//    //패키지 마지막일로 찾기(여럿)
-//    List<Package> findByPackageEndDate(LocalDate endDate);
-//
-//    //패키지 총 기간으로 찾기(여럿)
-//    List<Package> findByPackageDuration(int duration);
-//
-//    //패키지 국가별로 찾기(여럿)
-//    List<Package> findByPlaceCountry(String country);
-//
-//    //패키지 '도'별로 찾기(여럿)
-//    List<Package> findByPlaceProvince(String province);
-//
-//    //패키지 '시'별로 찾기(여럿)
-//    List<Package> findByPlaceCity(String city);
-//
-//    //패키지 명소 이름으로 찾기(여럿)
-//    List<Package> findByLandmarkName(String landmarkName);
-//
-//    //패키지 명소 종류로 찾기(여럿)
-//    List<Package> findByLandmarkCategory(String landmarkCategory);
-//
-//    //
-//    List<Package> findByLandmarkArea(String landmarkArea);
-//
-////    List<Package>
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
+//상속되는 파일들
 
+    //title 찾는 쿼리 메소드
+    List<Item> findByTitle(String title);
+
+    //title이나 내용에서 찾는 쿼리 메소드
+    List<Item> findByTitleOrContent(String title, String content);
+
+    //입력 price보다 작은 상품을 모두 조회
+    List<Item> findByTotalPriceLessThan(Integer totalPrice);
+
+    //OrderBy로 내림차순 정렬(Desc는 내림차순, Asc는 오름차순)
+    List<Item> findByTotalPriceLessThanOrderByTotalPriceDesc(Integer totalPrice);
+
+    //SQL 쿼리문을 사용해 조회하는 방법
+    @Query("select i from Item i where i.content like " +
+            "%:content% order by i.totalPrice desc")
+    List<Item> findByContent(@Param("content") String content);
+
+    //navtiveQuery를 사용해서 기존쿼리를 그대로 사용가능
+    @Query(value="select * from item i where i.content like " +
+            "%:content% order by i.totalPrice desc", nativeQuery = true)
+    List<Item> findByContentlByNative(@Param("content") String content);
 }

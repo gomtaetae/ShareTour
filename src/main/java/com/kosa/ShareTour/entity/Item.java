@@ -1,69 +1,72 @@
 package com.kosa.ShareTour.entity;
 
-import lombok.Data;
+import com.kosa.ShareTour.constant.ItemSellStatus;
+import com.kosa.ShareTour.dto.ItemFormDto;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="items")
-@Data
-@ToString(exclude = {"place", "landmark", "accommodation", "restaurant"})
-public class Item implements Serializable {
+@Table(name="item")
+@Getter
+@Setter
+@ToString
+public class Item extends BaseEntity{
 
     @Id
-    @Column(name="items_id")
+    @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="title", nullable = false)
-    private String title;
+    @Column(name = "title", nullable = false, length = 50)
+    private String title;       //패키지 이름
 
-    @Column(name="content", columnDefinition = "LONGTEXT", nullable = false)
-    private String content;
+    @Column(name = "content", columnDefinition = "LONGTEXT", nullable = false)
+    private String content;       //패키지 설명
 
-    @Column(name="start_date", nullable = false)
-    private LocalDate startDate;
-
-    @Column(name="end_date", nullable = false)
-    private LocalDate endDate;
-
-    @Lob
-    @Column(name="img", nullable = false)
+    @Column(name="img")
     private String img;
 
     @Column(name="totalprice", nullable = false)
-    private float totalPrice;
+    private Integer totalPrice;
 
-    @Column(name="duration", nullable = false)
-    private int duration;
-
-    @Column(name="expire")
-    private LocalDateTime expire;
-
-    @Column(name="in_stock")
-    private int inStock;
+    @Column(name="in_stock", nullable = false)
+    private Integer inStock;
 
     @Column(name="stock_left")
-    private int stockLeft;
+    private Integer stockLeft;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="places_id")
-    private Place place;
+    @Enumerated(EnumType.STRING)
+    private ItemSellStatus itemSellStatus;    //패키지 판매 상태
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="landmarks_id")
-    private Landmark landmark;
+    public void updateItem(ItemFormDto itemFormDto) {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="accommodations_id")
-    private Accommodation accommodation;
+        this.title = itemFormDto.getTitle();
+        this.content = itemFormDto.getContent();
+        this.totalPrice = itemFormDto.getTotalPrice();
+        this.inStock = itemFormDto.getInStock();
+        this.stockLeft = itemFormDto.getStockLeft();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="restaurants_id")
-    private Restaurant restaurant;
+    }
 
+//    @ManyToOne
+//    @JoinColumn(name="places_id")
+//    private Place place;
+//
+//    @ManyToOne
+//    @JoinColumn(name="landmarks_id")
+//    private Landmark landmark;
+//
+//    @ManyToOne
+//    @JoinColumn(name="accommodations_id")
+//    private Accommodation accommodation;
+//
+//    @ManyToOne
+//    @JoinColumn(name="restaurants_id")
+//    private Restaurant restaurant;
 }
