@@ -1,11 +1,9 @@
 package com.kosa.ShareTour.service;
 
-import com.kosa.ShareTour.dto.MemberFormDto;
 import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import javax.persistence.EntityNotFoundException;
 
 @Service
 @Transactional
@@ -29,17 +25,22 @@ public class MemberService implements UserDetailsService{
     }
 
     private void validateDuplicateMember(Member member){
-        Member findMember = memberRepository.findByEmail(member.getEmail())
-                .orElseThrow(EntityNotFoundException::new);
-        if(findMember != null){
+        Member findMemberEmail = memberRepository.findByEmail(member.getEmail());
+        if(findMemberEmail != null) {
             throw new IllegalStateException("이미 가입된 회원입니다(동일한 Email을 사용하는 계정 존재)");
         }
+
+        Member findMemberNick = memberRepository.findByNickname(member.getNickname());
+        if(findMemberNick != null) {
+            throw new IllegalStateException("이미 사용중인 아이디 입니다");
+        }
+
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(EntityNotFoundException::new);
+        Member member = memberRepository.findByEmail(email);
 
         if(member == null){
             throw new UsernameNotFoundException(email);
@@ -51,27 +52,5 @@ public class MemberService implements UserDetailsService{
                 .roles(member.getRole().toString())
                 .build();
     }
-
-    public String getCurrentLoggedInMemberNickname() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email = userDetails.getUsername();
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(EntityNotFoundException::new);
-
-        if (member == null) {
-            throw new UsernameNotFoundException(email);
-        }
-
-        return member.getNickname();
-    }
-
-    ////
-//    public Long updateMember(MemberFormDto memberFormDto) throws Exception {
-//        //회원 정보 수정
-//        Member member = memberRepository.findById(memberFormDto.getId())
-//                .orElseThrow(EntityNotFoundException::new);
-//        member.updateMember(memberFormDto);
-//        return member.getId();
-//    }
 
 }

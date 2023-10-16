@@ -8,6 +8,6 @@ public interface PostimageRepository extends JpaRepository<Postimage, Long> {
 
     List<Postimage> findByPostingIdOrderByIdAsc(Long postingId);
 
-//    Postimage findByPostIdAndRepImgYn(Long postingId, String repImgYn);
+//    Postimage findByPostIdAndRepimgYn(Long postingId, String repimgYn);
 
 }
