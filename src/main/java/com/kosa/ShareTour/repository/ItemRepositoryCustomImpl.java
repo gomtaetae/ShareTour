@@ -1,7 +1,11 @@
 package com.kosa.ShareTour.repository;
 
+import com.kosa.ShareTour.dto.MainItemDto;
+import com.kosa.ShareTour.dto.QMainItemDto;
+import com.kosa.ShareTour.entity.QItemImg;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.kosa.ShareTour.constant.ItemSellStatus;
 import com.kosa.ShareTour.dto.ItemSearchDto;
@@ -22,50 +26,52 @@ import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
-    //itemRepositoryCustom을 상속
 
-    private JPAQueryFactory queryFactory;
+//itemRepositoryCustom을 상속
+public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
+
     //동적으로 쿼리를 생성하기 위해 JPAQueryFactory 클래스를 사용
+    private JPAQueryFactory queryFactory;
 
-    public ItemRepositoryCustomImpl(EntityManager em){
-        //JPAQueryFactory의 생성자로 EntityManager 객체를 넣어줌
+    //JPAQueryFactory의 생성자로 EntityManager 객체를 넣어줌
+
+    public ItemRepositoryCustomImpl(EntityManager em) {
 
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    private BooleanExpression searchSellStatusEq(ItemSellStatus searchSellStatus){
-        //상품 판매 상태 조건이 전체(null)일 경우는 null 리턴, 결과값이 null이면 where 절에서 해당 조건은 무시됨
+    //상품 판매 상태 조건이 전체(null)일 경우는 null 리턴, 결과값이 null이면 where 절에서 해당 조건은 무시됨
+    private BooleanExpression searchSellStatusEq(ItemSellStatus searchSellStatus) {
 
-        return searchSellStatus == null ? null : QItem.item.itemSellStatus.eq(searchSellStatus);
         //serachDateType의 값에 따라서 dateTime의 값을 이전 시간의 값으로 세팅 후 해당 시간 이후로 등록된 상품만 조회
+        return searchSellStatus == null ? null : QItem.item.itemSellStatus.eq(searchSellStatus);
     }
 
-    private BooleanExpression regDtsAfter(String searchDateType){
+    private BooleanExpression regDtsAfter(String searchDateType) {
 
         LocalDateTime dateTime = LocalDateTime.now();
 
-        if(StringUtils.equals("all", searchDateType) || searchDateType == null){
+        if (StringUtils.equals("all", searchDateType) || searchDateType == null) {
             return null;
-        } else if(StringUtils.equals("1d", searchDateType)){
+        } else if (StringUtils.equals("1d", searchDateType)) {
             dateTime = dateTime.minusDays(1);
-        } else if(StringUtils.equals("1w", searchDateType)){
+        } else if (StringUtils.equals("1w", searchDateType)) {
             dateTime = dateTime.minusWeeks(1);
-        } else if(StringUtils.equals("1m", searchDateType)){
+        } else if (StringUtils.equals("1m", searchDateType)) {
             dateTime = dateTime.minusMonths(1);
-        } else if(StringUtils.equals("6m", searchDateType)){
+        } else if (StringUtils.equals("6m", searchDateType)) {
             dateTime = dateTime.minusMonths(6);
         }
 
         return QItem.item.regTime.after(dateTime);
     }
 
-    private BooleanExpression searchByLike(String searchBy, String searchQuery){
-        //searchBy의 값에 따라서 상품명에 검색어를 포함하고 있는 상품 또는 상품 생성자의 아이디에 검색어를 포함하고 있는 상품을 조회하도록 조건값을 반환
+    //searchBy의 값에 따라서 상품명에 검색어를 포함하고 있는 상품 또는 상품 생성자의 아이디에 검색어를 포함하고 있는 상품을 조회하도록 조건값을 반환
+    private BooleanExpression searchByLike(String searchBy, String searchQuery) {
 
-        if(StringUtils.equals("title", searchBy)){
+        if (StringUtils.equals("title", searchBy)) {
             return QItem.item.title.like("%" + searchQuery + "%");
-        } else if(StringUtils.equals("createdBy", searchBy)){
+        } else if (StringUtils.equals("createdBy", searchBy)) {
             return QItem.item.createdBy.like("%" + searchQuery + "%");
         }
 
@@ -112,8 +118,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
         return new PageImpl<>(content, pageable, total);
     }
-
-    private BooleanExpression itemNmLike(String searchQuery){
+*/
+    private BooleanExpression titleLike(String searchQuery) {
         return StringUtils.isEmpty(searchQuery) ? null : QItem.item.title.like("%" + searchQuery + "%");
     }
 
@@ -123,35 +129,28 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
 
-        List<MainItemDto> content = queryFactory
+        QueryResults<MainItemDto> results = queryFactory
                 .select(
                         new QMainItemDto(
-                                item.id,
-                                item.itemNm,
-                                item.itemDetail,
-                                itemImg.imgUrl,
-                                item.price)
+                        item.id,
+                        item.title,
+                        item.content,
+                        itemImg.imgUrl,
+                        item.totalPrice)
                 )
                 .from(itemImg)
                 .join(itemImg.item, item)
                 .where(itemImg.repimgYn.eq("Y"))
-                .where(itemNmLike(itemSearchDto.getSearchQuery()))
+                .where(titleLike(itemSearchDto.getSearchQuery()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .fetch();
+                .fetchResults();
 
-        long total = queryFactory
-                .select(Wildcard.count)
-                .from(itemImg)
-                .join(itemImg.item, item)
-                .where(itemImg.repimgYn.eq("Y"))
-                .where(itemNmLike(itemSearchDto.getSearchQuery()))
-                .fetchOne()
-                ;
-
+        List<MainItemDto> content = results.getResults();
+        long total = results.getTotal();
         return new PageImpl<>(content, pageable, total);
+
     }
-     */
 
 }

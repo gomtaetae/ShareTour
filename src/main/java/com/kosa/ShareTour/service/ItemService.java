@@ -20,12 +20,12 @@ import com.kosa.ShareTour.dto.ItemSearchDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-//import com.kosa.ShareTour.dto.MainItemDto;
+import com.kosa.ShareTour.dto.MainItemDto;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ItemService {
+public class  ItemService {
 
     private final ItemRepository itemRepository;
 
@@ -100,5 +100,10 @@ public class ItemService {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
 
-}
+
+    }
