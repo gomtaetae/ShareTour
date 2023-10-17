@@ -22,8 +22,9 @@ public class STUtils {
         member.setImgUrl("멤버 이미지" + suffix);
         member.setGender("멤버 성별");
         member.setBirthday(LocalDate.now());
-        member.setMobile("멤버 전화번호" + suffix);
-        member.setAddress("멤버 주소" + suffix);
+        member.setPhone("멤버 전화번호" + suffix);
+        member.setAddressMain("멤버 메인주소" + suffix);
+        member.setAddressSub("멤버 서브주소" + suffix);
         member.setGrade("멤버 등급");
         member.setPoint(10);
 

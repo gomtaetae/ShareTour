@@ -1,9 +1,11 @@
 package com.kosa.ShareTour.service;
 
+import com.kosa.ShareTour.dto.MemberFormDto;
 import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,7 @@ import javax.persistence.EntityNotFoundException;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               MemberService implements UserDetailsService{
+public class MemberService implements UserDetailsService{
 
     private final MemberRepository memberRepository;
 
@@ -63,5 +65,34 @@ public class                                                                    
 
         return member.getNickname();
     }
+
+    //ChatGPT
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    public Member updateMemberProfile(MemberFormDto memberDto) {
+        // 현재 사용자 정보 가져오는 코드
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Member member = memberRepository.findByEmail(username);
+
+        if (member == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        // 업데이트할 정보를 Member 엔티티에 설정
+        member.setPassword(memberDto.getPassword());
+        member.setImgUrl(memberDto.getImgUrl());
+        member.setGender(memberDto.getGender());
+        member.setPhone(memberDto.getPhone());
+        member.setAddressMain(memberDto.getAddressMain());
+        member.setAddressSub(memberDto.getAddressSub());
+
+        // 다른 필드도 필요에 따라 업데이트
+
+        return memberRepository.save(member);
+    }
+
 
 }

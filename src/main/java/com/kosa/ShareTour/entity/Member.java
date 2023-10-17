@@ -41,11 +41,14 @@ public class Member extends BaseEntity{
     @Column(name="birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name="mobile", length = 45, nullable = false)
-    private String mobile;
+    @Column(name="phone", nullable = false)
+    private String phone;
 
-    @Column(name="address", length = 45, nullable = false)
-    private String address;
+    @Column(name="addressMain", nullable = false)
+    private String addressMain;
+
+    @Column(name="addressSub")
+    private String addressSub;
 
     @Column(name="grade")
     private String grade;
@@ -87,8 +90,9 @@ public class Member extends BaseEntity{
         member.setImgUrl(memberFormDto.getImgUrl());
         member.setGender(memberFormDto.getGender());
         member.setBirthday(LocalDate.parse(memberFormDto.getBirthday()));
-        member.setMobile(memberFormDto.getPhone());
-        member.setAddress(memberFormDto.getAddressMain() + memberFormDto.getAddressSub());
+        member.setPhone(memberFormDto.getPhone());
+        member.setAddressMain(memberFormDto.getAddressMain());
+        member.setAddressSub(memberFormDto.getAddressSub());
         member.setGrade(memberFormDto.getGrade());
         member.setPoint(memberFormDto.getPoint());
 
