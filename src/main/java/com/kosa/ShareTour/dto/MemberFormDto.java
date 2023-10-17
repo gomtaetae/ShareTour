@@ -1,13 +1,18 @@
 package com.kosa.ShareTour.dto;
 
+import com.kosa.ShareTour.constant.Role;
+import com.kosa.ShareTour.entity.Member;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
 public class MemberFormDto {
+
+    private Long id;
 
     @NotBlank(message = "이름은 필수 입력 값입니다")
     private String name;
@@ -44,4 +49,15 @@ public class MemberFormDto {
 
     private int point;
 
+    private Role role;
+
+    private static ModelMapper modelMapper = new ModelMapper();
+
+    public Member createMember() {
+        return modelMapper.map(this, Member.class);
+    }
+
+    public static MemberFormDto of(Member member) {
+        return modelMapper.map(member, MemberFormDto.class);
+    }
 }

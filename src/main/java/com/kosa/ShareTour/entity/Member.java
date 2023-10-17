@@ -21,7 +21,7 @@ public class Member extends BaseEntity{
     private Long id;
 
     @Column(name="username", length = 32, nullable = false)
-    private String username;
+    private String name;
 
     @Column(name="email", length = 60, nullable = false, unique = true)
     private String email;
@@ -80,7 +80,7 @@ public class Member extends BaseEntity{
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
-        member.setUsername(memberFormDto.getName());
+        member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
         member.setNickname(memberFormDto.getNickname());
 

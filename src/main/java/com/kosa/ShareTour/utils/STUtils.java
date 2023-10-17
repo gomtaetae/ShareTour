@@ -14,7 +14,7 @@ public class STUtils {
     //유저 생성
     public static Member getMember(String name, String suffix) {
         Member member = new Member();
-        member.setUsername("멤버 이름" + name);
+        member.setName("멤버 이름" + name);
         member.setEmail("member" + suffix + "@email.com");
         member.setNickname("멤버 닉네임" + suffix);
         member.setPassword("멤버 비밀번호" + suffix);

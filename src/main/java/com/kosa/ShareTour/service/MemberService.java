@@ -15,12 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import javax.persistence.EntityNotFoundException;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               MemberService implements UserDetailsService{
+public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
@@ -31,16 +30,19 @@ public class                                                                    
 
     private void validateDuplicateMember(Member member){
         Member findMember = memberRepository.findByEmail(member.getEmail());
-//                .orElseThrow(EntityNotFoundException::new);
         if(findMember != null){
             throw new IllegalStateException("이미 가입된 회원입니다(동일한 Email을 사용하는 계정 존재)");
         }
-    }
 
+        Member findMemberNick = memberRepository.findByNickname(member.getNickname());
+        if(findMemberNick != null) {
+            throw new IllegalStateException("이미 사용중인 아이디 입니다");
+        }
+
+    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);
-//                .orElseThrow(EntityNotFoundException::new);
 
         if(member == null){
             throw new UsernameNotFoundException(email);
@@ -52,6 +54,7 @@ public class                                                                    
                 .roles(member.getRole().toString())
                 .build();
     }
+
 
     public String getCurrentLoggedInMemberNickname() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -66,12 +69,12 @@ public class                                                                    
         return member.getNickname();
     }
 
-    public Member findByUsername(String username) throws UsernameNotFoundException {
-
-        return null;
+    //ChatGPT
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 
-    public Member updateMemberProfile(MemberFormDto memberDto) {
+    public Member updateMemberProfile(MemberFormDto memberFormDto) {
         // 현재 사용자 정보 가져오는 코드
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
@@ -82,11 +85,16 @@ public class                                                                    
         }
 
         // 업데이트할 정보를 Member 엔티티에 설정
-        member.setNickname(memberDto.getNickname());
-        member.setImgUrl(memberDto.getImgUrl());
+        member.setPassword(memberFormDto.getPassword());
+        member.setImgUrl(memberFormDto.getImgUrl());
+        member.setGender(memberFormDto.getGender());
+        member.setPhone(memberFormDto.getPhone());
+        member.setAddressMain(memberFormDto.getAddressMain());
+        member.setAddressSub(memberFormDto.getAddressSub());
         // 다른 필드도 필요에 따라 업데이트
 
         return memberRepository.save(member);
     }
+
 
 }
