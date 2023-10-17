@@ -8,7 +8,6 @@
 //import org.springframework.boot.test.context.SpringBootTest;
 //
 //import javax.persistence.EntityManager;
-//import javax.persistence.EntityNotFoundException;
 //import javax.persistence.PersistenceContext;
 //import javax.transaction.Transactional;
 //import java.time.LocalDate;
@@ -59,8 +58,9 @@
 //        member.setImgUrl("새로운 이미지");
 //        member.setGender("새로운 성별");
 //        member.setBirthday(LocalDate.now());
-//        member.setMobile("새로운 전화번호");
-//        member.setAddress("새로운 주소");
+//        member.setPhone("새로운 전화번호");
+//        member.setAddressMain("새로운 메인주소");
+//        member.setAddressSub("새로운 상세주소");
 //        member.setGrade("새로운 등급");
 //        member.setPoint(999);
 //        memberRepository.saveAndFlush(member);

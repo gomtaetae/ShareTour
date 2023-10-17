@@ -20,7 +20,7 @@ import javax.persistence.EntityNotFoundException;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService implements UserDetailsService{
+public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               MemberService implements UserDetailsService{
 
     private final MemberRepository memberRepository;
 
@@ -66,9 +66,9 @@ public class MemberService implements UserDetailsService{
         return member.getNickname();
     }
 
-    //ChatGPT
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email);
+    public Member findByUsername(String username) throws UsernameNotFoundException {
+
+        return null;
     }
 
     public Member updateMemberProfile(MemberFormDto memberDto) {
@@ -82,17 +82,11 @@ public class MemberService implements UserDetailsService{
         }
 
         // 업데이트할 정보를 Member 엔티티에 설정
-        member.setPassword(memberDto.getPassword());
+        member.setNickname(memberDto.getNickname());
         member.setImgUrl(memberDto.getImgUrl());
-        member.setGender(memberDto.getGender());
-        member.setPhone(memberDto.getPhone());
-        member.setAddressMain(memberDto.getAddressMain());
-        member.setAddressSub(memberDto.getAddressSub());
-
         // 다른 필드도 필요에 따라 업데이트
 
         return memberRepository.save(member);
     }
-
 
 }

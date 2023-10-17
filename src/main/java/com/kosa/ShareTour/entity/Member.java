@@ -41,13 +41,13 @@ public class Member extends BaseEntity{
     @Column(name="birthday", nullable = false)
     private LocalDate birthday;
 
-    @Column(name="phone", nullable = false)
+    @Column(name="phone", length = 45, nullable = false)
     private String phone;
 
     @Column(name="addressMain", nullable = false)
     private String addressMain;
 
-    @Column(name="addressSub")
+    @Column(name="addressSub", nullable = false)
     private String addressSub;
 
     @Column(name="grade")

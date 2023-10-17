@@ -32,7 +32,7 @@ public class MemberFormDto {
     private String birthday;
 
     @NotBlank(message = "전화번호는 필수 입력 값입니다")
-    @Length(min = 1, max = 11, message = "전화번호는 '-'없이 11자 이하로 입력 해야 됩니다")
+    @Length(min = 1, max= 11, message = "전화번호는 '-'없이 11자 이하로 입력 해야 됩니다")
     private String phone;
 
     @NotBlank(message = "주소는 필수 입력 값입니다")

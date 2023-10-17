@@ -4,7 +4,6 @@ import com.kosa.ShareTour.entity.*;
 import com.kosa.ShareTour.entity.Member;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class STUtils {
         member.setBirthday(LocalDate.now());
         member.setPhone("멤버 전화번호" + suffix);
         member.setAddressMain("멤버 메인주소" + suffix);
-        member.setAddressSub("멤버 서브주소" + suffix);
+        member.setAddressSub("멤버 상세주소" + suffix);
         member.setGrade("멤버 등급");
         member.setPoint(10);
 

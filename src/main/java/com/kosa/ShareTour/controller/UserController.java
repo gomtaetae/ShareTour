@@ -17,36 +17,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/profile/edit")
-    public String editUserProfile(Model model) {
+    @GetMapping("/profile")
+    public String userProfile(Model model) {
+        // 현재 사용자 정보 가져오는 코드 (Spring Security를 통해)
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
-        Member member = memberService.findByEmail(email);
-
-        // member 객체를 memberFormDto로 변환하여 모델에 추가
-        MemberFormDto memberFormDto = new MemberFormDto();
-        memberFormDto.setEmail(member.getEmail());
-        memberFormDto.setName(member.getUsername());
-        model.addAttribute("memberFormDto", member);
-
-        return "member/memberProfile";
+        Member member = memberRepository.findByEmail(email);
+        model.addAttribute("member", member);
+        return "user/profile";
     }
 
-    @PostMapping("/profile/edit")
-    public String updateUserProfile(@ModelAttribute MemberFormDto memberDto, Model model) {
-        Member updatedMember = memberService.updateMemberProfile(memberDto);
-        if (updatedMember != null) {
-            model.addAttribute("successMessage", "프로필이 성공적으로 업데이트되었습니다.");
-            return "redirect:/";
-        }
-
-        model.addAttribute("errorMessage", "프로필 업데이트 중에 문제가 발생했습니다.");
-
-        return "redirect:/user/profile/edit";
+    @PostMapping("/profile")
+    public String updateUserProfile(@ModelAttribute MemberFormDto memberDto) {
+        // 사용자 정보 업데이트 및 저장
+        memberService.updateMemberProfile(memberDto);
+        return "redirect:/user/profile";
     }
 
 }
