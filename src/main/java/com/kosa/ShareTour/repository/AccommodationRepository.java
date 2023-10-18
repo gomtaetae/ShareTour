@@ -12,7 +12,7 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
     List<Accommodation> findByArea(String area);
     List<Accommodation> findByGrade(String grade);
     List<Accommodation> findByParking(String parking);
-
+    List<Accommodation> findByIdOrderByPriceDesc(Long id);
 
 
 }

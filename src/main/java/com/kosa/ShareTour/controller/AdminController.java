@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping
     public String showUserList(Model model) {
-        List<UserListDto> users = memberService.getAllUsersForAdmin();
+        List<UserListDto> users = memberService.getOtherUsersForAdmin();
         model.addAttribute("users", users);
 
         RoleUpdateDto roleUpdateDto = new RoleUpdateDto();

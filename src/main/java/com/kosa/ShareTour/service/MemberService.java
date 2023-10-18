@@ -114,6 +114,20 @@ public class MemberService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public List<UserListDto> getOtherUsersForAdmin() {
+        String currentLoggedInMemberNickname = this.getCurrentLoggedInMemberNickname();
+
+        List<Member> allMembers = this.getAllUsers();
+
+        List<Member> otherMembers = allMembers.stream()
+                .filter(member -> !member.getNickname().equals(this.getCurrentLoggedInMemberNickname()))
+                .toList();
+
+        return otherMembers.stream()
+                .map(this::convertToUserListDto)
+                .collect(Collectors.toList());
+    }
+
     //ChatGPT
     private UserListDto convertToUserListDto(Member member) {
         UserListDto userListDto = new UserListDto();
