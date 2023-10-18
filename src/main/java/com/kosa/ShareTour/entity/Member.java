@@ -96,7 +96,7 @@ public class Member extends BaseEntity{
         member.setGrade(memberFormDto.getGrade());
         member.setPoint(memberFormDto.getPoint());
 
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
 
         return member;
     }

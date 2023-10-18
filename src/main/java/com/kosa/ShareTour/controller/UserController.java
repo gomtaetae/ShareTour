@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
-    private PasswordEncoder passwordEncoder;
-    private MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
+    private final MemberService memberService;
 
     @Autowired
     public UserController(MemberService memberService, PasswordEncoder passwordEncoder) {

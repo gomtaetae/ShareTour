@@ -1,6 +1,9 @@
 package com.kosa.ShareTour.service;
 
+import com.kosa.ShareTour.constant.Role;
 import com.kosa.ShareTour.dto.MemberFormDto;
+import com.kosa.ShareTour.dto.RoleUpdateDto;
+import com.kosa.ShareTour.dto.UserListDto;
 import com.kosa.ShareTour.entity.Member;
 import com.kosa.ShareTour.repository.MemberRepository;
 
@@ -14,6 +17,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -69,11 +77,12 @@ public class MemberService implements UserDetailsService {
         return member.getNickname();
     }
 
-    //ChatGPT
+    //ChatGPT (일부완료)
     public Member findByEmail(String email) {
         return memberRepository.findByEmail(email);
     }
 
+    //ChatGPT (일부완료)
     public Member updateMemberProfile(MemberFormDto memberFormDto) {
         // 현재 사용자 정보 가져오는 코드
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -96,5 +105,48 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(member);
     }
 
+    //ChatGPT
+    public List<UserListDto> getAllUsersForAdmin() {
+        List<Member> memberList = memberRepository.findAll();
 
+        return memberList.stream()
+                .map(this::convertToUserListDto)
+                .collect(Collectors.toList());
+    }
+
+    //ChatGPT
+    private UserListDto convertToUserListDto(Member member) {
+        UserListDto userListDto = new UserListDto();
+        userListDto.setId(member.getId());
+        userListDto.setName(member.getName());
+        userListDto.setEmail(member.getEmail());
+        userListDto.setNickname(member.getNickname());
+        userListDto.setBirthday(member.getBirthday());
+        userListDto.setPhone(member.getPhone());
+        userListDto.setPoint(member.getPoint());
+        userListDto.setRole(member.getRole());
+
+        return userListDto;
+    }
+
+    //ChatGPT
+    public List<Member> getAllUsers() {
+        return memberRepository.findAll();
+    }
+
+    public void updateRole(Long id, Role newRole, RoleUpdateDto roleUpdateDto) {
+        if (id == null) {
+            throw new IllegalArgumentException("The given id must not be null!");
+        }
+
+        Optional<Member> memberOptional = memberRepository.findById(id);
+
+        if (memberOptional.isPresent()) {
+            Member member = memberOptional.get();
+            member.setRole(newRole);
+            memberRepository.save(member);
+        } else {
+            throw new EntityNotFoundException("다음 Id를 가진 회원은 없습니다 : " + id);
+        }
+    }
 }
